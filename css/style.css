@@ -2361,6 +2361,11 @@ body.light-theme .feedback-tabs .tab-btn.active {
 }
 
 .premium-badge-btn.is-active-premium {
+    width: auto !important;
+    padding: 0 12px !important;
+    border-radius: 20px !important;
+    font-size: 0.82rem !important;
+    white-space: nowrap !important;
     background: linear-gradient(135deg, #a855f7, #6366f1) !important;
     box-shadow: 0 4px 10px rgba(99, 102, 241, 0.3);
     animation: pulseActivePremium 2s infinite alternate;

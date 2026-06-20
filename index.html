@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="tr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
@@ -7,10 +8,13 @@
     <!-- Google Fonts: Inter & Outfit -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <!-- Main Style -->
     <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
 
     <!-- 1. SPLASH SCREEN (AÇILIŞ EKRANI) -->
@@ -18,13 +22,16 @@
         <div class="splash-content">
             <div class="splash-logo">
                 <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="24" height="24" rx="6" fill="url(#logo-gradient)"/>
-                    <path d="M16.5 7.5L10.5 13.5L7.5 10.5" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M19 12V17C19 18.1046 18.1046 19 17 19H7C5.89543 19 5 18.1046 5 17V7C5 5.89543 5.89543 5 7 5H14" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+                    <rect width="24" height="24" rx="6" fill="url(#logo-gradient)" />
+                    <path d="M16.5 7.5L10.5 13.5L7.5 10.5" stroke="white" stroke-width="2.5" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path
+                        d="M19 12V17C19 18.1046 18.1046 19 17 19H7C5.89543 19 5 18.1046 5 17V7C5 5.89543 5.89543 5 7 5H14"
+                        stroke="white" stroke-width="2.5" stroke-linecap="round" />
                     <defs>
                         <linearGradient id="logo-gradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
-                            <stop stop-color="#06b6d4"/>
-                            <stop offset="1" stop-color="#4f46e5"/>
+                            <stop stop-color="#06b6d4" />
+                            <stop offset="1" stop-color="#4f46e5" />
                         </linearGradient>
                     </defs>
                 </svg>
@@ -39,18 +46,22 @@
 
     <!-- 2. ANA UYGULAMA PANELİ (DASHBOARD) -->
     <div id="app-container" class="app-container hidden">
-        
+
         <!-- ÜST HEADER PANELİ -->
         <header class="app-header">
             <div class="header-logo-section">
                 <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect width="24" height="24" rx="6" fill="url(#header-logo-gradient)"/>
-                    <path d="M16.5 7.5L10.5 13.5L7.5 10.5" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    <path d="M19 12V17C19 18.1046 18.1046 19 17 19H7C5.89543 19 5 18.1046 5 17V7C5 5.89543 5.89543 5 7 5H14" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+                    <rect width="24" height="24" rx="6" fill="url(#header-logo-gradient)" />
+                    <path d="M16.5 7.5L10.5 13.5L7.5 10.5" stroke="white" stroke-width="2.5" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path
+                        d="M19 12V17C19 18.1046 18.1046 19 17 19H7C5.89543 19 5 18.1046 5 17V7C5 5.89543 5.89543 5 7 5H14"
+                        stroke="white" stroke-width="2.5" stroke-linecap="round" />
                     <defs>
-                        <linearGradient id="header-logo-gradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
-                            <stop stop-color="#06b6d4"/>
-                            <stop offset="1" stop-color="#4f46e5"/>
+                        <linearGradient id="header-logo-gradient" x1="0" y1="0" x2="24" y2="24"
+                            gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#06b6d4" />
+                            <stop offset="1" stop-color="#4f46e5" />
                         </linearGradient>
                     </defs>
                 </svg>
@@ -111,7 +122,9 @@
                 <div class="section-header-row">
                     <h3 class="section-title">Geçmiş Formlar</h3>
                     <div class="past-forms-header-actions" style="display: flex; gap: 8px; align-items: center;">
-                        <button id="btn-bulk-download" class="btn-small-action" style="background: var(--success); border-color: var(--success-light); font-weight: 600;">📥 Toplu İndir</button>
+                        <button id="btn-bulk-download" class="btn-small-action"
+                            style="background: var(--success); border-color: var(--success-light); font-weight: 600;">📥
+                            Toplu İndir</button>
                         <div class="search-filter-toggle-btn" id="filter-toggle">🔍 Filtrele</div>
                     </div>
                 </div>
@@ -155,7 +168,7 @@
             </div>
             <form id="company-form" class="editor-form">
                 <input type="hidden" id="company-edit-id">
-                
+
                 <div class="form-group">
                     <label for="company-name">Şirket Adı <span class="required">*</span></label>
                     <input type="text" id="company-name" required placeholder="Örn: ABC Ajans Ltd. Şti.">
@@ -196,13 +209,14 @@
 
                 <div class="form-group">
                     <label for="company-address">Şirket Adresi</label>
-                    <textarea id="company-address" rows="3" placeholder="Örn: Hisar Mah. 1202 Sk. No: 99 Beşiktaş/İstanbul"></textarea>
+                    <textarea id="company-address" rows="3"
+                        placeholder="Örn: Hisar Mah. 1202 Sk. No: 99 Beşiktaş/İstanbul"></textarea>
                 </div>
 
                 <!-- GÖRSEL YÜKLEME ALANLARI -->
                 <div class="media-upload-section">
                     <h4 class="media-section-title">Şirket Görselleri (Sıkıştırılmış & Kaydedilmiş)</h4>
-                    
+
                     <div class="upload-grid">
                         <!-- Logo Yükle -->
                         <div class="upload-card">
@@ -213,7 +227,8 @@
                                     <span class="upload-placeholder">Logo Seç/Bırak</span>
                                 </div>
                             </div>
-                            <button type="button" class="btn-crop-image hidden" id="btn-crop-logo">✂️ Kırp / Düzelt</button>
+                            <button type="button" class="btn-crop-image hidden" id="btn-crop-logo">✂️ Kırp /
+                                Düzelt</button>
                         </div>
 
                         <!-- Kaşe Yükle -->
@@ -225,14 +240,16 @@
                                     <span class="upload-placeholder">Kaşe Seç/Bırak</span>
                                 </div>
                             </div>
-                            <button type="button" class="btn-crop-image hidden" id="btn-crop-stamp">✂️ Kırp / Düzelt</button>
+                            <button type="button" class="btn-crop-image hidden" id="btn-crop-stamp">✂️ Kırp /
+                                Düzelt</button>
                         </div>
 
                         <!-- Varsayılan Yetkili İmzası -->
                         <div class="upload-card">
                             <label>Varsayılan Yetkili İmzası</label>
                             <div class="signature-upload-actions">
-                                <button type="button" class="btn-small-action" id="btn-draw-default-sig">✍️ İmza Çiz</button>
+                                <button type="button" class="btn-small-action" id="btn-draw-default-sig">✍️ İmza
+                                    Çiz</button>
                                 <span class="upload-or-text">veya</span>
                                 <input type="file" id="input-sig" accept="image/*" class="file-input-small">
                             </div>
@@ -241,7 +258,8 @@
                                     <span class="upload-placeholder">İmza Yok</span>
                                 </div>
                             </div>
-                            <button type="button" class="btn-crop-image hidden" id="btn-crop-sig">✂️ Kırp / Düzelt</button>
+                            <button type="button" class="btn-crop-image hidden" id="btn-crop-sig">✂️ Kırp /
+                                Düzelt</button>
                         </div>
                     </div>
                 </div>
@@ -278,7 +296,7 @@
             <!-- Canlı Form Düzenleme Şablonu (A4 Görünümü) -->
             <div class="a4-container-wrapper">
                 <div class="a4-page" id="service-print-area">
-                    
+
                     <!-- Form Başlık Bloğu -->
                     <div class="form-print-header">
                         <div class="form-header-left" id="srv-print-comp-details">
@@ -305,11 +323,13 @@
                         <div class="print-grid-2">
                             <div class="print-form-field">
                                 <label>Kurum Adı:</label>
-                                <input type="text" id="srv-input-client-name" class="print-inline-input" placeholder="Kurum adını yazın...">
+                                <input type="text" id="srv-input-client-name" class="print-inline-input"
+                                    placeholder="Kurum adını yazın...">
                             </div>
                             <div class="print-form-field">
                                 <label>Şehir:</label>
-                                <input type="text" id="srv-input-client-city" class="print-inline-input" placeholder="Şehir yazın...">
+                                <input type="text" id="srv-input-client-city" class="print-inline-input"
+                                    placeholder="Şehir yazın...">
                             </div>
                         </div>
                     </div>
@@ -363,7 +383,8 @@
                     <!-- Yapılan İşlem -->
                     <div class="form-print-section">
                         <h3 class="print-section-title">YAPILAN İŞLEM</h3>
-                        <textarea id="srv-txt-process" class="print-textarea" placeholder="Servis sürecinde yapılan işlemleri detaylandırın..." rows="6"></textarea>
+                        <textarea id="srv-txt-process" class="print-textarea"
+                            placeholder="Servis sürecinde yapılan işlemleri detaylandırın..." rows="6"></textarea>
                     </div>
 
                     <!-- Değişen / Tavsiye Edilen Parçalar -->
@@ -392,7 +413,8 @@
                     <!-- Sonuç -->
                     <div class="form-print-section">
                         <h3 class="print-section-title">SONUÇ</h3>
-                        <textarea id="srv-txt-result" class="print-textarea" placeholder="Servis sonucu veya tavsiyeler..." rows="3"></textarea>
+                        <textarea id="srv-txt-result" class="print-textarea"
+                            placeholder="Servis sonucu veya tavsiyeler..." rows="3"></textarea>
                     </div>
 
                     <!-- Onay İmzaları Alanı -->
@@ -406,7 +428,8 @@
                                     <span class="sig-placeholder-text">İmza Atmak İçin Tıklayın</span>
                                 </div>
                                 <div class="sig-name-field">
-                                    <input type="text" id="srv-input-tech-name" placeholder="İsim Soyisim" class="sig-name-input">
+                                    <input type="text" id="srv-input-tech-name" placeholder="İsim Soyisim"
+                                        class="sig-name-input">
                                 </div>
                             </div>
 
@@ -417,7 +440,8 @@
                                     <span class="sig-placeholder-text">İmza Atmak İçin Tıklayın</span>
                                 </div>
                                 <div class="sig-name-field">
-                                    <input type="text" id="srv-input-client-person" placeholder="İsim Soyisim" class="sig-name-input">
+                                    <input type="text" id="srv-input-client-person" placeholder="İsim Soyisim"
+                                        class="sig-name-input">
                                 </div>
                             </div>
 
@@ -428,7 +452,8 @@
                                     <span class="sig-placeholder-text">İmza Atmak İçin Tıklayın</span>
                                 </div>
                                 <div class="sig-name-field">
-                                    <input type="text" id="srv-input-unit-person" placeholder="İsim Soyisim / Birim" class="sig-name-input">
+                                    <input type="text" id="srv-input-unit-person" placeholder="İsim Soyisim / Birim"
+                                        class="sig-name-input">
                                 </div>
                             </div>
                         </div>
@@ -471,7 +496,7 @@
             <!-- Canlı Form Düzenleme Şablonu (A4 Görünümü) -->
             <div class="a4-container-wrapper">
                 <div class="a4-page" id="quote-print-area">
-                    
+
                     <!-- Form Başlık Bloğu -->
                     <div class="form-print-header">
                         <div class="form-header-left" id="qte-print-comp-details">
@@ -495,13 +520,16 @@
                             <div class="quote-meta-title">TEKLİF SUNULAN KURUM</div>
                             <div class="quote-client-details">
                                 <div class="print-form-field no-label">
-                                    <input type="text" id="qte-input-client-title" class="print-inline-input bold-input" placeholder="T.C / Kurum Adı yazın...">
+                                    <input type="text" id="qte-input-client-title" class="print-inline-input bold-input"
+                                        placeholder="T.C / Kurum Adı yazın...">
                                 </div>
                                 <div class="print-form-field no-label">
-                                    <input type="text" id="qte-input-client-address" class="print-inline-input" placeholder="Kurum adresi...">
+                                    <input type="text" id="qte-input-client-address" class="print-inline-input"
+                                        placeholder="Kurum adresi...">
                                 </div>
                                 <div class="print-form-field no-label">
-                                    <input type="text" id="qte-input-client-city" class="print-inline-input" placeholder="Şehir yazın...">
+                                    <input type="text" id="qte-input-client-city" class="print-inline-input"
+                                        placeholder="Şehir yazın...">
                                 </div>
                             </div>
                         </div>
@@ -516,7 +544,8 @@
                                 </div>
                                 <div class="print-form-field-row">
                                     <label>TEKLİF NO:</label>
-                                    <input type="text" id="qte-input-no" class="print-inline-input bold-input" placeholder="Örn: DRP-0621">
+                                    <input type="text" id="qte-input-no" class="print-inline-input bold-input"
+                                        placeholder="Örn: DRP-0621">
                                 </div>
                             </div>
                         </div>
@@ -566,13 +595,16 @@
                     <!-- Teklif Şartları / Koşulları -->
                     <div class="form-print-section">
                         <h3 class="print-section-title">TEKLİF KOŞULLARI VE ŞARTLARI</h3>
-                        <textarea id="qte-txt-conditions" class="print-textarea" placeholder="* Fiyatlarımız KDV hariçtir.&#10;* Teslim süresi 15 gündür." rows="4"></textarea>
+                        <textarea id="qte-txt-conditions" class="print-textarea"
+                            placeholder="* Fiyatlarımız KDV hariçtir.&#10;* Teslim süresi 15 gündür."
+                            rows="4"></textarea>
                     </div>
 
                     <!-- Kaşe ve İmza Bölümü -->
                     <div class="form-print-section">
                         <div class="quote-signature-row">
-                            <div class="company-info-block" id="qte-print-certs-container" style="display: flex; align-items: center;">
+                            <div class="company-info-block" id="qte-print-certs-container"
+                                style="display: flex; align-items: center;">
                                 <div class="form-print-certs-row" id="qte-print-certs">
                                     <!-- Sertifika Damgaları Dinamik Gelecek -->
                                 </div>
@@ -631,17 +663,28 @@
                     </select>
                 </div>
                 <div class="form-group" id="settings-qr-container">
-                    <label class="checkbox-container-label" style="display: flex; align-items: center; gap: 8px; cursor: pointer; color: var(--text-main); font-size: 0.9rem;">
+                    <label class="checkbox-container-label"
+                        style="display: flex; align-items: center; gap: 8px; cursor: pointer; color: var(--text-main); font-size: 0.9rem;">
                         <input type="checkbox" id="settings-enable-qr" checked>
-                        <span>PDF Çıktılarına QR Doğrulama Kodu Ekle <span id="settings-qr-premium-lock" style="color: #fbbf24; font-size: 0.8rem; font-weight: bold; margin-left: 4px;">👑 Sadece Pro</span></span>
+                        <span>PDF Çıktılarına QR Doğrulama Kodu Ekle <span id="settings-qr-premium-lock"
+                                style="color: #fbbf24; font-size: 0.8rem; font-weight: bold; margin-left: 4px;">👑
+                                Sadece Pro</span></span>
                     </label>
-                    <small id="settings-qr-help" style="color: var(--text-muted); font-size: 0.75rem; margin-top: 4px; display: block;">PDF çıktılarının altına doğrulama ve dijital aktarım için QR kod yerleştirilir.</small>
+                    <small id="settings-qr-help"
+                        style="color: var(--text-muted); font-size: 0.75rem; margin-top: 4px; display: block;">PDF
+                        çıktılarının altına doğrulama ve dijital aktarım için QR kod yerleştirilir.</small>
                 </div>
-                <div class="form-group settings-premium-divider" style="border-top: 1px solid var(--border-color); padding-top: 15px; margin-top: 15px;">
+                <div class="form-group settings-premium-divider"
+                    style="border-top: 1px solid var(--border-color); padding-top: 15px; margin-top: 15px;">
                     <label>Abonelik Durumu</label>
-                    <div class="settings-premium-box" style="display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.15); padding: 10px; border-radius: 8px; border: 1px solid var(--border-color);">
-                        <span id="settings-premium-status" style="font-weight: 600; color: var(--text-main); font-size: 0.9rem;">Standart Üye (Reklamlı)</span>
-                        <button type="button" id="btn-settings-premium" class="btn-small-action" style="background: linear-gradient(135deg, #fbbf24, #d97706); color: white; border: none; font-weight: 600; padding: 6px 12px; border-radius: 6px; cursor: pointer;">👑 Premium</button>
+                    <div class="settings-premium-box"
+                        style="display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.15); padding: 10px; border-radius: 8px; border: 1px solid var(--border-color);">
+                        <span id="settings-premium-status"
+                            style="font-weight: 600; color: var(--text-main); font-size: 0.9rem;">Standart Üye
+                            (Reklamlı)</span>
+                        <button type="button" id="btn-settings-premium" class="btn-small-action"
+                            style="background: linear-gradient(135deg, #fbbf24, #d97706); color: white; border: none; font-weight: 600; padding: 6px 12px; border-radius: 6px; cursor: pointer;">👑
+                            Premium</button>
                     </div>
                 </div>
             </div>
@@ -662,31 +705,37 @@
                 <div class="guide-step">
                     <div class="step-num">1</div>
                     <div class="step-desc">
-                        <strong>Şirketini Ekle:</strong> "Şirket Ekle" butonuna basarak firmanızın unvan, adres, vergi dairesi ve no bilgilerini girin. Logo, kaşe ve damgaları yükleyin.
+                        <strong>Şirketini Ekle:</strong> "Şirket Ekle" butonuna basarak firmanızın unvan, adres, vergi
+                        dairesi ve no bilgilerini girin. Logo, kaşe ve damgaları yükleyin.
                     </div>
                 </div>
                 <div class="guide-step">
                     <div class="step-num">2</div>
                     <div class="step-desc">
-                        <strong>Aktif Şirketi Seç:</strong> Ana panelin üst kısmından hangi şirketinizle işlem yapacaksanız o şirketin kartına tıklayıp aktif hale getirin.
+                        <strong>Aktif Şirketi Seç:</strong> Ana panelin üst kısmından hangi şirketinizle işlem
+                        yapacaksanız o şirketin kartına tıklayıp aktif hale getirin.
                     </div>
                 </div>
                 <div class="guide-step">
                     <div class="step-num">3</div>
                     <div class="step-desc">
-                        <strong>Form Oluştur:</strong> "Form Oluştur" butonuna basın, Servis veya Teklif formundan birini seçerek düzenleme ekranına geçin.
+                        <strong>Form Oluştur:</strong> "Form Oluştur" butonuna basın, Servis veya Teklif formundan
+                        birini seçerek düzenleme ekranına geçin.
                     </div>
                 </div>
                 <div class="guide-step">
                     <div class="step-num">4</div>
                     <div class="step-desc">
-                        <strong>Tıkla ve Doldur (Inline Edit):</strong> Form üzerindeki tüm alanlar etkileşimlidir. Cihazları, kalemleri veya yapılan işlemleri tıklayarak klavyenizle doğrudan doldurun.
+                        <strong>Tıkla ve Doldur (Inline Edit):</strong> Form üzerindeki tüm alanlar etkileşimlidir.
+                        Cihazları, kalemleri veya yapılan işlemleri tıklayarak klavyenizle doğrudan doldurun.
                     </div>
                 </div>
                 <div class="guide-step">
                     <div class="step-num">5</div>
                     <div class="step-desc">
-                        <strong>İmzalat ve PDF İndir:</strong> İmza kutularına tıklayarak telefon ekranından parmakla dijital imza attırın. Üst bardaki "PDF İndir" butonuna basarak anında A4 boyutunda çıktısını indirin. Formunuz yerel geçmişe de otomatik olarak kaydedilecektir.
+                        <strong>İmzalat ve PDF İndir:</strong> İmza kutularına tıklayarak telefon ekranından parmakla
+                        dijital imza attırın. Üst bardaki "PDF İndir" butonuna basarak anında A4 boyutunda çıktısını
+                        indirin. Formunuz yerel geçmişe de otomatik olarak kaydedilecektir.
                     </div>
                 </div>
             </div>
@@ -759,11 +808,13 @@
                 <button class="modal-close" id="btn-close-confirm-exit">✖</button>
             </div>
             <div class="modal-body">
-                <p style="color: var(--text-main); margin-bottom: 8px;">Kaydedilmemiş değişiklikler kaybolabilir. Çıkmak istediğinizden emin misiniz?</p>
+                <p style="color: var(--text-main); margin-bottom: 8px;">Kaydedilmemiş değişiklikler kaybolabilir. Çıkmak
+                    istediğinizden emin misiniz?</p>
             </div>
             <div class="modal-footer">
                 <button class="btn-secondary-small" id="btn-cancel-exit">Vazgeç</button>
-                <button class="btn-primary-small" id="btn-confirm-exit" style="background: var(--danger);">Çıkış Yap</button>
+                <button class="btn-primary-small" id="btn-confirm-exit" style="background: var(--danger);">Çıkış
+                    Yap</button>
             </div>
         </div>
     </div>
@@ -780,27 +831,32 @@
                     <button id="tab-feedback-btn" class="tab-btn active">💬 Geri Bildirim</button>
                     <button id="tab-about-btn" class="tab-btn">ℹ️ Hakkında & Kredi</button>
                 </div>
-                
+
                 <div id="tab-feedback-content">
-                    <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 12px;">Görüş, öneri veya hata bildirimlerinizi geliştiriciye doğrudan iletebilirsiniz.</p>
+                    <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 12px;">Görüş, öneri veya hata
+                        bildirimlerinizi geliştiriciye doğrudan iletebilirsiniz.</p>
                     <div class="form-group">
                         <label for="feedback-message">Mesajınız</label>
-                        <textarea id="feedback-message" rows="5" placeholder="Geri bildiriminizi buraya yazın..." style="width: 100%; background: rgba(0,0,0,0.2); border: 1px solid var(--border-color); color: white; border-radius: 8px; padding: 10px; font-family: inherit; font-size: 0.88rem; outline: none; resize: none;"></textarea>
+                        <textarea id="feedback-message" rows="5" placeholder="Geri bildiriminizi buraya yazın..."
+                            style="width: 100%; background: rgba(0,0,0,0.2); border: 1px solid var(--border-color); color: white; border-radius: 8px; padding: 10px; font-family: inherit; font-size: 0.88rem; outline: none; resize: none;"></textarea>
                     </div>
-                    <button id="btn-send-feedback" class="btn-primary" style="width: 100%; margin-top: 10px; height: 40px;">Geri Bildirimi Gönder</button>
+                    <button id="btn-send-feedback" class="btn-primary"
+                        style="width: 100%; margin-top: 10px; height: 40px;">Geri Bildirimi Gönder</button>
                 </div>
 
                 <div id="tab-about-content" class="hidden">
                     <div style="font-size: 0.88rem; line-height: 1.6; color: var(--text-main);">
                         <strong style="color: var(--secondary-light); font-size: 1rem;">Kolay Form v1.1.0</strong>
-                        <p style="margin-top: 8px;">Bu uygulama, teknik servis ekiplerinin ve işletmelerin hızlı, pratik ve çevrimdışı (offline) form & teklif yönetimi yapabilmesi amacıyla geliştirilmiştir.</p>
-                        
+                        <p style="margin-top: 8px;">Bu uygulama, teknik servis ekiplerinin ve işletmelerin hızlı, pratik
+                            ve çevrimdışı (offline) form & teklif yönetimi yapabilmesi amacıyla geliştirilmiştir.</p>
+
                         <div style="margin-top: 16px; border-top: 1px solid var(--border-color); padding-top: 12px;">
                             <strong style="color: var(--primary-light);">Geliştirici & Krediler:</strong>
                             <p style="margin-top: 4px; font-size: 0.85rem; color: var(--text-muted);">
                                 💻 <strong>Tasarım & Geliştirme:</strong> Alieren3D<br>
                                 🎯 <strong>Vizyon & Katkılar:</strong> Haydar Şeker<br>
-                                🔒 <strong>Gizlilik:</strong> Uygulama tamamen cihazınızda çalışır, hiçbir veri uzak sunucuya aktarılmaz.
+                                🔒 <strong>Gizlilik:</strong> Uygulama tamamen cihazınızda çalışır, hiçbir veri uzak
+                                sunucuya aktarılmaz.
                             </p>
                         </div>
                     </div>
@@ -844,7 +900,8 @@
                     <div class="qr-result-line"><span>Tutar</span><strong id="qr-res-total">—</strong></div>
                 </div>
 
-                <p class="qr-scan-note">İpucu: QR okunmuyorsa, QR'ın net göründüğü bir fotoğrafı yükleyerek de tarayabilirsiniz.</p>
+                <p class="qr-scan-note">İpucu: QR okunmuyorsa, QR'ın net göründüğü bir fotoğrafı yükleyerek de
+                    tarayabilirsiniz.</p>
                 <input type="file" id="qr-file-input" accept="image/*" class="hidden">
             </div>
             <div class="modal-footer qr-scan-footer">
@@ -862,7 +919,8 @@
                 <button class="modal-close" id="btn-close-crop">✖</button>
             </div>
             <div class="modal-body crop-body">
-                <p class="crop-hint">4 köşeyi sürükleyerek kırpılacak alanı belirleyin. Seçilen dörtgen düzeltilerek dik bir dikdörtgene çevrilir.</p>
+                <p class="crop-hint">4 köşeyi sürükleyerek kırpılacak alanı belirleyin. Seçilen dörtgen düzeltilerek dik
+                    bir dikdörtgene çevrilir.</p>
                 <div class="crop-stage" id="crop-stage">
                     <canvas id="crop-canvas"></canvas>
                     <canvas id="crop-overlay"></canvas>
@@ -885,14 +943,19 @@
             <div class="modal-body">
                 <div class="premium-hero">
                     <h4>Sınırsız Gücü Serbest Bırakın</h4>
-                    <p>Uygulamayı reklamsız kullanın, toplu indirmeleri sınırsızca yapın ve profesyonelliğinizi artırın.</p>
+                    <p>Uygulamayı reklamsız kullanın, toplu indirmeleri sınırsızca yapın ve profesyonelliğinizi artırın.
+                    </p>
                 </div>
-                
+
                 <div class="premium-benefits">
-                    <div class="benefit-item"><span>✓</span> <strong>Sınırsız PDF İndirme:</strong> Günlük 3 adet indirme limitini kaldırın ve reklam izlemeden anında indirin.</div>
-                    <div class="benefit-item"><span>✓</span> <strong>PDF QR Doğrulama Kodu:</strong> PDF çıktılarınızın altına dijital doğrulama ve aktarım için QR kod ekleyin.</div>
-                    <div class="benefit-item"><span>✓</span> <strong>Toplu PDF İndirme:</strong> Tüm geçmiş arşivi tek tuşla birleşik PDF raporu olarak indirin.</div>
-                    <div class="benefit-item"><span>✓</span> <strong>Sınırsız Şirket Profili:</strong> İstediğiniz kadar şirket tanımlayın ve yönetin.</div>
+                    <div class="benefit-item"><span>✓</span> <strong>Sınırsız PDF İndirme:</strong> Günlük indirme
+                        limitini kaldırın ve reklam izlemeden anında indirin.</div>
+                    <div class="benefit-item"><span>✓</span> <strong>PDF QR Doğrulama Kodu:</strong> PDF çıktılarınızın
+                        altına dijital doğrulama ve aktarım için QR kod ekleyin.</div>
+                    <div class="benefit-item"><span>✓</span> <strong>Toplu PDF İndirme:</strong> Tüm geçmiş arşivi tek
+                        tuşla birleşik PDF raporu olarak indirin.</div>
+                    <div class="benefit-item"><span>✓</span> <strong>Sınırsız Şirket Profili:</strong> İstediğiniz kadar
+                        şirket tanımlayın ve yönetin.</div>
                 </div>
 
                 <div class="premium-plans-grid">
@@ -901,7 +964,8 @@
                         <div class="plan-badge">Aylık</div>
                         <div class="plan-price">₺99<span> / ay</span></div>
                         <p class="plan-desc">Küçük işletmeler ve serbest çalışanlar için ideal.</p>
-                        <button class="btn-buy-plan btn-primary" data-plan="monthly" data-price="₺99.00/Ay">Satın Al</button>
+                        <button class="btn-buy-plan btn-primary" data-plan="monthly" data-price="₺99.00/Ay">Satın
+                            Al</button>
                     </div>
 
                     <!-- Yıllık Plan -->
@@ -910,7 +974,8 @@
                         <div class="plan-badge">Yıllık</div>
                         <div class="plan-price">₺999<span> / yıl</span></div>
                         <p class="plan-desc">Yıllık ödeme ile %15 tasarruf edin.</p>
-                        <button class="btn-buy-plan btn-primary" data-plan="yearly" data-price="₺999.00/Yıl">Satın Al</button>
+                        <button class="btn-buy-plan btn-primary" data-plan="yearly" data-price="₺999.00/Yıl">Satın
+                            Al</button>
                     </div>
 
                     <!-- Kurumsal Plan -->
@@ -918,7 +983,8 @@
                         <div class="plan-badge">10 Kişilik / Sınırsız</div>
                         <div class="plan-price">₺9999<span> / ömürlük</span></div>
                         <p class="plan-desc">Büyük ekipler için tek seferlik sınırsız kullanım lisansı.</p>
-                        <button class="btn-buy-plan btn-primary" data-plan="enterprise" data-price="₺9999.00 Tek Sefer">Satın Al</button>
+                        <button class="btn-buy-plan btn-primary" data-plan="enterprise"
+                            data-price="₺9999.00 Tek Sefer">Satın Al</button>
                     </div>
                 </div>
             </div>
@@ -939,14 +1005,17 @@
                 <div style="font-size: 3rem; margin-bottom: 15px;">📽️</div>
                 <h4 style="margin-bottom: 10px; color: var(--text-main);">Ücretsiz İndirmek için Reklam İzleyin</h4>
                 <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 20px;">
-                    Bu özellik ücretsiz üyeler için ödüllü reklam izlemeyi gerektirir. 5 saniyelik kısa bir reklam izleyerek PDF belgenizi anında indirebilirsiniz.<br><br>
+                    Bu özellik ücretsiz üyeler için ödüllü reklam izlemeyi gerektirir. 5 saniyelik kısa bir reklam
+                    izleyerek PDF belgenizi anında indirebilirsiniz.<br><br>
                     Reklamları tamamen kaldırmak ve diğer tüm premium özelliklere erişmek için Premium'a geçebilirsiniz.
                 </p>
                 <div style="display: flex; flex-direction: column; gap: 10px;">
-                    <button id="btn-ad-prompt-watch" class="btn-primary" style="height: 44px; font-weight: 600; display: flex; justify-content: center; align-items: center; gap: 8px;">
+                    <button id="btn-ad-prompt-watch" class="btn-primary"
+                        style="height: 44px; font-weight: 600; display: flex; justify-content: center; align-items: center; gap: 8px;">
                         <span>▶</span> Reklamı İzle ve PDF İndir
                     </button>
-                    <button id="btn-ad-prompt-premium" class="btn-secondary" style="height: 44px; font-weight: 600; border-color: #fbbf24; color: #fbbf24; display: flex; justify-content: center; align-items: center; gap: 8px;">
+                    <button id="btn-ad-prompt-premium" class="btn-secondary"
+                        style="height: 44px; font-weight: 600; border-color: #fbbf24; color: #fbbf24; display: flex; justify-content: center; align-items: center; gap: 8px;">
                         <span>👑</span> Premium'a Yükselt (₺99/Ay)
                     </button>
                 </div>
@@ -962,25 +1031,31 @@
                 <button class="modal-close hidden" id="btn-close-ad-sim" style="color: white;">✖</button>
             </div>
             <div class="modal-body ad-sim-body" style="padding: 30px; text-align: center; color: white;">
-                <div class="ad-sim-visual" style="position: relative; width: 100px; height: 100px; margin: 0 auto 20px;">
+                <div class="ad-sim-visual"
+                    style="position: relative; width: 100px; height: 100px; margin: 0 auto 20px;">
                     <svg class="ad-sim-circle" width="100" height="100" viewBox="0 0 100 100">
-                        <circle cx="50" cy="50" r="45" stroke="rgba(255,255,255,0.1)" stroke-width="6" fill="none"/>
-                        <circle id="ad-sim-progress-bar" cx="50" cy="50" r="45" stroke="#06b6d4" stroke-width="6" fill="none" 
-                                stroke-dasharray="283" stroke-dashoffset="283" style="transition: stroke-dashoffset 1s linear; transform: rotate(-90deg); transform-origin: 50% 50%;"/>
+                        <circle cx="50" cy="50" r="45" stroke="rgba(255,255,255,0.1)" stroke-width="6" fill="none" />
+                        <circle id="ad-sim-progress-bar" cx="50" cy="50" r="45" stroke="#06b6d4" stroke-width="6"
+                            fill="none" stroke-dasharray="283" stroke-dashoffset="283"
+                            style="transition: stroke-dashoffset 1s linear; transform: rotate(-90deg); transform-origin: 50% 50%;" />
                     </svg>
-                    <div id="ad-sim-counter" style="position: absolute; top: 0; left: 0; width: 100px; height: 100px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; font-weight: 700; font-family: 'Outfit', sans-serif;">5</div>
+                    <div id="ad-sim-counter"
+                        style="position: absolute; top: 0; left: 0; width: 100px; height: 100px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; font-weight: 700; font-family: 'Outfit', sans-serif;">
+                        5</div>
                 </div>
-                
+
                 <h4 style="margin-bottom: 8px; color: #06b6d4;">Ödüllü Reklam Oynatılıyor</h4>
                 <p style="font-size: 0.85rem; color: #a1a1aa; line-height: 1.5; margin-bottom: 25px;">
                     Simülasyon Reklamı: Lütfen bekleyin. Video tamamlandığında belgeniz otomatik olarak indirilecektir.
                 </p>
 
                 <!-- Reklam Mock İçeriği -->
-                <div class="ad-mockup-display" style="background: rgba(255,255,255,0.05); border-radius: 8px; padding: 15px; border: 1px dashed rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; gap: 10px;">
+                <div class="ad-mockup-display"
+                    style="background: rgba(255,255,255,0.05); border-radius: 8px; padding: 15px; border: 1px dashed rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; gap: 10px;">
                     <span style="font-size: 2rem;">🎮</span>
                     <div style="text-align: left;">
-                        <div style="font-weight: 600; font-size: 0.85rem; color: white;">Kolay Form Premium Mobil Oyun</div>
+                        <div style="font-weight: 600; font-size: 0.85rem; color: white;">Kolay Form Premium Mobil Oyun
+                        </div>
                         <div style="font-size: 0.75rem; color: #71717a;">Hemen İndir ve Oyna!</div>
                     </div>
                 </div>
@@ -989,29 +1064,44 @@
     </div>
 
     <!-- 14. ODEME SIMULATORU MODALI -->
-    <div id="modal-iap-simulation" class="modal-backdrop hidden" style="z-index: 9999; display: flex; align-items: flex-end; background: rgba(0,0,0,0.6);">
-        <div class="iap-sim-sheet" style="width: 100%; max-width: 500px; background: #242424; border-top-left-radius: 16px; border-top-right-radius: 16px; box-shadow: 0 -10px 25px rgba(0,0,0,0.5); padding: 20px; font-family: 'Inter', sans-serif; color: #e4e4e7; margin: 0 auto; box-sizing: border-box;">
-            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #3f3f46; padding-bottom: 12px; margin-bottom: 15px;">
+    <div id="modal-iap-simulation" class="modal-backdrop hidden"
+        style="z-index: 9999; display: flex; align-items: flex-end; background: rgba(0,0,0,0.6);">
+        <div class="iap-sim-sheet"
+            style="width: 100%; max-width: 500px; background: #242424; border-top-left-radius: 16px; border-top-right-radius: 16px; box-shadow: 0 -10px 25px rgba(0,0,0,0.5); padding: 20px; font-family: 'Inter', sans-serif; color: #e4e4e7; margin: 0 auto; box-sizing: border-box;">
+            <div
+                style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #3f3f46; padding-bottom: 12px; margin-bottom: 15px;">
                 <div style="display: flex; align-items: center; gap: 8px;">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M19.224 8.796c-.347-.367-.803-.57-1.284-.57H5.21c-.482 0-.938.203-1.285.57A1.895 1.895 0 003.5 10.15v8.52c0 .506.196.98.552 1.347.347.367.803.57 1.284.57h12.728c.483 0 .939-.203 1.285-.57a1.898 1.898 0 00.551-1.347v-8.52a1.897 1.897 0 00-.476-1.354z" fill="#00e676"/>
-                        <path d="M17.94 8.226h-11.88a2.5 2.5 0 01-2.5-2.5v-.5a2.5 2.5 0 012.5-2.5h11.88a2.5 2.5 0 012.5 2.5v.5a2.5 2.5 0 01-2.5 2.5z" fill="#00c853"/>
+                        <path
+                            d="M19.224 8.796c-.347-.367-.803-.57-1.284-.57H5.21c-.482 0-.938.203-1.285.57A1.895 1.895 0 003.5 10.15v8.52c0 .506.196.98.552 1.347.347.367.803.57 1.284.57h12.728c.483 0 .939-.203 1.285-.57a1.898 1.898 0 00.551-1.347v-8.52a1.897 1.897 0 00-.476-1.354z"
+                            fill="#00e676" />
+                        <path
+                            d="M17.94 8.226h-11.88a2.5 2.5 0 01-2.5-2.5v-.5a2.5 2.5 0 012.5-2.5h11.88a2.5 2.5 0 012.5 2.5v.5a2.5 2.5 0 01-2.5 2.5z"
+                            fill="#00c853" />
                     </svg>
                     <span style="font-weight: 700; color: #ffffff; letter-spacing: 0.5px;">Google Play Satın Alma</span>
                 </div>
-                <button id="btn-close-iap-sim" style="background: none; border: none; color: #a1a1aa; font-size: 1.2rem; cursor: pointer;">✖</button>
+                <button id="btn-close-iap-sim"
+                    style="background: none; border: none; color: #a1a1aa; font-size: 1.2rem; cursor: pointer;">✖</button>
             </div>
-            
+
             <div style="margin-bottom: 20px;">
-                <div style="font-size: 0.8rem; color: #a1a1aa; text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px;">Uygulama</div>
-                <div style="font-weight: 700; font-size: 1.1rem; color: #ffffff; margin-top: 2px;">Kolay Form - Premium Üyelik</div>
-                
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px; background: #18181b; padding: 12px; border-radius: 8px; border: 1px solid #27272a;">
+                <div
+                    style="font-size: 0.8rem; color: #a1a1aa; text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px;">
+                    Uygulama</div>
+                <div style="font-weight: 700; font-size: 1.1rem; color: #ffffff; margin-top: 2px;">Kolay Form - Premium
+                    Üyelik</div>
+
+                <div
+                    style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px; background: #18181b; padding: 12px; border-radius: 8px; border: 1px solid #27272a;">
                     <div>
-                        <div id="iap-sim-plan-name" style="font-weight: 600; color: #ffffff; font-size: 0.95rem;">Premium Yıllık Paket</div>
-                        <div style="font-size: 0.75rem; color: #71717a;">Google Play faturalandırma sistemi ile simüle edilir.</div>
+                        <div id="iap-sim-plan-name" style="font-weight: 600; color: #ffffff; font-size: 0.95rem;">
+                            Premium Yıllık Paket</div>
+                        <div style="font-size: 0.75rem; color: #71717a;">Google Play faturalandırma sistemi ile simüle
+                            edilir.</div>
                     </div>
-                    <div id="iap-sim-plan-price" style="font-weight: 700; font-size: 1.1rem; color: #00e676;">₺999.00</div>
+                    <div id="iap-sim-plan-price" style="font-weight: 700; font-size: 1.1rem; color: #00e676;">₺999.00
+                    </div>
                 </div>
             </div>
 
@@ -1022,7 +1112,8 @@
             </div>
 
             <!-- Onay Butonu -->
-            <button id="btn-iap-sim-pay" class="btn-primary" style="width: 100%; height: 48px; border-radius: 24px; font-weight: 700; font-size: 1rem; background: #00c853; border: none; color: white; display: flex; justify-content: center; align-items: center; gap: 8px; box-shadow: 0 4px 12px rgba(0,200,83,0.3); cursor: pointer;">
+            <button id="btn-iap-sim-pay" class="btn-primary"
+                style="width: 100%; height: 48px; border-radius: 24px; font-weight: 700; font-size: 1rem; background: #00c853; border: none; color: white; display: flex; justify-content: center; align-items: center; gap: 8px; box-shadow: 0 4px 12px rgba(0,200,83,0.3); cursor: pointer;">
                 <span>🔒</span> TEK DOKUNUŞLA SATIN AL
             </button>
         </div>
@@ -1036,4 +1127,5 @@
     <script src="js/libs/jsQR.min.js"></script>
     <script src="js/app.js"></script>
 </body>
+
 </html>
