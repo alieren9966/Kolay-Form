@@ -290,8 +290,8 @@ Uygulamayı imzalamak ve App Store'a yüklemek için:
 Uygulamanın sürdürülebilirliği ve ticari yapısı için tanımlanan Free/Premium limitleri ve çalışma kuralları şu şekildedir:
 
 ### A. Günlük İndirme Limiti (Free)
-- Ücretsiz kullanıcılar yerel cihazlarında günde en fazla **3 adet PDF** indirebilirler. Her başarılı indirme isteğinde (reklam sonrası) indirme adedi artırılır ve tarih kontrolü ile yerel hafızada (`kolayform_free_downloads`) saklanır.
-- 4. indirme yapılmak istendiğinde indirme işlemi engellenir ve kullanıcı Premium satın alma ekranına yönlendirilir.
+- Ücretsiz kullanıcılar yerel cihazlarında günde en fazla **3 adet PDF** indirebilirler. Limit hesabı, günün ilk PDF indirme zamanı (`firstDownloadTime` timestamp) kaydedilerek başlatılır.
+- 3 adet indirildikten sonraki istekler engellenir ve kullanıcı Premium satın alma ekranına yönlendirilir. Burada ilk indirme anından itibaren 24 saatin bitmesi için kalan süreyi gösteren **gerçek zamanlı bir geri sayım sayacı** gösterilir. 24 saat dolduğunda indirme hakkı sıfırlanır ve tekrar 3 hak tanımlanır. Veriler yerel hafızada (`kolayform_free_downloads`) saklanır.
 
 ### B. Toplu PDF İndirme (Pro-Only)
 - Geçmiş formları filtreleyip tek bir PDF'te birleştirme (Toplu İndir) işlemi tamamen Premium üyelere özeldir. Ücretsiz üyeler bu butona tıkladığında Premium modalı açılır.

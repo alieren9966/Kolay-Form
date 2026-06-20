@@ -44,7 +44,7 @@ Bu dosya, **Kolay Form** uygulamasının Google Play Store ve Apple App Store ü
 
 ## ✨ Tamamlanan Özellikler ve İş Kuralları (Implemented Features & Business Rules)
 
-* **Günlük İndirme Sınırı (Free):** Ücretsiz kullanıcılar günde maksimum **3 adet PDF** indirebilir (reklam izleyerek). 4. indirmede işlem engellenerek Premium satın alma modalı otomatik gösterilir.
+* **Günlük İndirme Sınırı (Free):** Ücretsiz kullanıcılar günde maksimum **3 adet PDF** indirebilir (reklam izleyerek). 4. indirmede işlem engellenerek Premium satın alma modalı otomatik gösterilir. Ayrıca kullanıcıya yeni indirme haklarının tanımlanacağı zamanı gösteren **24 saatlik gerçek zamanlı bir geri sayım sayacı** gösterilir.
 * **Toplu PDF İndirme (Pro-Only):** Filtrelenmiş geçmiş formların tek bir PDF dosyasında birleştirilip indirilmesi (Toplu İndir) özelliği tamamen Premium üyelere özel hale getirilmiştir.
 * **PDF QR Doğrulama Kodu Kontrolü:** PDF çıktılarında QR kod eklenmesi/kaldırılması ayarı Pro kullanıcılara özeldir (Ayarlar menüsünden yönetilir). Ücretsiz üyelerde bu kod eklenmez ve ayar kilitlenir.
 * **Otomatik Kaydetme (Auto-Save):** Editörde kaydetmeden doğrudan PDF İndir denildiğinde veri kaybını önlemek amacıyla form arka planda otomatik olarak kaydedilir.
