@@ -241,32 +241,41 @@ document.addEventListener('DOMContentLoaded', () => {
             return true;
         }
         
-        const today = new Date().toISOString().split('T')[0];
+        const now = Date.now();
+        const oneDay = 24 * 60 * 60 * 1000;
+        
         let downloadData = localStorage.getItem('kolayform_free_downloads');
-        let data = { date: today, count: 0 };
+        let data = { firstDownloadTime: 0, count: 0 };
         
         if (downloadData) {
             try {
-                const parsed = JSON.parse(downloadData);
-                if (parsed.date === today) {
-                    data = parsed;
-                }
+                data = JSON.parse(downloadData);
             } catch (e) {
                 console.error("Download limit parse error:", e);
             }
         }
         
+        // Eger ilk indirmeden itibaren 24 saat gectiyse haklari sıfırla
+        if (data.firstDownloadTime && (now - data.firstDownloadTime >= oneDay)) {
+            data.count = 0;
+            data.firstDownloadTime = 0;
+        }
+        
         if (data.count >= 3) {
-            showFreeLimitReachedModal();
+            showFreeLimitReachedModal(data.firstDownloadTime);
             return false;
         }
         
         data.count++;
+        if (data.count === 1) {
+            data.firstDownloadTime = now;
+        }
+        
         localStorage.setItem('kolayform_free_downloads', JSON.stringify(data));
         return true;
     }
 
-    function showFreeLimitReachedModal() {
+    function showFreeLimitReachedModal(firstDownloadTime) {
         let alertBanner = document.getElementById('premium-limit-alert');
         if (!alertBanner) {
             alertBanner = document.createElement('div');
@@ -280,15 +289,44 @@ document.addEventListener('DOMContentLoaded', () => {
             alertBanner.style.fontWeight = '600';
             alertBanner.style.textAlign = 'center';
             alertBanner.style.fontSize = '0.9rem';
+            alertBanner.style.lineHeight = '1.4';
             
             const modalBody = document.querySelector('#modal-premium .modal-body');
             if (modalBody) {
                 modalBody.insertBefore(alertBanner, modalBody.firstChild);
             }
         }
-        alertBanner.innerHTML = '⚠️ Günlük 3 adet ücretsiz PDF indirme limitinizi doldurdunuz. Devam etmek için lütfen Premium pakete geçin.';
-        alertBanner.style.display = 'block';
         
+        // Geri sayım baslat
+        if (window.limitCountdownInterval) {
+            clearInterval(window.limitCountdownInterval);
+        }
+        
+        function formatCountdown(ms) {
+            const totalSecs = Math.floor(ms / 1000);
+            const hours = String(Math.floor(totalSecs / 3600)).padStart(2, '0');
+            const mins = String(Math.floor((totalSecs % 3600) / 60)).padStart(2, '0');
+            const secs = String(totalSecs % 60).padStart(2, '0');
+            return `${hours}:${mins}:${secs}`;
+        }
+        
+        const updateCountdownText = () => {
+            const remaining = Math.max(0, (firstDownloadTime + 24 * 60 * 60 * 1000) - Date.now());
+            alertBanner.innerHTML = `
+                ⚠️ Günlük 3 adet ücretsiz PDF indirme limitinizi doldurdunuz.<br>
+                Yeni haklar için kalan süre: <strong id="download-limit-countdown" style="color: #fbbf24; font-family: monospace; font-size: 1rem;">${formatCountdown(remaining)}</strong><br>
+                Sınırsız indirme yapmak için Premium pakete geçin.
+            `;
+            if (remaining <= 0) {
+                clearInterval(window.limitCountdownInterval);
+                alertBanner.style.display = 'none';
+            }
+        };
+        
+        updateCountdownText();
+        window.limitCountdownInterval = setInterval(updateCountdownText, 1000);
+        
+        alertBanner.style.display = 'block';
         document.getElementById('modal-premium').classList.remove('hidden');
     }
 
@@ -2267,6 +2305,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Modalları Kapatma Butonları
     document.getElementById('btn-close-premium').addEventListener('click', () => {
+        if (window.limitCountdownInterval) {
+            clearInterval(window.limitCountdownInterval);
+        }
         premiumModal.classList.add('hidden');
     });
     
