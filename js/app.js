@@ -37,8 +37,17 @@ document.addEventListener('DOMContentLoaded', () => {
             if (state.settings.isPremium === undefined) {
                 state.settings.isPremium = false;
             }
+            if (state.settings.enableQr === undefined) {
+                state.settings.enableQr = true;
+            }
         } else {
-            state.settings.isPremium = false;
+            state.settings = {
+                defaultKdv: 20,
+                currency: '₺',
+                lang: 'tr',
+                isPremium: false,
+                enableQr: true
+            };
         }
         
         if (storedActiveComp) state.activeCompanyId = storedActiveComp;
@@ -183,6 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('modal-premium').classList.add('hidden');
             
             state.settings.isPremium = true;
+            state.settings.enableQr = true;
             saveSettings();
             updatePremiumUI();
             
@@ -226,9 +236,70 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    function checkAndIncrementDownloadLimit() {
+        if (state.settings.isPremium) {
+            return true;
+        }
+        
+        const today = new Date().toISOString().split('T')[0];
+        let downloadData = localStorage.getItem('kolayform_free_downloads');
+        let data = { date: today, count: 0 };
+        
+        if (downloadData) {
+            try {
+                const parsed = JSON.parse(downloadData);
+                if (parsed.date === today) {
+                    data = parsed;
+                }
+            } catch (e) {
+                console.error("Download limit parse error:", e);
+            }
+        }
+        
+        if (data.count >= 3) {
+            showFreeLimitReachedModal();
+            return false;
+        }
+        
+        data.count++;
+        localStorage.setItem('kolayform_free_downloads', JSON.stringify(data));
+        return true;
+    }
+
+    function showFreeLimitReachedModal() {
+        let alertBanner = document.getElementById('premium-limit-alert');
+        if (!alertBanner) {
+            alertBanner = document.createElement('div');
+            alertBanner.id = 'premium-limit-alert';
+            alertBanner.style.background = 'rgba(239, 68, 68, 0.2)';
+            alertBanner.style.border = '1px solid #ef4444';
+            alertBanner.style.color = '#fca5a5';
+            alertBanner.style.padding = '12px';
+            alertBanner.style.borderRadius = '8px';
+            alertBanner.style.marginBottom = '15px';
+            alertBanner.style.fontWeight = '600';
+            alertBanner.style.textAlign = 'center';
+            alertBanner.style.fontSize = '0.9rem';
+            
+            const modalBody = document.querySelector('#modal-premium .modal-body');
+            if (modalBody) {
+                modalBody.insertBefore(alertBanner, modalBody.firstChild);
+            }
+        }
+        alertBanner.innerHTML = '⚠️ Günlük 3 adet ücretsiz PDF indirme limitinizi doldurdunuz. Devam etmek için lütfen Premium pakete geçin.';
+        alertBanner.style.display = 'block';
+        
+        document.getElementById('modal-premium').classList.remove('hidden');
+    }
+
     function requireAdOrPremium(onConfirmAction) {
         if (state.settings.isPremium) {
             onConfirmAction();
+            return;
+        }
+        
+        // Free user download limit check
+        if (!checkAndIncrementDownloadLimit()) {
             return;
         }
         
@@ -1528,6 +1599,18 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('btn-pdf-service-form').addEventListener('click', () => {
         const formData = getServiceFormData();
         if (formData) {
+            // Arka planda otomatik kaydet
+            applyImportedMetaToFormData(formData);
+            const idx = state.forms.findIndex(f => f.id === formData.id);
+            if (idx !== -1) {
+                state.forms[idx] = formData;
+            } else {
+                state.forms.unshift(formData);
+            }
+            state.currentEditingForm = formData; // Düzenleme moduna çek ki mükerrer kayıt oluşmasın
+            saveForms();
+            renderFormsList();
+
             const company = state.companies.find(c => c.id === formData.companyId);
             const compName = company ? company.name : 'Sirket';
             const clientName = formData.clientName || 'Musteri';
@@ -1543,6 +1626,18 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('btn-pdf-quote-form').addEventListener('click', () => {
         const formData = getQuoteFormData();
         if (formData) {
+            // Arka planda otomatik kaydet
+            applyImportedMetaToFormData(formData);
+            const idx = state.forms.findIndex(f => f.id === formData.id);
+            if (idx !== -1) {
+                state.forms[idx] = formData;
+            } else {
+                state.forms.unshift(formData);
+            }
+            state.currentEditingForm = formData; // Düzenleme moduna çek ki mükerrer kayıt oluşmasın
+            saveForms();
+            renderFormsList();
+
             const company = state.companies.find(c => c.id === formData.companyId);
             const compName = company ? company.name : 'Sirket';
             const clientName = formData.clientName || 'Musteri';
@@ -1957,79 +2052,83 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Toplu İndirme: tüm seçili formları TEK bir PDF'te, her form ayrı sayfada birleştirir
-    function triggerBulkDownload() {
-        requireAdOrPremium(async () => {
-            const filtered = getFilteredForms();
+    // Toplu İndirme: tüm seçili formları TEK bir PDF'te, her form ayrı sayfada birleştirir (Yalnızca Premium)
+    async function triggerBulkDownload() {
+        if (!state.settings.isPremium) {
+            alert("Toplu PDF İndirme özelliği sadece Premium üyelerimize özeldir. Lütfen devam etmek için Premium plana yükseltin.");
+            document.getElementById('modal-premium').classList.remove('hidden');
+            return;
+        }
 
-            if (filtered.length === 0) {
-                alert("İndirilecek form bulunamadı.");
-                return;
-            }
+        const filtered = getFilteredForms();
 
-            if (!confirm(`${filtered.length} adet form tek bir PDF dosyasında (her form ayrı sayfa) birleştirilecektir. Onaylıyor musunuz?`)) {
-                return;
-            }
+        if (filtered.length === 0) {
+            alert("İndirilecek form bulunamadı.");
+            return;
+        }
 
-            const bulkModal = document.getElementById('modal-bulk-loading');
-            const bulkProgress = document.getElementById('bulk-loading-progress');
-            bulkModal.classList.remove('hidden');
+        if (!confirm(`${filtered.length} adet form tek bir PDF dosyasında (her form ayrı sayfa) birleştirilecektir. Onaylıyor musunuz?`)) {
+            return;
+        }
 
-            const originalActiveCompanyId = state.activeCompanyId;
-            suppressA4Fit = true; // Toplu render sırasında zoom ölçeklemesini bastır
+        const bulkModal = document.getElementById('modal-bulk-loading');
+        const bulkProgress = document.getElementById('bulk-loading-progress');
+        bulkModal.classList.remove('hidden');
 
-            try {
-                let pdf = null;
+        const originalActiveCompanyId = state.activeCompanyId;
+        suppressA4Fit = true; // Toplu render sırasında zoom ölçeklemesini bastır
 
-                for (let i = 0; i < filtered.length; i++) {
-                    const form = filtered[i];
-                    bulkProgress.innerHTML = `Hazırlanıyor: ${i + 1} / ${filtered.length}<br><strong>${form.id}</strong>`;
+        try {
+            let pdf = null;
 
-                    setActiveCompany(form.companyId);
-                    const elementId = form.type === 'servis' ? 'service-print-area' : 'quote-print-area';
+            for (let i = 0; i < filtered.length; i++) {
+                const form = filtered[i];
+                bulkProgress.innerHTML = `Hazırlanıyor: ${i + 1} / ${filtered.length}<br><strong>${form.id}</strong>`;
 
-                    if (form.type === 'servis') {
-                        openServiceFormEditor(form);
-                    } else {
-                        openQuoteFormEditor(form);
-                    }
-                    if (form._imported) applyImportedDocStyling(form);
-                    injectQrIntoPrintArea(form, false);
+                setActiveCompany(form.companyId);
+                const elementId = form.type === 'servis' ? 'service-print-area' : 'quote-print-area';
 
-                    if (!pdf) {
-                        pdf = await withPrintAreaPrepared(elementId, async (el, opt) => {
-                            const p = await html2pdf().set(opt).from(el).toPdf().get('pdf');
-                            try {
-                                while (p.internal.getNumberOfPages() > 1) {
-                                    p.deletePage(p.internal.getNumberOfPages());
-                                }
-                            } catch (e) { }
-                            return p;
-                        });
-                    } else {
-                        const canvas = await withPrintAreaPrepared(elementId, (el, opt) =>
-                            html2pdf().set(opt).from(el).toCanvas().get('canvas')
-                        );
-                        addCanvasToPdf(pdf, canvas, false);
-                    }
+                if (form.type === 'servis') {
+                    openServiceFormEditor(form);
+                } else {
+                    openQuoteFormEditor(form);
                 }
+                if (form._imported) applyImportedDocStyling(form);
+                injectQrIntoPrintArea(form, false);
 
-                bulkProgress.innerHTML = 'PDF kaydediliyor…';
-                const activeComp = state.companies.find(c => c.id === originalActiveCompanyId);
-                const compName = activeComp ? activeComp.name : 'Kolay Form';
-                const rawName = `${compName} - Toplu Belgeler (${filtered.length} form)`;
-                const sanitized = rawName.replace(/[/\\?%*:|"<>]/g, '_').trim();
-                await savePdfBlob(pdf.output('blob'), sanitized);
-            } catch (err) {
-                console.error("Toplu indirme sırasında hata:", err);
-                alert("Toplu indirme sırasında bir hata oluştu.");
-            } finally {
-                suppressA4Fit = false;
-                setActiveCompany(originalActiveCompanyId);
-                showView('dashboard');
-                bulkModal.classList.add('hidden');
+                if (!pdf) {
+                    pdf = await withPrintAreaPrepared(elementId, async (el, opt) => {
+                        const p = await html2pdf().set(opt).from(el).toPdf().get('pdf');
+                        try {
+                            while (p.internal.getNumberOfPages() > 1) {
+                                p.deletePage(p.internal.getNumberOfPages());
+                            }
+                        } catch (e) { }
+                        return p;
+                    });
+                } else {
+                    const canvas = await withPrintAreaPrepared(elementId, (el, opt) =>
+                        html2pdf().set(opt).from(el).toCanvas().get('canvas')
+                    );
+                    addCanvasToPdf(pdf, canvas, false);
+                }
             }
-        });
+
+            bulkProgress.innerHTML = 'PDF kaydediliyor…';
+            const activeComp = state.companies.find(c => c.id === originalActiveCompanyId);
+            const compName = activeComp ? activeComp.name : 'Kolay Form';
+            const rawName = `${compName} - Toplu Belgeler (${filtered.length} form)`;
+            const sanitized = rawName.replace(/[/\\?%*:|"<>]/g, '_').trim();
+            await savePdfBlob(pdf.output('blob'), sanitized);
+        } catch (err) {
+            console.error("Toplu indirme sırasında hata:", err);
+            alert("Toplu indirme sırasında bir hata oluştu.");
+        } finally {
+            suppressA4Fit = false;
+            setActiveCompany(originalActiveCompanyId);
+            showView('dashboard');
+            bulkModal.classList.add('hidden');
+        }
     }
 
     // Geri Bildirim Modalı & Tabları
@@ -2090,6 +2189,26 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('btn-settings').addEventListener('click', () => {
         document.getElementById('settings-kdv').value = state.settings.defaultKdv;
         document.getElementById('settings-currency').value = state.settings.currency;
+        
+        // Load QR checkbox state and lock if not premium
+        const enableQrCheckbox = document.getElementById('settings-enable-qr');
+        const premiumLock = document.getElementById('settings-qr-premium-lock');
+        const qrHelp = document.getElementById('settings-qr-help');
+        
+        if (state.settings.isPremium) {
+            enableQrCheckbox.disabled = false;
+            enableQrCheckbox.checked = state.settings.enableQr !== false; // default true
+            premiumLock.style.display = 'none';
+            qrHelp.textContent = "PDF çıktılarının altına doğrulama ve dijital aktarım için QR kod yerleştirilir.";
+            qrHelp.style.color = "var(--text-muted)";
+        } else {
+            enableQrCheckbox.disabled = true;
+            enableQrCheckbox.checked = false;
+            premiumLock.style.display = 'inline-block';
+            qrHelp.textContent = "🔒 QR Doğrulama Kodu ekleme özelliği sadece Premium üyeler içindir.";
+            qrHelp.style.color = "#fbbf24";
+        }
+        
         settingsModal.classList.remove('hidden');
     });
 
@@ -2100,6 +2219,11 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('btn-save-settings').addEventListener('click', () => {
         state.settings.defaultKdv = parseInt(document.getElementById('settings-kdv').value) || 20;
         state.settings.currency = document.getElementById('settings-currency').value;
+        if (state.settings.isPremium) {
+            state.settings.enableQr = document.getElementById('settings-enable-qr').checked;
+        } else {
+            state.settings.enableQr = false;
+        }
         saveSettings();
         settingsModal.classList.add('hidden');
         renderFormsList();
@@ -2124,6 +2248,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const goPremiumBtn = document.getElementById('btn-go-premium');
     if (goPremiumBtn) {
         goPremiumBtn.addEventListener('click', () => {
+            const alertBanner = document.getElementById('premium-limit-alert');
+            if (alertBanner) alertBanner.style.display = 'none';
             premiumModal.classList.remove('hidden');
         });
     }
@@ -2132,6 +2258,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const settingsPremiumBtn = document.getElementById('btn-settings-premium');
     if (settingsPremiumBtn) {
         settingsPremiumBtn.addEventListener('click', () => {
+            const alertBanner = document.getElementById('premium-limit-alert');
+            if (alertBanner) alertBanner.style.display = 'none';
             settingsModal.classList.add('hidden');
             premiumModal.classList.remove('hidden');
         });
@@ -2473,6 +2601,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const container = document.getElementById(containerId);
         if (!container) return false;
         container.innerHTML = '';
+
+        // QR kod ekleme özelligini yalnızca pro ve ayarı açık kullanıcılar için çalıştır
+        if (!state.settings.isPremium || state.settings.enableQr === false) {
+            return false;
+        }
 
         try {
             const url = buildQrUrl(form);
