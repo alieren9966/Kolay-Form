@@ -39,3 +39,15 @@ Bu dosya, **Kolay Form** uygulamasının Google Play Store ve Apple App Store ü
 - [ ] Codemagic üzerinden ilk iOS build'inin alınması ve TestFlight'a yüklenmesi.
 - [ ] Android Studio üzerinden AAB (Android App Bundle) sürümünün alınması ve Play Console'da "Kapalı Test" veya "Üretim" kanalına yüklenmesi.
 - [ ] Mağaza incelemelerinin başlatılması ve onay süreci takibi.
+
+---
+
+## ✨ Tamamlanan Özellikler ve İş Kuralları (Implemented Features & Business Rules)
+
+* **Günlük İndirme Sınırı (Free):** Ücretsiz kullanıcılar günde maksimum **3 adet PDF** indirebilir (reklam izleyerek). 4. indirmede işlem engellenerek Premium satın alma modalı otomatik gösterilir.
+* **Toplu PDF İndirme (Pro-Only):** Filtrelenmiş geçmiş formların tek bir PDF dosyasında birleştirilip indirilmesi (Toplu İndir) özelliği tamamen Premium üyelere özel hale getirilmiştir.
+* **PDF QR Doğrulama Kodu Kontrolü:** PDF çıktılarında QR kod eklenmesi/kaldırılması ayarı Pro kullanıcılara özeldir (Ayarlar menüsünden yönetilir). Ücretsiz üyelerde bu kod eklenmez ve ayar kilitlenir.
+* **Otomatik Kaydetme (Auto-Save):** Editörde kaydetmeden doğrudan PDF İndir denildiğinde veri kaybını önlemek amacıyla form arka planda otomatik olarak kaydedilir.
+* **Kurumsal Paket Lisanslama Kurgusu:** 9999 TL'lik Kurumsal paket için sunucu bağımlılığını sıfırlamak ve veri gizliliğini korumak amacıyla Google Play Console ve App Store Connect'in **yerleşik Promo/Tanıtım Kodları** altyapısının kullanılması kararlaştırıldı ve satın alma kartına bu bilgi eklendi.
+* **Arayüz Düzeltmeleri:** Premium butonunun taşma sorunu CSS ile giderildi. Kapsül tasarımı uygulandı.
+

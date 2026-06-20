@@ -283,3 +283,27 @@ Uygulamayı imzalamak ve App Store'a yüklemek için:
 6. **Publishing (Yayınlama)** kısmında **App Store Connect**'i aktif edin ve **Submit to TestFlight** seçeneğini seçin.
 7. **Start new build** butonuna basarak macOS sunucularında derlemeyi başlatın. Derleme bittiğinde uygulama otomatik olarak TestFlight hesabınıza yüklenecektir.
 
+---
+
+## 7. Ücretsiz ve Premium (Pro) Üyelik Modeli İş Kuralları
+
+Uygulamanın sürdürülebilirliği ve ticari yapısı için tanımlanan Free/Premium limitleri ve çalışma kuralları şu şekildedir:
+
+### A. Günlük İndirme Limiti (Free)
+- Ücretsiz kullanıcılar yerel cihazlarında günde en fazla **3 adet PDF** indirebilirler. Her başarılı indirme isteğinde (reklam sonrası) indirme adedi artırılır ve tarih kontrolü ile yerel hafızada (`kolayform_free_downloads`) saklanır.
+- 4. indirme yapılmak istendiğinde indirme işlemi engellenir ve kullanıcı Premium satın alma ekranına yönlendirilir.
+
+### B. Toplu PDF İndirme (Pro-Only)
+- Geçmiş formları filtreleyip tek bir PDF'te birleştirme (Toplu İndir) işlemi tamamen Premium üyelere özeldir. Ücretsiz üyeler bu butona tıkladığında Premium modalı açılır.
+
+### C. PDF QR Doğrulama Kodu Kontrolü
+- PDF belgelerinin altına doğrulama QR kodu eklenmesi özelliği yalnızca Premium kullanıcılar tarafından kapatılabilir/açılabilir.
+- Ücretsiz kullanıcılar için bu ayar kapatılmıştır, QR kodlar PDF'lerine eklenmez ve Ayarlar menüsündeki checkbox kilitli durur.
+
+### D. Otomatik Arka Plan Kaydı (Auto-Save)
+- Kullanıcıların editörden kaydetmeden doğrudan PDF İndir butonuna tıklayıp sonrasında uygulamayı kapatarak veri kaybetmelerini önlemek için, PDF indirme tıklandığı anda form verileri arka planda otomatik olarak kaydedilir.
+
+### E. Kurumsal 10'lu Lisans Kurgusu
+- 9999 TL'lik Kurumsal Paket satın alımında, offline gizlilik modelini bozmamak amacıyla Google Play Console ve App Store Connect'in kendi **Promo/Tanıtım Kodları** altyapısı kullanılır. Alıcıya mağazalardan üretilen 10 adet tek kullanımlık indirme/lisans kodu e-posta veya fatura yoluyla teslim edilir.
+
+
