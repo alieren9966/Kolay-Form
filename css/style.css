@@ -1,0 +1,2640 @@
+/* ==========================================================================
+   KOLAY FORM - MODERN & PREMIUM CSS TASARIMI (VANILLA CSS)
+   ========================================================================== */
+
+/* 1. TASARIM DEĞİŞKENLERİ VE RENK PALETİ */
+:root {
+    --bg-dark: #090d16;
+    --bg-card: rgba(22, 28, 45, 0.7);
+    --bg-card-hover: rgba(30, 41, 59, 0.85);
+    --border-color: rgba(255, 255, 255, 0.08);
+    
+    --primary: #4f46e5;
+    --primary-light: #6366f1;
+    --primary-glow: rgba(79, 70, 229, 0.4);
+    
+    --secondary: #06b6d4;
+    --secondary-light: #22d3ee;
+    --secondary-glow: rgba(6, 182, 212, 0.4);
+    
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    
+    --danger: #ef4444;
+    --danger-light: #f87171;
+    --success: #10b981;
+    --success-light: #34d399;
+    
+    --font-heading: 'Outfit', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    
+    --glass-blur: blur(12px);
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* 2. TEMEL SIFIRLAMALAR & MOBİL AYARLAR */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    font-family: var(--font-body);
+    font-weight: 400;
+    overflow-x: hidden;
+    line-height: 1.5;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-heading);
+    color: #ffffff;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* 3. SPLASH SCREEN (AÇILIŞ EKRANI) */
+.splash-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--bg-dark);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    transition: opacity 0.5s ease;
+}
+
+.splash-content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.splash-logo {
+    animation: pulseLogo 2s infinite ease-in-out;
+    margin-bottom: 24px;
+}
+
+.splash-title {
+    font-size: 2.2rem;
+    font-weight: 800;
+    background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+}
+
+.splash-subtitle {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    font-weight: 300;
+    margin-bottom: 32px;
+}
+
+.splash-loader {
+    width: 140px;
+    height: 4px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.loader-bar {
+    height: 100%;
+    width: 0%;
+    background: linear-gradient(90deg, var(--secondary) 0%, var(--primary) 100%);
+    border-radius: 2px;
+    animation: fillLoader 2s ease-in-out forwards;
+}
+
+@keyframes pulseLogo {
+    0%, 100% { transform: scale(1); filter: drop-shadow(0 0 10px rgba(6, 182, 212, 0.3)); }
+    50% { transform: scale(1.08); filter: drop-shadow(0 0 20px rgba(79, 70, 229, 0.6)); }
+}
+
+@keyframes fillLoader {
+    0% { width: 0%; }
+    50% { width: 70%; }
+    100% { width: 100%; }
+}
+
+/* 4. ANA KONTEYNER VE ÜST HEADER */
+.app-container {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.app-header {
+    height: 64px;
+    background: rgba(9, 13, 22, 0.8);
+    backdrop-filter: var(--glass-blur);
+    border-bottom: 1px solid var(--border-color);
+    padding: 0 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.header-logo-section {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.header-app-title {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, #ffffff 0%, #cbd5e1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.header-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.header-btn {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.header-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+    border-color: rgba(255, 255, 255, 0.2);
+}
+
+/* 5. GÖRÜNÜMLER (VIEWS) */
+.view {
+    flex: 1;
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 24px 20px 80px 20px;
+    animation: fadeInView 0.4s ease-out;
+}
+
+@keyframes fadeInView {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 6. DAHBOARD & ŞİRKET SLIDER */
+.section-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.8px;
+    margin-bottom: 16px;
+}
+
+.company-selection-section {
+    margin-bottom: 28px;
+}
+
+.company-cards-slider {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+    padding: 4px 4px 16px 4px;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(255, 255, 255, 0.1) transparent;
+}
+
+.company-cards-slider::-webkit-scrollbar {
+    height: 5px;
+}
+.company-cards-slider::-webkit-scrollbar-thumb {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+.company-card {
+    flex: 0 0 280px;
+    scroll-snap-align: start;
+    background: var(--bg-card);
+    backdrop-filter: var(--glass-blur);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 20px;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    position: relative;
+    overflow: hidden;
+}
+
+.company-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: transparent;
+    transition: var(--transition-smooth);
+}
+
+.company-card:hover {
+    background: var(--bg-card-hover);
+    transform: translateY(-4px);
+    border-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.company-card.active {
+    border-color: var(--primary-light);
+    box-shadow: 0 0 15px var(--primary-glow);
+}
+
+.company-card.active::before {
+    background: linear-gradient(90deg, var(--secondary) 0%, var(--primary) 100%);
+}
+
+.company-card-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 14px;
+}
+
+.company-card-logo {
+    width: 50px;
+    height: 50px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.company-card-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.company-card-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #ffffff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: 1;
+}
+
+.company-card-details {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.company-card-details p {
+    margin-bottom: 4px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.empty-company-card {
+    flex: 1;
+    min-height: 120px;
+    background: rgba(255, 255, 255, 0.02);
+    border: 2px dashed rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    padding: 20px;
+    text-align: center;
+}
+
+.empty-company-card:hover {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: var(--secondary);
+    color: #ffffff;
+}
+
+/* 7. HIZLI AKSİYON BUTONLARI */
+.quick-actions-section {
+    margin-bottom: 32px;
+}
+
+.action-buttons-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 12px;
+}
+
+.action-btn {
+    height: 72px;
+    border-radius: 16px;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    transition: var(--transition-smooth);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(79, 70, 229, 0.35);
+    filter: brightness(1.1);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-color);
+    color: #ffffff;
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Generic button base styles when not action buttons */
+.btn-primary:not(.action-btn):not(.btn-small-action):not(.header-btn),
+.btn-secondary:not(.action-btn):not(.btn-small-action):not(.header-btn) {
+    height: 44px;
+    padding: 0 20px;
+    border-radius: 10px;
+    border: none;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-smooth);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.security-privacy-note {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    text-align: center;
+    opacity: 0.8;
+}
+
+/* 8. GEÇMİŞ FORMLAR LİSTESİ & KART TASARIMI */
+.section-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.search-filter-toggle-btn {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--secondary-light);
+    cursor: pointer;
+    background: rgba(6, 182, 212, 0.08);
+    padding: 6px 12px;
+    border-radius: 20px;
+    border: 1px solid rgba(6, 182, 212, 0.15);
+    transition: var(--transition-smooth);
+}
+
+.search-filter-toggle-btn:hover {
+    background: rgba(6, 182, 212, 0.15);
+    transform: scale(1.05);
+}
+
+.filter-panel {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 16px;
+    margin-bottom: 16px;
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.filter-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 12px;
+}
+
+.filter-field {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.filter-field label {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.filter-field input, .filter-field select {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    height: 40px;
+    padding: 0 12px;
+    color: #ffffff;
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    outline: none;
+    transition: var(--transition-smooth);
+}
+
+.filter-field input:focus, .filter-field select:focus {
+    border-color: var(--secondary);
+    box-shadow: 0 0 8px var(--secondary-glow);
+}
+
+.forms-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.form-list-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.form-list-card:hover {
+    background: var(--bg-card-hover);
+    transform: translateX(4px);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+
+.form-card-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex: 1;
+    min-width: 0;
+}
+
+.form-card-logo {
+    width: 44px;
+    height: 44px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    flex-shrink: 0;
+}
+
+.form-card-logo img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.form-card-info {
+    min-width: 0;
+}
+
+.form-card-title-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 4px;
+}
+
+.form-card-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #ffffff;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.badge {
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 2px 8px;
+    border-radius: 12px;
+    text-transform: uppercase;
+}
+
+.badge-servis {
+    background: rgba(6, 182, 212, 0.12);
+    color: var(--secondary-light);
+    border: 1px solid rgba(6, 182, 212, 0.2);
+}
+
+.badge-teklif {
+    background: rgba(79, 70, 229, 0.12);
+    color: var(--primary-light);
+    border: 1px solid rgba(79, 70, 229, 0.2);
+}
+
+.form-card-meta {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    display: flex;
+    gap: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.form-card-right {
+    text-align: right;
+    margin-left: 16px;
+    flex-shrink: 0;
+}
+
+.form-card-total {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--secondary-light);
+    margin-bottom: 2px;
+}
+
+.form-card-date {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+}
+
+.empty-forms-placeholder {
+    padding: 48px 24px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.01);
+    border: 1px dashed rgba(255, 255, 255, 0.05);
+    border-radius: 16px;
+    color: var(--text-muted);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.empty-forms-icon {
+    font-size: 2.2rem;
+    opacity: 0.4;
+}
+
+/* 9. MODALLAR VE POP-UPLAR */
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(9, 13, 22, 0.7);
+    backdrop-filter: var(--glass-blur);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 20px;
+    animation: fadeInModal 0.25s ease-out;
+}
+
+.modal-card {
+    background: #111827;
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    width: 100%;
+    max-width: 460px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    animation: scaleUpModal 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.modal-card.wide-card {
+    max-width: 600px;
+}
+
+@keyframes fadeInModal {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes scaleUpModal {
+    from { transform: scale(0.9); }
+    to { transform: scale(1); }
+}
+
+.modal-header {
+    padding: 18px 24px;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+}
+
+.modal-close {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    font-size: 1rem;
+    transition: var(--transition-smooth);
+}
+
+.modal-close:hover {
+    color: #ffffff;
+    transform: scale(1.1);
+}
+
+.modal-body {
+    padding: 24px;
+    overflow-y: auto;
+    max-height: 70vh;
+}
+
+.modal-footer {
+    padding: 16px 24px;
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+/* ŞİRKET EDİTÖR FORMU */
+.view-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.btn-back {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-color);
+    color: #ffffff;
+    padding: 8px 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    font-size: 0.85rem;
+}
+
+.btn-back:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.editor-form {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 24px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+
+.required {
+    color: var(--danger-light);
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.editor-form input[type="text"],
+.editor-form input[type="tel"],
+.editor-form input[type="email"],
+.editor-form input[type="url"],
+.editor-form input[type="number"],
+.editor-form select,
+.editor-form textarea {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    height: 44px;
+    padding: 0 14px;
+    color: #ffffff;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    outline: none;
+    transition: var(--transition-smooth);
+    width: 100%;
+}
+
+.editor-form textarea {
+    height: auto;
+    padding: 12px 14px;
+    resize: vertical;
+}
+
+.editor-form input:focus,
+.editor-form select:focus,
+.editor-form textarea:focus {
+    border-color: var(--primary-light);
+    box-shadow: 0 0 10px var(--primary-glow);
+}
+
+/* MEDYA GÖRSEL YÜKLEME ALANLARI */
+.media-upload-section {
+    margin-top: 24px;
+    border-top: 1px solid var(--border-color);
+    padding-top: 20px;
+}
+
+.media-section-title {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--secondary-light);
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.upload-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.upload-card {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.upload-card label {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.drop-zone {
+    height: 110px;
+    border: 2px dashed rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    position: relative;
+    cursor: pointer;
+    background: rgba(255, 255, 255, 0.01);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transition: var(--transition-smooth);
+}
+
+.drop-zone:hover {
+    border-color: var(--secondary);
+    background: rgba(6, 182, 212, 0.03);
+}
+
+.file-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.preview-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 8px;
+}
+
+.preview-container img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.upload-placeholder {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-align: center;
+}
+
+.signature-upload-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 4px;
+}
+
+.btn-small-action {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    color: #ffffff;
+    font-size: 0.72rem;
+    padding: 3px 8px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.btn-small-action:hover {
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.upload-or-text {
+    font-size: 0.68rem;
+    color: var(--text-muted);
+}
+
+.file-input-small {
+    font-size: 0.68rem;
+    max-width: 90px;
+    color: var(--text-muted);
+}
+
+/* DİNAMİK DAMGALAR */
+.certification-section {
+    margin-top: 20px;
+    border-top: 1px solid var(--border-color);
+    padding-top: 18px;
+}
+
+.certs-upload-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.cert-upload-item {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.78rem;
+}
+
+.cert-thumbnail {
+    width: 32px;
+    height: 32px;
+    border-radius: 4px;
+    background: white;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cert-thumbnail img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+.btn-remove-cert {
+    background: none;
+    border: none;
+    color: var(--danger-light);
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+
+.cert-upload-item span {
+    flex: 1;
+}
+
+.btn-crop-cert {
+    background: none;
+    border: none;
+    color: var(--secondary-light);
+    cursor: pointer;
+    font-size: 0.95rem;
+}
+
+.form-actions-row {
+    margin-top: 28px;
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.btn-danger {
+    background: var(--danger);
+    border: none;
+    color: #ffffff;
+    font-weight: 600;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+
+.btn-danger:hover {
+    background: #dc2626;
+}
+
+/* KILAVUZ MODALI */
+.user-guide-content {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.guide-step {
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+}
+
+.step-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--secondary);
+    color: #ffffff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    font-size: 0.9rem;
+    flex-shrink: 0;
+}
+
+.step-desc {
+    font-size: 0.88rem;
+    color: #cbd5e1;
+    line-height: 1.45;
+}
+
+.step-desc strong {
+    color: #ffffff;
+}
+
+/* IMZA PANELI CANVAS MODALI */
+.signature-pad-card {
+    max-width: 440px;
+}
+
+.pad-body {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.sig-pad-warning {
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    text-align: center;
+    margin-bottom: 12px;
+    background: rgba(255, 255, 255, 0.02);
+    padding: 6px 12px;
+    border-radius: 8px;
+    width: 100%;
+}
+
+.canvas-wrapper {
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    position: relative;
+    overflow: hidden;
+}
+
+#signature-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+    cursor: crosshair;
+}
+
+.sig-pad-presets {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+    justify-content: center;
+    width: 100%;
+}
+
+.btn-danger-small {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.2);
+    color: var(--danger-light);
+    padding: 6px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.btn-secondary-small {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid var(--border-color);
+    color: white;
+    padding: 6px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.btn-primary-small {
+    background: var(--primary);
+    border: none;
+    color: white;
+    padding: 6px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+/* ==========================================================================
+   10. CANLI A4 EDITÖR ŞABLONU & DÜZENLEME ALANLARI
+   ========================================================================== */
+.editor-top-sticky-bar {
+    position: sticky;
+    top: 0;
+    height: 56px;
+    background: #0f172a;
+    border-bottom: 1px solid var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 16px;
+    z-index: 90;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-editor-back {
+    background: none;
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.82rem;
+}
+
+.editor-title-sticky {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: white;
+}
+
+.editor-sticky-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-editor-save {
+    background: #334155;
+    border: none;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.82rem;
+    font-weight: 600;
+}
+
+.btn-editor-pdf {
+    background: var(--secondary);
+    border: none;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.82rem;
+    font-weight: 600;
+}
+
+.a4-container-wrapper {
+    background: transparent;
+    padding: 0;
+    overflow-x: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.editor-helper-tip {
+    color: var(--text-muted);
+    font-size: 0.8rem;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+/* BASILABİLİR A4 PREVIEW SAYFASI */
+.a4-page {
+    width: 210mm;
+    min-height: 297mm;
+    background: #ffffff;
+    color: #1e293b;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+    border-radius: 4px;
+    padding: 16mm;
+    margin: 0 auto;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+    position: relative;
+    font-size: 11px;
+}
+
+/* PDF İÇİNDEKİ YAZILARIN RENKLERİ VE TASARIMI */
+.a4-page * {
+    color: #1e293b !important;
+}
+
+.form-print-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 2px solid #0284c7; /* Sky Blue accent color */
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+}
+
+.form-header-left {
+    font-size: 9px;
+    line-height: 1.4;
+    max-width: 65%;
+}
+
+.form-print-logo-container {
+    max-width: 160px;
+    max-height: 55px;
+    overflow: hidden;
+}
+
+.form-print-logo-container img {
+    max-width: 100%;
+    max-height: 55px;
+    object-fit: contain;
+}
+
+.form-print-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 14px;
+}
+
+.form-print-title {
+    font-size: 14px !important;
+    font-weight: 800;
+    color: #0c4a6e !important;
+    letter-spacing: -0.3px;
+    margin: 0;
+}
+
+.form-print-date-block {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-weight: 700;
+}
+
+/* ŞABLON ALANINDAKİ INLINE METİN GİRDİLERİ */
+.print-inline-input {
+    background: transparent;
+    border: none;
+    border-bottom: 1px dotted rgba(0, 0, 0, 0.25);
+    color: #1e293b;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 500;
+    padding: 2px 4px;
+    outline: none;
+    width: 100%;
+    transition: all 0.2s ease;
+}
+
+.print-inline-input:hover {
+    border-bottom-color: #0284c7;
+    background: rgba(2, 132, 199, 0.03);
+}
+
+.print-inline-input:focus {
+    border-bottom: 1px solid #0284c7;
+    background: rgba(2, 132, 199, 0.05);
+}
+
+.bold-input {
+    font-weight: 700;
+}
+
+/* KURUM & CIHAZ DÜZENİ */
+.form-print-section {
+    margin-bottom: 14px;
+}
+
+.print-section-title {
+    font-size: 9px !important;
+    font-weight: 700;
+    color: #ffffff !important;
+    background: #0284c7;
+    padding: 3px 8px;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.print-section-header-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #0284c7;
+    padding: 2px 8px;
+    margin-bottom: 8px;
+}
+
+.print-section-header-row .print-section-title {
+    background: none;
+    padding: 0;
+    margin: 0;
+}
+
+.btn-table-action {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white !important;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 8px;
+    cursor: pointer;
+    font-weight: 700;
+    transition: all 0.15s ease;
+}
+
+.btn-table-action:hover {
+    background: rgba(255, 255, 255, 0.35);
+}
+
+.print-grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.print-form-field {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.print-form-field label {
+    font-weight: 700;
+    white-space: nowrap;
+    font-size: 10px;
+}
+
+.print-form-field.no-label {
+    width: 100%;
+}
+
+/* TABLOLAR (CIHAZ & PARÇA) */
+.print-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 10px;
+    margin-bottom: 8px;
+}
+
+.print-table th {
+    background: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    padding: 5px 8px;
+    font-weight: 700;
+    text-align: left;
+}
+
+.print-table td {
+    border: 1px solid #cbd5e1;
+    padding: 4px 6px;
+}
+
+.table-row-delete-btn {
+    background: none;
+    border: none;
+    color: #ef4444 !important;
+    cursor: pointer;
+    font-size: 11px;
+    padding: 2px;
+}
+
+.table-row-delete-btn:hover {
+    color: #dc2626 !important;
+}
+
+/* SWITCH VE ONAY KUTULARI (PRINT UYUMLU) */
+.table-checkbox-group {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.table-chk-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 9px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.print-checkbox-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 8px;
+    padding: 4px 8px;
+}
+
+.print-checkbox-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* TEXTAREAS (YAPILAN İŞLEM / SONUÇ) */
+.print-textarea {
+    background: transparent;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    width: 100%;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    padding: 6px;
+    outline: none;
+    resize: none;
+    line-height: 1.4;
+    transition: all 0.2s ease;
+}
+
+.print-textarea:hover {
+    border-color: #0284c7;
+}
+
+.print-textarea:focus {
+    border-color: #0284c7;
+    background: rgba(2, 132, 199, 0.02);
+}
+
+/* IMZA KUTULARI ALANI */
+.print-signatures-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.print-sig-box {
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 8px;
+    background: #fafafa;
+}
+
+.sig-title {
+    font-weight: 800;
+    font-size: 8px;
+    color: #475569 !important;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+}
+
+.sig-image-container {
+    width: 100%;
+    height: 55px;
+    background: #ffffff;
+    border: 1px dashed #cbd5e1;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    overflow: hidden;
+    transition: all 0.2s ease;
+}
+
+.sig-image-container:hover {
+    border-color: #0284c7;
+    background: rgba(2, 132, 199, 0.02);
+}
+
+.sig-image-container img {
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+}
+
+.sig-placeholder-text {
+    font-size: 8px;
+    color: #94a3b8 !important;
+    font-weight: 500;
+}
+
+.sig-name-field {
+    width: 100%;
+    margin-top: 6px;
+}
+
+.sig-name-input {
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+    background: transparent;
+    font-size: 9px;
+    width: 100%;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    outline: none;
+}
+
+.sig-name-input:focus {
+    border-bottom-color: #0284c7;
+}
+
+/* SAYFA ALTI VE SERTIFIKALAR */
+.form-print-footer {
+    margin-top: 16px;
+    border-top: 1px solid #cbd5e1;
+    padding-top: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+.form-print-footer-text {
+    font-size: 8px;
+    color: #64748b !important;
+    white-space: nowrap;
+    text-align: right;
+    margin-top: 10px;
+}
+
+.form-print-certs-row {
+    display: flex;
+    gap: 8px;
+}
+
+.form-print-certs-row.right-aligned {
+    justify-content: flex-end;
+}
+
+.print-cert-logo {
+    height: 32px;
+    max-width: 48px;
+    object-fit: contain;
+}
+
+/* ==================== 11. TEKLİF FORMU ÖZEL DÜZENLERİ ==================== */
+.quote-title-row {
+    justify-content: center;
+    margin-bottom: 18px;
+}
+
+.quote-title-row .form-print-title {
+    font-size: 15px !important;
+    color: #1e3a8a !important; /* Navy blue */
+    border-bottom: 2px solid #1e3a8a;
+    padding-bottom: 4px;
+}
+
+.quote-meta-section {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+
+.quote-meta-box {
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    padding: 8px;
+}
+
+.quote-meta-title {
+    font-size: 8px;
+    font-weight: 800;
+    color: #ffffff !important;
+    background: #1e3a8a; /* Navy background */
+    padding: 2px 6px;
+    margin-bottom: 6px;
+    text-transform: uppercase;
+}
+
+.quote-client-details {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.quote-details-rows {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.print-form-field-row {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 10px;
+}
+
+.print-form-field-row label {
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+/* HESAPLAMA TABLOSU ÖZETİ */
+.quote-summary-block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    margin-top: 10px;
+    margin-bottom: 14px;
+}
+
+.quote-summary-row {
+    display: flex;
+    width: 200px;
+    justify-content: space-between;
+    padding: 3px 0;
+    font-size: 10px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.summary-label {
+    font-weight: 600;
+}
+
+.summary-value {
+    font-weight: 700;
+}
+
+.grand-total-row {
+    font-size: 12px;
+    border-top: 2px solid #1e3a8a;
+    border-bottom: 2px double #1e3a8a;
+    padding: 4px 0;
+    color: #1e3a8a !important;
+}
+
+.grand-total-row * {
+    color: #1e3a8a !important;
+}
+
+/* TEKLİF İMZA/KAŞE ALANI */
+.quote-signature-row {
+    display: grid;
+    grid-template-columns: 1.5fr auto 1fr;
+    gap: 16px;
+    align-items: center;
+}
+
+.company-info-block {
+    font-size: 8px;
+    line-height: 1.5;
+    color: #475569 !important;
+}
+
+.quote-stamp-sig-box {
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    padding: 6px;
+    text-align: center;
+}
+
+.quote-stamp-sig-title {
+    font-weight: 700;
+    font-size: 8px;
+    margin-bottom: 6px;
+}
+
+.quote-stamp-sig-wrapper {
+    height: 70px;
+    background: #ffffff;
+    border: 1px dashed #cbd5e1;
+    border-radius: 4px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+.quote-print-stamp, .quote-print-signature {
+    position: absolute;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quote-print-stamp {
+    left: 10px;
+    width: 50%;
+}
+
+.quote-print-signature {
+    right: 10px;
+    width: 50%;
+}
+
+.quote-print-stamp img, .quote-print-signature img {
+    max-height: 90%;
+    max-width: 90%;
+    object-fit: contain;
+}
+
+/* PDF OLUŞTURMA ESNASINDA EKRAN ELEMANLARINI GİZLEME */
+.generating-pdf .btn-table-action,
+.generating-pdf .no-print,
+.generating-pdf th:last-child,
+.generating-pdf td:last-child {
+    display: none !important;
+}
+
+/* ==========================================================================
+   12. YAZDIRMA (PDF) CIKTISI İÇİN MEDYA KURALLARI
+   ========================================================================== */
+@media print {
+    body {
+        background: white;
+        color: black;
+    }
+
+    .app-header,
+    .editor-top-sticky-bar,
+    .editor-helper-tip,
+    .btn-table-action,
+    .no-print,
+    .modal-backdrop,
+    th:last-child,
+    td:last-child {
+        display: none !important;
+    }
+
+    .view {
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .a4-container-wrapper {
+        background: transparent !important;
+        padding: 0 !important;
+        overflow: visible !important;
+    }
+
+    .a4-page {
+        box-shadow: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        width: 100% !important;
+        height: auto !important;
+        min-height: initial !important;
+    }
+
+    .print-inline-input {
+        border-bottom: none !important;
+        background: transparent !important;
+        padding: 0 !important;
+    }
+
+    .print-textarea {
+        border: none !important;
+        background: transparent !important;
+        padding: 0 !important;
+    }
+}
+
+/* ==========================================================================
+   13. CİHAZ MOBİL EKRAN UYUMLULUKLARI (RESPONSIVE)
+   ========================================================================== */
+@media (max-width: 768px) {
+    .action-buttons-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .filter-grid {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+    
+    .upload-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    /* Mobil ekranda A4 önizlemesini sığdırma */
+    .a4-container-wrapper {
+        align-items: flex-start;
+        padding: 0;
+    }
+
+    /* A4 şablonunun mobil ekranda yana taşmasını ve zoom'u engellemek için */
+    .a4-page {
+        width: 210mm;
+        transform-origin: top left;
+        /* dynamic scale done via javascript if needed, but styling allows scroll */
+    }
+    
+    .print-signatures-grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 8px;
+    }
+    
+    .quote-meta-section {
+        grid-template-columns: 2fr 1fr;
+    }
+}
+
+/* ==========================================================================
+   14. AYDINLIK MOD (LIGHT THEME) OVERRIDES
+   ========================================================================== */
+body.light-theme {
+    --bg-dark: #f1f5f9;
+    --bg-card: rgba(255, 255, 255, 0.75);
+    --bg-card-hover: rgba(241, 245, 249, 0.9);
+    --border-color: rgba(15, 23, 42, 0.08);
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+}
+
+body.light-theme h1,
+body.light-theme h2,
+body.light-theme h3,
+body.light-theme h4,
+body.light-theme h5,
+body.light-theme h6 {
+    color: #0f172a;
+}
+
+body.light-theme .app-header {
+    background: rgba(241, 245, 249, 0.85);
+}
+
+body.light-theme .header-app-title {
+    background: linear-gradient(135deg, #0f172a 0%, #334155 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+body.light-theme .header-btn {
+    background: rgba(0, 0, 0, 0.03);
+    color: #0f172a;
+}
+
+body.light-theme .header-btn:hover {
+    background: rgba(0, 0, 0, 0.08);
+    border-color: rgba(0, 0, 0, 0.15);
+}
+
+body.light-theme .company-card-title {
+    color: #0f172a;
+}
+
+body.light-theme .btn-secondary {
+    background: rgba(0, 0, 0, 0.02);
+    color: #0f172a;
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+body.light-theme .btn-secondary:hover {
+    background: rgba(0, 0, 0, 0.06);
+    border-color: rgba(0, 0, 0, 0.15);
+}
+
+body.light-theme .form-card-title {
+    color: #0f172a;
+}
+
+body.light-theme .filter-panel {
+    background: rgba(255, 255, 255, 0.85);
+}
+
+body.light-theme .filter-field input,
+body.light-theme .filter-field select {
+    background: rgba(255, 255, 255, 0.9);
+    border-color: rgba(0, 0, 0, 0.1);
+    color: #0f172a;
+}
+
+body.light-theme .editor-form {
+    background: rgba(255, 255, 255, 0.8);
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+body.light-theme .editor-form input[type="text"],
+body.light-theme .editor-form input[type="tel"],
+body.light-theme .editor-form input[type="email"],
+body.light-theme .editor-form input[type="url"],
+body.light-theme .editor-form input[type="number"],
+body.light-theme .editor-form select,
+body.light-theme .editor-form textarea {
+    background: #ffffff;
+    border-color: rgba(0, 0, 0, 0.1);
+    color: #0f172a;
+}
+
+body.light-theme .modal-card {
+    background: #ffffff;
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+body.light-theme .modal-close {
+    color: #64748b;
+}
+
+body.light-theme .modal-close:hover {
+    color: #0f172a;
+}
+
+body.light-theme .btn-secondary-small {
+    background: rgba(0, 0, 0, 0.03);
+    border-color: rgba(0, 0, 0, 0.1);
+    color: #0f172a;
+}
+
+body.light-theme .editor-top-sticky-bar {
+    background: #cbd5e1;
+    border-bottom-color: rgba(0, 0, 0, 0.08);
+}
+
+body.light-theme .editor-title-sticky {
+    color: #0f172a;
+}
+
+body.light-theme .btn-editor-back {
+    border-color: rgba(0, 0, 0, 0.1);
+    color: #0f172a;
+}
+
+body.light-theme .btn-editor-back:hover {
+    background: rgba(0, 0, 0, 0.04);
+}
+
+body.light-theme .btn-editor-save {
+    background: #94a3b8;
+    color: #0f172a;
+}
+
+body.light-theme .btn-editor-save:hover {
+    background: #cbd5e1;
+}
+
+body.light-theme .empty-company-card {
+    background: rgba(0, 0, 0, 0.01);
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+body.light-theme .empty-company-card:hover {
+    background: rgba(0, 0, 0, 0.03);
+}
+
+body.light-theme .empty-forms-placeholder {
+    background: rgba(0, 0, 0, 0.01);
+    border-color: rgba(0, 0, 0, 0.05);
+}
+
+body.light-theme .sig-pad-warning {
+    background: rgba(0, 0, 0, 0.02);
+}
+
+body.light-theme .drop-zone {
+    border-color: rgba(0, 0, 0, 0.1);
+    background: rgba(0, 0, 0, 0.01);
+}
+
+body.light-theme .drop-zone:hover {
+    background: rgba(6, 182, 212, 0.03);
+}
+
+body.light-theme .cert-upload-item {
+    background: rgba(0, 0, 0, 0.01);
+    border-color: rgba(0, 0, 0, 0.08);
+}
+
+/* ==========================================================================
+   15. YENİ EKLENEN ELEMANLARIN EK STİLLERİ
+   ========================================================================== */
+
+/* Kaşe Boş Bırakıldığında Ortalanması */
+.quote-stamp-sig-wrapper.stamp-centered .quote-print-stamp {
+    left: 0;
+    width: 100%;
+}
+.quote-stamp-sig-wrapper.stamp-centered .quote-print-signature {
+    display: none;
+}
+
+/* Teknik Servis Alt Kaşe Alanı */
+.srv-footer-stamp {
+    width: 140px;
+    height: 90px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px dashed #cbd5e1;
+    border-radius: 4px;
+    overflow: hidden;
+    background: #ffffff;
+    flex-shrink: 0;
+}
+.footer-right-assets {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+    margin-left: auto;
+}
+.srv-footer-stamp img {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+}
+
+/* Geri Bildirim Modal Tabları */
+.feedback-tabs {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 8px;
+}
+.feedback-tabs .tab-btn {
+    flex: 1;
+    padding: 8px 12px;
+    border: none;
+    background: transparent;
+    color: var(--text-muted);
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: var(--transition-smooth);
+    font-size: 0.88rem;
+}
+.feedback-tabs .tab-btn:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.02);
+}
+body.light-theme .feedback-tabs .tab-btn:hover {
+    color: var(--text-main);
+    background: rgba(0, 0, 0, 0.02);
+}
+.feedback-tabs .tab-btn.active {
+    background: rgba(255, 255, 255, 0.05);
+    color: white;
+}
+body.light-theme .feedback-tabs .tab-btn.active {
+    background: rgba(0, 0, 0, 0.05);
+    color: var(--text-main);
+}
+
+
+/* ==================== 14. QR EKLENTİSİ ==================== */
+
+/* QR damgası — servis footer'ında ve teklif imza satırında ortada;
+   yalnızca PDF üretimi anında içerik dolar, boşken (editörde) yer kaplamaz */
+.form-qr-stamp {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    text-align: center;
+}
+.form-qr-stamp img {
+    width: 32mm;
+    height: 32mm;
+    display: block;
+}
+.form-qr-stamp .qr-caption {
+    margin-top: 2px;
+    font-size: 6px;
+    line-height: 1.2;
+    text-align: center;
+    color: #475569 !important;
+    max-width: 36mm;
+}
+
+/* Servis footer'ı: kaşe | QR (orta) | bandrol+onay metni */
+.form-print-footer .footer-right-assets {
+    margin-left: 0;
+}
+
+/* PDF anında textarea yerine geçen, sol-üst hizalı, kutuya tam oturan blok */
+.print-textarea-clone {
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    line-height: 1.35;
+    color: #1e293b !important;
+    text-align: left;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 4px 6px;
+    min-height: 14px;
+}
+
+/* QR ile alınan belgelerde kaşe/imza yerine doğrulama notu */
+.qr-verified-note {
+    display: inline-block;
+    text-align: center;
+    font-size: 9px;
+    font-weight: 600;
+    line-height: 1.35;
+    color: #1d9e75 !important;
+    padding: 4px;
+}
+
+/* QR Tarama Modalı */
+.qr-scan-card {
+    max-width: 420px;
+}
+.qr-scan-body {
+    text-align: center;
+}
+.qr-scan-viewport {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    max-height: 320px;
+    background: #000;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 12px;
+}
+#qr-scan-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+.qr-scan-frame {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 62%;
+    aspect-ratio: 1 / 1;
+    border: 3px solid var(--secondary);
+    border-radius: 12px;
+    box-shadow: 0 0 0 2000px rgba(0, 0, 0, 0.35);
+    pointer-events: none;
+}
+.qr-scan-status {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    min-height: 1.2em;
+    margin-bottom: 10px;
+}
+.qr-scan-note {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    opacity: 0.85;
+    margin-top: 10px;
+}
+.qr-scan-result {
+    text-align: left;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 10px 14px;
+    margin-bottom: 8px;
+}
+.qr-result-line {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 5px 0;
+    border-bottom: 1px dashed var(--border-color);
+    font-size: 0.9rem;
+}
+.qr-result-line:last-child {
+    border-bottom: none;
+}
+.qr-result-line span {
+    color: var(--text-muted);
+}
+.qr-result-line strong {
+    color: var(--text-main);
+    text-align: right;
+}
+.qr-scan-footer {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+/* ==================== 15. GÖRSEL KIRPMA (PERSPEKTİF DÜZELTME) ==================== */
+.btn-crop-image {
+    margin-top: 8px;
+    width: 100%;
+    padding: 7px 10px;
+    border: 1px solid var(--secondary);
+    background: rgba(6, 182, 212, 0.08);
+    color: var(--secondary-light);
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+.btn-crop-image:hover {
+    background: rgba(6, 182, 212, 0.16);
+}
+
+.crop-card {
+    max-width: 560px;
+}
+.crop-body {
+    text-align: center;
+}
+.crop-hint {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+}
+.crop-stage {
+    position: relative;
+    display: inline-block;
+    line-height: 0;
+    max-width: 100%;
+    touch-action: none; /* dokunmatik sürüklemede sayfa kaymasın */
+    -webkit-user-select: none;
+    user-select: none;
+}
+#crop-canvas {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    background: #0b1220;
+    border-radius: 8px;
+}
+#crop-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    max-width: 100%;
+    height: auto;
+    cursor: crosshair;
+    touch-action: none;
+}
+.crop-footer {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+/* Geçmiş formlarda QR ile alınan belgeler için logo yerine rozet */
+.qr-badge {
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    color: var(--secondary-light);
+}
+
+/* Geçmiş form kartındaki kırmızı silme butonu */
+.form-list-card {
+    position: relative;
+    padding-right: 50px;
+}
+.btn-card-delete {
+    position: absolute;
+    top: 50%;
+    right: 10px;
+    transform: translateY(-50%);
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    border: 1px solid rgba(239, 68, 68, 0.45);
+    background: rgba(239, 68, 68, 0.12);
+    color: #ffffff;
+    cursor: pointer;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-smooth);
+}
+.btn-card-delete:hover {
+    background: var(--danger);
+    border-color: var(--danger);
+}
+
+/* Şirket kartındaki kırmızı silme butonu */
+.btn-delete-comp {
+    margin-top: 12px;
+    width: 100%;
+    padding: 7px;
+    border-radius: 8px;
+    border: 1px solid rgba(239, 68, 68, 0.45);
+    background: rgba(239, 68, 68, 0.12);
+    color: #ffffff;
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+.btn-delete-comp:hover {
+    background: var(--danger);
+    border-color: var(--danger);
+}
+
+/* ==========================================================================
+   11. PREMIUM & AD SIMULATION CSS STYLES
+   ========================================================================== */
+
+/* Premium Header Badge / Button */
+.premium-badge-btn {
+    background: linear-gradient(135deg, #fbbf24, #d97706) !important;
+    border: none !important;
+    color: white !important;
+    font-size: 0.95rem !important;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(217, 119, 6, 0.3);
+    animation: pulsePremium 2s infinite alternate;
+}
+
+@keyframes pulsePremium {
+    from {
+        box-shadow: 0 4px 10px rgba(217, 119, 6, 0.3), 0 0 0 0px rgba(251, 191, 36, 0.4);
+    }
+    to {
+        box-shadow: 0 4px 14px rgba(217, 119, 6, 0.5), 0 0 0 4px rgba(251, 191, 36, 0);
+    }
+}
+
+.premium-badge-btn.is-active-premium {
+    background: linear-gradient(135deg, #a855f7, #6366f1) !important;
+    box-shadow: 0 4px 10px rgba(99, 102, 241, 0.3);
+    animation: pulseActivePremium 2s infinite alternate;
+}
+
+@keyframes pulseActivePremium {
+    from {
+        box-shadow: 0 4px 10px rgba(99, 102, 241, 0.3), 0 0 0 0px rgba(168, 85, 247, 0.4);
+    }
+    to {
+        box-shadow: 0 4px 14px rgba(99, 102, 241, 0.5), 0 0 0 4px rgba(168, 85, 247, 0);
+    }
+}
+
+/* Premium Modal Layout */
+.premium-modal-card {
+    background: linear-gradient(180deg, #18181b 0%, #111827 100%) !important;
+    border-color: rgba(251, 191, 36, 0.25) !important;
+}
+
+.premium-hero {
+    text-align: center;
+    margin-bottom: 24px;
+    padding: 15px;
+    background: rgba(251, 191, 36, 0.05);
+    border-radius: 12px;
+    border: 1px solid rgba(251, 191, 36, 0.1);
+}
+
+.premium-hero h4 {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #fbbf24;
+    font-family: 'Outfit', sans-serif;
+    margin: 0 0 8px 0;
+    letter-spacing: -0.5px;
+}
+
+.premium-hero p {
+    font-size: 0.9rem;
+    color: #cbd5e1;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.premium-benefits {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.benefit-item {
+    font-size: 0.88rem;
+    color: #e2e8f0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.benefit-item span {
+    color: #06b6d4;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.premium-plans-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 10px;
+}
+
+@media (max-width: 600px) {
+    .premium-plans-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    .premium-benefits {
+        grid-template-columns: 1fr;
+    }
+}
+
+.premium-plan-card {
+    background: rgba(0, 0, 0, 0.3);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    transition: var(--transition-smooth);
+}
+
+.premium-plan-card:hover {
+    border-color: rgba(255, 255, 255, 0.2);
+    transform: translateY(-4px);
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.premium-plan-card.popular {
+    border-color: #fbbf24;
+    background: rgba(251, 191, 36, 0.03);
+    box-shadow: 0 10px 25px rgba(251, 191, 36, 0.08);
+}
+
+.plan-popular-ribbon {
+    position: absolute;
+    top: -12px;
+    background: linear-gradient(135deg, #fbbf24, #d97706);
+    color: #000;
+    font-size: 0.72rem;
+    font-weight: 800;
+    padding: 4px 12px;
+    border-radius: 12px;
+    text-transform: uppercase;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.plan-badge {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+    margin-top: 5px;
+}
+
+.plan-price {
+    font-size: 1.8rem;
+    font-weight: 800;
+    color: white;
+    font-family: 'Outfit', sans-serif;
+    margin-bottom: 10px;
+}
+
+.plan-price span {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-muted);
+}
+
+.plan-desc {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    line-height: 1.4;
+    margin-bottom: 20px;
+    flex: 1;
+}
+
+.btn-buy-plan {
+    width: 100%;
+    height: 38px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 0.85rem;
+    cursor: pointer;
+}
+
+.premium-plan-card.popular .btn-buy-plan {
+    background: linear-gradient(135deg, #fbbf24, #d97706);
+    color: white;
+    border: none;
+}
+
+.premium-plan-card.popular .btn-buy-plan:hover {
+    background: linear-gradient(135deg, #fcd34d, #b45309);
+}
+
+.premium-footer-note {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+    text-align: center;
+    width: 100%;
+    margin: 5px 0 0 0;
+}
+
+/* Ad Simulation Progress Animation */
+.ad-sim-circle {
+    transform: rotate(-90deg);
+}
+
+#ad-sim-progress-bar {
+    stroke-dasharray: 283; /* 2 * PI * r (2 * 3.14159 * 45 = 282.7) */
+    stroke-dashoffset: 283;
+}
+
+/* Google Play Simulation Bottom Sheet */
+.iap-sim-sheet {
+    animation: slideUpSheet 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes slideUpSheet {
+    from {
+        transform: translateY(100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
+/* ==========================================================================
+   16. LIGHT THEME READABILITY OVERRIDES
+   ========================================================================== */
+
+/* Button styles in light theme */
+body.light-theme .btn-small-action {
+    background: rgba(0, 0, 0, 0.04);
+    border-color: rgba(0, 0, 0, 0.1);
+    color: #0f172a;
+}
+body.light-theme .btn-small-action:hover {
+    background: rgba(0, 0, 0, 0.08);
+    border-color: rgba(0, 0, 0, 0.15);
+}
+
+body.light-theme .btn-back {
+    background: rgba(0, 0, 0, 0.03);
+    border-color: rgba(0, 0, 0, 0.1);
+    color: #0f172a;
+}
+body.light-theme .btn-back:hover {
+    background: rgba(0, 0, 0, 0.06);
+}
+
+body.light-theme .btn-delete-comp {
+    background: rgba(239, 68, 68, 0.08);
+    border-color: rgba(239, 68, 68, 0.3);
+    color: #ef4444;
+}
+body.light-theme .btn-delete-comp:hover {
+    background: #ef4444;
+    border-color: #ef4444;
+    color: #ffffff;
+}
+
+/* User Guide step descriptions */
+body.light-theme .step-desc {
+    color: #334155;
+}
+body.light-theme .step-desc strong {
+    color: #0f172a;
+}
+
+/* Premium Modal styling in light theme (force dark aesthetic) */
+body.light-theme .premium-modal-card {
+    background: linear-gradient(180deg, #18181b 0%, #111827 100%) !important;
+    border-color: rgba(251, 191, 36, 0.25) !important;
+}
+body.light-theme .premium-modal-card h3,
+body.light-theme .premium-modal-card h4,
+body.light-theme .premium-modal-card .plan-price {
+    color: #ffffff !important;
+}
+body.light-theme .premium-modal-card .premium-hero h4 {
+    color: #fbbf24 !important;
+}
+body.light-theme .premium-modal-card .premium-hero p,
+body.light-theme .premium-modal-card .plan-desc,
+body.light-theme .premium-modal-card .plan-badge,
+body.light-theme .premium-modal-card .premium-footer-note {
+    color: #a1a1aa !important;
+}
+body.light-theme .premium-modal-card .benefit-item {
+    color: #e2e8f0 !important;
+}
+body.light-theme .premium-modal-card .benefit-item strong {
+    color: #ffffff !important;
+}
+body.light-theme .premium-modal-card .plan-price span {
+    color: #71717a !important;
+}
+
+
+

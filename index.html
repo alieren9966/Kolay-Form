@@ -1,0 +1,1032 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Kolay Form - Profesyonel Form Hazırlama Mobil Uygulaması</title>
+    <!-- Google Fonts: Inter & Outfit -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Main Style -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- 1. SPLASH SCREEN (AÇILIŞ EKRANI) -->
+    <div id="splash-screen" class="splash-screen">
+        <div class="splash-content">
+            <div class="splash-logo">
+                <svg width="80" height="80" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="24" height="24" rx="6" fill="url(#logo-gradient)"/>
+                    <path d="M16.5 7.5L10.5 13.5L7.5 10.5" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M19 12V17C19 18.1046 18.1046 19 17 19H7C5.89543 19 5 18.1046 5 17V7C5 5.89543 5.89543 5 7 5H14" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+                    <defs>
+                        <linearGradient id="logo-gradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#06b6d4"/>
+                            <stop offset="1" stop-color="#4f46e5"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+            </div>
+            <h1 class="splash-title">Kolay Form</h1>
+            <p class="splash-subtitle">Profesyonel Mobil Form Oluşturucu</p>
+            <div class="splash-loader">
+                <div class="loader-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. ANA UYGULAMA PANELİ (DASHBOARD) -->
+    <div id="app-container" class="app-container hidden">
+        
+        <!-- ÜST HEADER PANELİ -->
+        <header class="app-header">
+            <div class="header-logo-section">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <rect width="24" height="24" rx="6" fill="url(#header-logo-gradient)"/>
+                    <path d="M16.5 7.5L10.5 13.5L7.5 10.5" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M19 12V17C19 18.1046 18.1046 19 17 19H7C5.89543 19 5 18.1046 5 17V7C5 5.89543 5.89543 5 7 5H14" stroke="white" stroke-width="2.5" stroke-linecap="round"/>
+                    <defs>
+                        <linearGradient id="header-logo-gradient" x1="0" y1="0" x2="24" y2="24" gradientUnits="userSpaceOnUse">
+                            <stop stop-color="#06b6d4"/>
+                            <stop offset="1" stop-color="#4f46e5"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <span class="header-app-title">Kolay Form</span>
+            </div>
+            <div class="header-actions">
+                <button id="btn-theme-toggle" class="header-btn" title="Tema Değiştir">
+                    <span>🌙</span>
+                </button>
+                <button id="btn-feedback" class="header-btn" title="Geri Bildirim & Hakkında">
+                    <span>💬</span>
+                </button>
+                <button id="btn-how-to" class="header-btn" title="Nasıl Kullanılır?">
+                    <span>❓</span>
+                </button>
+                <button id="btn-settings" class="header-btn" title="Ayarlar">
+                    <span>⚙️</span>
+                </button>
+                <button id="btn-go-premium" class="header-btn premium-badge-btn" title="Premium'a Geç">
+                    <span>👑</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- DASHBOARD EKRANI -->
+        <main id="dashboard-view" class="view">
+            <!-- AKTİF ŞİRKET SEÇİM BÖLÜMÜ -->
+            <section class="company-selection-section">
+                <h3 class="section-title">Şirketiniz</h3>
+                <div id="company-cards-container" class="company-cards-slider">
+                    <!-- Şirket Kartları Dinamik Olarak Buraya Gelecek -->
+                </div>
+            </section>
+
+            <!-- HIZLI AKSİYONLAR -->
+            <section class="quick-actions-section">
+                <div class="action-buttons-grid">
+                    <button id="btn-create-form" class="action-btn btn-primary">
+                        <span class="btn-icon">📄</span>
+                        <span class="btn-text">Form Oluştur</span>
+                    </button>
+                    <button id="btn-add-company" class="action-btn btn-secondary">
+                        <span class="btn-icon">🏢</span>
+                        <span class="btn-text">Şirket Ekle / Yönet</span>
+                    </button>
+                    <button id="btn-scan-qr" class="action-btn btn-secondary">
+                        <span class="btn-icon">📷</span>
+                        <span class="btn-text">QR ile Belge Al</span>
+                    </button>
+                </div>
+                <p class="security-privacy-note">
+                    🔒 Oluşturulan formlar ve eklenen kaşeler yalnızca telefonunuzda saklanmaktadır.
+                </p>
+            </section>
+
+            <!-- GEÇMİŞ FORMLAR LİSTESİ -->
+            <section class="past-forms-section">
+                <div class="section-header-row">
+                    <h3 class="section-title">Geçmiş Formlar</h3>
+                    <div class="past-forms-header-actions" style="display: flex; gap: 8px; align-items: center;">
+                        <button id="btn-bulk-download" class="btn-small-action" style="background: var(--success); border-color: var(--success-light); font-weight: 600;">📥 Toplu İndir</button>
+                        <div class="search-filter-toggle-btn" id="filter-toggle">🔍 Filtrele</div>
+                    </div>
+                </div>
+
+                <!-- Arama ve Filtreleme Paneli -->
+                <div id="filter-panel" class="filter-panel hidden">
+                    <div class="filter-grid">
+                        <div class="filter-field">
+                            <label for="search-input">Ara</label>
+                            <input type="text" id="search-input" placeholder="Müşteri Adı, Form ID veya Cihaz...">
+                        </div>
+                        <div class="filter-field">
+                            <label for="filter-type">Form Türü</label>
+                            <select id="filter-type">
+                                <option value="all">Tümü</option>
+                                <option value="servis">Servis Formu</option>
+                                <option value="teklif">Teklif Formu</option>
+                            </select>
+                        </div>
+                        <div class="filter-field">
+                            <label for="filter-company">Şirket</label>
+                            <select id="filter-company">
+                                <option value="all">Tüm Şirketler</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Geçmiş Formlar Kart Listesi -->
+                <div id="forms-list-container" class="forms-list-container">
+                    <!-- Dinamik Geçmiş Form Kartları Buraya Gelecek -->
+                </div>
+            </section>
+        </main>
+
+        <!-- 3. ŞİRKET EKLEME / YÖNETME EKRANI -->
+        <section id="company-edit-view" class="view hidden">
+            <div class="view-header">
+                <button class="btn-back" id="btn-back-from-company">⬅️ Geri Dön</button>
+                <h2 id="company-view-title">Şirket Ekle</h2>
+            </div>
+            <form id="company-form" class="editor-form">
+                <input type="hidden" id="company-edit-id">
+                
+                <div class="form-group">
+                    <label for="company-name">Şirket Adı <span class="required">*</span></label>
+                    <input type="text" id="company-name" required placeholder="Örn: ABC Ajans Ltd. Şti.">
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="company-phone">Telefon</label>
+                        <input type="tel" id="company-phone" placeholder="Örn: 0216 216 16 16">
+                    </div>
+                    <div class="form-group">
+                        <label for="company-email">E-Posta</label>
+                        <input type="email" id="company-email" placeholder="info@abc.com">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="company-website">Web Sitesi</label>
+                        <input type="text" id="company-website" placeholder="Örn: www.abc.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="company-taxoffice">Vergi Dairesi</label>
+                        <input type="text" id="company-taxoffice" placeholder="Beşiktaş V.D">
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="company-taxnumber">Vergi Numarası</label>
+                        <input type="text" id="company-taxnumber" placeholder="Örn: 1234567890">
+                    </div>
+                    <div class="form-group">
+                        <label for="company-mersis">Mersis No</label>
+                        <input type="text" id="company-mersis" placeholder="Örn: 1234567890123456">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="company-address">Şirket Adresi</label>
+                    <textarea id="company-address" rows="3" placeholder="Örn: Hisar Mah. 1202 Sk. No: 99 Beşiktaş/İstanbul"></textarea>
+                </div>
+
+                <!-- GÖRSEL YÜKLEME ALANLARI -->
+                <div class="media-upload-section">
+                    <h4 class="media-section-title">Şirket Görselleri (Sıkıştırılmış & Kaydedilmiş)</h4>
+                    
+                    <div class="upload-grid">
+                        <!-- Logo Yükle -->
+                        <div class="upload-card">
+                            <label>Şirket Logosu</label>
+                            <div class="drop-zone" id="zone-logo">
+                                <input type="file" id="input-logo" accept="image/*" class="file-input">
+                                <div class="preview-container" id="preview-logo">
+                                    <span class="upload-placeholder">Logo Seç/Bırak</span>
+                                </div>
+                            </div>
+                            <button type="button" class="btn-crop-image hidden" id="btn-crop-logo">✂️ Kırp / Düzelt</button>
+                        </div>
+
+                        <!-- Kaşe Yükle -->
+                        <div class="upload-card">
+                            <label>Şirket Kaşesi</label>
+                            <div class="drop-zone" id="zone-stamp">
+                                <input type="file" id="input-stamp" accept="image/*" class="file-input">
+                                <div class="preview-container" id="preview-stamp">
+                                    <span class="upload-placeholder">Kaşe Seç/Bırak</span>
+                                </div>
+                            </div>
+                            <button type="button" class="btn-crop-image hidden" id="btn-crop-stamp">✂️ Kırp / Düzelt</button>
+                        </div>
+
+                        <!-- Varsayılan Yetkili İmzası -->
+                        <div class="upload-card">
+                            <label>Varsayılan Yetkili İmzası</label>
+                            <div class="signature-upload-actions">
+                                <button type="button" class="btn-small-action" id="btn-draw-default-sig">✍️ İmza Çiz</button>
+                                <span class="upload-or-text">veya</span>
+                                <input type="file" id="input-sig" accept="image/*" class="file-input-small">
+                            </div>
+                            <div class="drop-zone" id="zone-sig">
+                                <div class="preview-container" id="preview-sig">
+                                    <span class="upload-placeholder">İmza Yok</span>
+                                </div>
+                            </div>
+                            <button type="button" class="btn-crop-image hidden" id="btn-crop-sig">✂️ Kırp / Düzelt</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- DİNAMİK SERTİFİKA DAMGALARI -->
+                <div class="certification-section">
+                    <div class="section-header-row">
+                        <h4 class="media-section-title">Tescil/Sertifika Damgaları (TSE, ISO, CE vb.)</h4>
+                        <button type="button" id="btn-add-cert" class="btn-small-action">➕ Damga Ekle</button>
+                    </div>
+                    <div id="certs-container" class="certs-upload-list">
+                        <!-- Dinamik Damga Alanları Buraya Gelecek -->
+                    </div>
+                </div>
+
+                <div class="form-actions-row">
+                    <button type="submit" class="btn-primary" id="btn-save-company">Şirketi Kaydet</button>
+                    <button type="button" class="btn-danger hidden" id="btn-delete-company">Şirketi Sil</button>
+                </div>
+            </form>
+        </section>
+
+        <!-- 4. TEKNİK SERVİS FORMU EDİTÖR EKRANI -->
+        <section id="service-form-view" class="view hidden">
+            <div class="editor-top-sticky-bar">
+                <button class="btn-editor-back" id="btn-close-service-editor">⬅️ Çıkış</button>
+                <div class="editor-title-sticky">Servis Formu Düzenleyici</div>
+                <div class="editor-sticky-actions">
+                    <button class="btn-editor-save" id="btn-save-service-form">💾 Kaydet</button>
+                    <button class="btn-editor-pdf" id="btn-pdf-service-form">📥 PDF İndir</button>
+                </div>
+            </div>
+
+            <!-- Canlı Form Düzenleme Şablonu (A4 Görünümü) -->
+            <div class="a4-container-wrapper">
+                <div class="a4-page" id="service-print-area">
+                    
+                    <!-- Form Başlık Bloğu -->
+                    <div class="form-print-header">
+                        <div class="form-header-left" id="srv-print-comp-details">
+                            <!-- Şirket detayları dinamik gelecek -->
+                        </div>
+                        <div class="form-header-right">
+                            <div class="form-print-logo-container" id="srv-print-logo">
+                                <!-- Logo dinamik gelecek -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-print-title-row">
+                        <h2 class="form-print-title">TEKNİK SERVİS BİLGİ FORMU</h2>
+                        <div class="form-print-date-block">
+                            <label>Tarih:</label>
+                            <input type="date" id="srv-input-date" class="print-inline-input">
+                        </div>
+                    </div>
+
+                    <!-- Kurum Bilgileri -->
+                    <div class="form-print-section">
+                        <h3 class="print-section-title">KURUM BİLGİLERİ</h3>
+                        <div class="print-grid-2">
+                            <div class="print-form-field">
+                                <label>Kurum Adı:</label>
+                                <input type="text" id="srv-input-client-name" class="print-inline-input" placeholder="Kurum adını yazın...">
+                            </div>
+                            <div class="print-form-field">
+                                <label>Şehir:</label>
+                                <input type="text" id="srv-input-client-city" class="print-inline-input" placeholder="Şehir yazın...">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Cihaz Bilgileri -->
+                    <div class="form-print-section">
+                        <div class="print-section-header-row">
+                            <h3 class="print-section-title">CİHAZ BİLGİLERİ</h3>
+                            <button class="btn-table-action no-print" id="srv-btn-add-device">➕ Satır Ekle</button>
+                        </div>
+                        <table class="print-table" id="srv-table-devices">
+                            <thead>
+                                <tr>
+                                    <th>Marka / Model</th>
+                                    <th>Künye / Seri No</th>
+                                    <th width="120">Bakım Anlaşması</th>
+                                    <th width="40" class="no-print">İşlem</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Cihaz satırları dinamik gelecek -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Servis Nedeni -->
+                    <div class="form-print-section">
+                        <h3 class="print-section-title">SERVİS NEDENİ</h3>
+                        <div class="print-checkbox-grid">
+                            <label class="print-checkbox-label">
+                                <input type="checkbox" id="srv-chk-bakim"> Bakım
+                            </label>
+                            <label class="print-checkbox-label">
+                                <input type="checkbox" id="srv-chk-onarim"> Onarım
+                            </label>
+                            <label class="print-checkbox-label">
+                                <input type="checkbox" id="srv-chk-ariza"> Arıza Tespiti
+                            </label>
+                            <label class="print-checkbox-label">
+                                <input type="checkbox" id="srv-chk-kontrol"> Kontrol
+                            </label>
+                            <label class="print-checkbox-label">
+                                <input type="checkbox" id="srv-chk-garanti"> Garanti
+                            </label>
+                            <label class="print-checkbox-label">
+                                <input type="checkbox" id="srv-chk-kurulum"> Kurulum
+                            </label>
+                        </div>
+                    </div>
+
+                    <!-- Yapılan İşlem -->
+                    <div class="form-print-section">
+                        <h3 class="print-section-title">YAPILAN İŞLEM</h3>
+                        <textarea id="srv-txt-process" class="print-textarea" placeholder="Servis sürecinde yapılan işlemleri detaylandırın..." rows="6"></textarea>
+                    </div>
+
+                    <!-- Değişen / Tavsiye Edilen Parçalar -->
+                    <div class="form-print-section">
+                        <div class="print-section-header-row">
+                            <h3 class="print-section-title">DEĞİŞİMİ TAVSİYE EDİLEN / DEĞİŞEN PARÇALAR</h3>
+                            <button class="btn-table-action no-print" id="srv-btn-add-part">➕ Parça Ekle</button>
+                        </div>
+                        <table class="print-table" id="srv-table-parts">
+                            <thead>
+                                <tr>
+                                    <th>Parça Kodu</th>
+                                    <th>Yedek Parça İsmi</th>
+                                    <th width="70">Adet</th>
+                                    <th width="100">Değişti</th>
+                                    <th width="100">Tavsiye</th>
+                                    <th width="40" class="no-print">İşlem</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Parça satırları dinamik gelecek -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Sonuç -->
+                    <div class="form-print-section">
+                        <h3 class="print-section-title">SONUÇ</h3>
+                        <textarea id="srv-txt-result" class="print-textarea" placeholder="Servis sonucu veya tavsiyeler..." rows="3"></textarea>
+                    </div>
+
+                    <!-- Onay İmzaları Alanı -->
+                    <div class="form-print-section">
+                        <h3 class="print-section-title">ONAY VE İMZALAR</h3>
+                        <div class="print-signatures-grid">
+                            <!-- Firma Yetkilisi -->
+                            <div class="print-sig-box" id="srv-sig-box-tech">
+                                <div class="sig-title">FİRMA YETKİLİSİ</div>
+                                <div class="sig-image-container" id="srv-sig-tech-img-cont">
+                                    <span class="sig-placeholder-text">İmza Atmak İçin Tıklayın</span>
+                                </div>
+                                <div class="sig-name-field">
+                                    <input type="text" id="srv-input-tech-name" placeholder="İsim Soyisim" class="sig-name-input">
+                                </div>
+                            </div>
+
+                            <!-- Kurum Sorumlusu -->
+                            <div class="print-sig-box" id="srv-sig-box-client">
+                                <div class="sig-title">KURUM SORUMLUSU</div>
+                                <div class="sig-image-container" id="srv-sig-client-img-cont">
+                                    <span class="sig-placeholder-text">İmza Atmak İçin Tıklayın</span>
+                                </div>
+                                <div class="sig-name-field">
+                                    <input type="text" id="srv-input-client-person" placeholder="İsim Soyisim" class="sig-name-input">
+                                </div>
+                            </div>
+
+                            <!-- Klinik Mühendisliği -->
+                            <div class="print-sig-box" id="srv-sig-box-unit">
+                                <div class="sig-title">KLİNİK MÜH. / TEKNİK BİRİM</div>
+                                <div class="sig-image-container" id="srv-sig-unit-img-cont">
+                                    <span class="sig-placeholder-text">İmza Atmak İçin Tıklayın</span>
+                                </div>
+                                <div class="sig-name-field">
+                                    <input type="text" id="srv-input-unit-person" placeholder="İsim Soyisim / Birim" class="sig-name-input">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sayfa Altı / Güvenlik Damgası -->
+                    <div class="form-print-footer">
+                        <!-- Left side: Stamp -->
+                        <div id="srv-print-stamp" class="srv-footer-stamp">
+                            <!-- Şirket kaşesi dinamik gelecek -->
+                        </div>
+                        <!-- Center: QR Doğrulama Kodu (sadece PDF çıktısında dolar) -->
+                        <div class="form-qr-stamp footer-qr" id="srv-print-qr"></div>
+                        <!-- Right side: Bandroller and validation text -->
+                        <div class="footer-right-assets">
+                            <div class="form-print-certs-row" id="srv-print-certs">
+                                <!-- Sertifika Damgaları Dinamik Gelecek -->
+                            </div>
+                            <div class="form-print-footer-text">
+                                Oluşturulan bu teknik servis formu elektronik ortamda onaylanmıştır.
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+        <!-- 5. TEKLİF FORMU EDİTÖR EKRANI -->
+        <section id="quote-form-view" class="view hidden">
+            <div class="editor-top-sticky-bar">
+                <button class="btn-editor-back" id="btn-close-quote-editor">⬅️ Çıkış</button>
+                <div class="editor-title-sticky">Fiyat Teklifi Düzenleyici</div>
+                <div class="editor-sticky-actions">
+                    <button class="btn-editor-save" id="btn-save-quote-form">💾 Kaydet</button>
+                    <button class="btn-editor-pdf" id="btn-pdf-quote-form">📥 PDF İndir</button>
+                </div>
+            </div>
+
+            <!-- Canlı Form Düzenleme Şablonu (A4 Görünümü) -->
+            <div class="a4-container-wrapper">
+                <div class="a4-page" id="quote-print-area">
+                    
+                    <!-- Form Başlık Bloğu -->
+                    <div class="form-print-header">
+                        <div class="form-header-left" id="qte-print-comp-details">
+                            <!-- Şirket detayları dinamik gelecek -->
+                        </div>
+                        <div class="form-header-right">
+                            <div class="form-print-logo-container" id="qte-print-logo">
+                                <!-- Logo dinamik gelecek -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-print-title-row quote-title-row">
+                        <h2 class="form-print-title">PROFORMA FİYAT TEKLİF MEKTUBU</h2>
+                    </div>
+
+                    <!-- Müşteri ve Teklif Meta Detayları -->
+                    <div class="quote-meta-section">
+                        <!-- Müşteri Kutusu -->
+                        <div class="quote-meta-box client-box">
+                            <div class="quote-meta-title">TEKLİF SUNULAN KURUM</div>
+                            <div class="quote-client-details">
+                                <div class="print-form-field no-label">
+                                    <input type="text" id="qte-input-client-title" class="print-inline-input bold-input" placeholder="T.C / Kurum Adı yazın...">
+                                </div>
+                                <div class="print-form-field no-label">
+                                    <input type="text" id="qte-input-client-address" class="print-inline-input" placeholder="Kurum adresi...">
+                                </div>
+                                <div class="print-form-field no-label">
+                                    <input type="text" id="qte-input-client-city" class="print-inline-input" placeholder="Şehir yazın...">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Teklif ID & Tarih Kutusu -->
+                        <div class="quote-meta-box details-box">
+                            <div class="quote-meta-title">TEKLİF BİLGİLERİ</div>
+                            <div class="quote-details-rows">
+                                <div class="print-form-field-row">
+                                    <label>TARİH:</label>
+                                    <input type="date" id="qte-input-date" class="print-inline-input">
+                                </div>
+                                <div class="print-form-field-row">
+                                    <label>TEKLİF NO:</label>
+                                    <input type="text" id="qte-input-no" class="print-inline-input bold-input" placeholder="Örn: DRP-0621">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Teklif Kalemleri Tablosu -->
+                    <div class="form-print-section">
+                        <div class="print-section-header-row">
+                            <h3 class="print-section-title">TEKLİF KALEMLERİ</h3>
+                            <button class="btn-table-action no-print" id="qte-btn-add-item">➕ Kalem Ekle</button>
+                        </div>
+                        <table class="print-table" id="qte-table-items">
+                            <thead>
+                                <tr>
+                                    <th width="40">Sıra</th>
+                                    <th>Mal / Hizmet Açıklaması</th>
+                                    <th width="60">Miktar</th>
+                                    <th width="60">Birim</th>
+                                    <th width="100">Birim Fiyat</th>
+                                    <th width="70">KDV %</th>
+                                    <th width="120">Toplam</th>
+                                    <th width="40" class="no-print">İşlem</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Teklif kalemleri dinamik gelecek -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <!-- Fiyat Hesaplama Özet Bloğu -->
+                    <div class="quote-summary-block">
+                        <div class="quote-summary-row">
+                            <span class="summary-label">Ara Toplam:</span>
+                            <span class="summary-value" id="qte-text-subtotal">₺ 0.00</span>
+                        </div>
+                        <div class="quote-summary-row">
+                            <span class="summary-label">KDV Toplamı:</span>
+                            <span class="summary-value" id="qte-text-tax-total">₺ 0.00</span>
+                        </div>
+                        <div class="quote-summary-row grand-total-row">
+                            <span class="summary-label">Genel Toplam:</span>
+                            <span class="summary-value" id="qte-text-grand-total">₺ 0.00</span>
+                        </div>
+                    </div>
+
+                    <!-- Teklif Şartları / Koşulları -->
+                    <div class="form-print-section">
+                        <h3 class="print-section-title">TEKLİF KOŞULLARI VE ŞARTLARI</h3>
+                        <textarea id="qte-txt-conditions" class="print-textarea" placeholder="* Fiyatlarımız KDV hariçtir.&#10;* Teslim süresi 15 gündür." rows="4"></textarea>
+                    </div>
+
+                    <!-- Kaşe ve İmza Bölümü -->
+                    <div class="form-print-section">
+                        <div class="quote-signature-row">
+                            <div class="company-info-block" id="qte-print-certs-container" style="display: flex; align-items: center;">
+                                <div class="form-print-certs-row" id="qte-print-certs">
+                                    <!-- Sertifika Damgaları Dinamik Gelecek -->
+                                </div>
+                            </div>
+                            <!-- Orta: QR Doğrulama Kodu (sadece PDF çıktısında dolar) -->
+                            <div class="form-qr-stamp signature-qr" id="qte-print-qr"></div>
+                            <div class="quote-stamp-sig-box">
+                                <div class="quote-stamp-sig-title">Kaşe & Yetkili İmza</div>
+                                <div class="quote-stamp-sig-wrapper" id="qte-stamp-sig-container">
+                                    <div class="quote-print-stamp" id="qte-print-stamp-img">
+                                        <!-- Kaşe görseli -->
+                                    </div>
+                                    <div class="quote-print-signature" id="qte-print-sig-img">
+                                        <!-- İmza görseli -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+    </div> <!-- /app-container -->
+
+
+    <!-- ==================== MODALLAR ==================== -->
+
+    <!-- 1. AYARLAR MODALI -->
+    <div id="modal-settings" class="modal-backdrop hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>Genel Ayarlar</h3>
+                <button class="modal-close" id="btn-close-settings">✖</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="settings-kdv">Varsayılan KDV Oranı (%)</label>
+                    <input type="number" id="settings-kdv" value="20" min="0" max="100">
+                </div>
+                <div class="form-group">
+                    <label for="settings-currency">Varsayılan Para Birimi Sembolü</label>
+                    <select id="settings-currency">
+                        <option value="₺">₺ (Türk Lirası)</option>
+                        <option value="$">$ (Dolar)</option>
+                        <option value="€">€ (Euro)</option>
+                        <option value="£">£ (Sterlin)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="settings-lang">Varsayılan Dil (Default Language)</label>
+                    <select id="settings-lang" disabled>
+                        <option value="tr">Türkçe</option>
+                        <option value="en">English (İleriki aşamada aktif)</option>
+                    </select>
+                </div>
+                <div class="form-group settings-premium-divider" style="border-top: 1px solid var(--border-color); padding-top: 15px; margin-top: 15px;">
+                    <label>Abonelik Durumu</label>
+                    <div class="settings-premium-box" style="display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.15); padding: 10px; border-radius: 8px; border: 1px solid var(--border-color);">
+                        <span id="settings-premium-status" style="font-weight: 600; color: var(--text-main); font-size: 0.9rem;">Standart Üye (Reklamlı)</span>
+                        <button type="button" id="btn-settings-premium" class="btn-small-action" style="background: linear-gradient(135deg, #fbbf24, #d97706); color: white; border: none; font-weight: 600; padding: 6px 12px; border-radius: 6px; cursor: pointer;">👑 Premium</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-primary" id="btn-save-settings">Ayarları Kaydet</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 2. NASIL KULLANILIR MODALI -->
+    <div id="modal-how-to" class="modal-backdrop hidden">
+        <div class="modal-card wide-card">
+            <div class="modal-header">
+                <h3>Uygulama Kullanım Kılavuzu</h3>
+                <button class="modal-close" id="btn-close-how-to">✖</button>
+            </div>
+            <div class="modal-body user-guide-content">
+                <div class="guide-step">
+                    <div class="step-num">1</div>
+                    <div class="step-desc">
+                        <strong>Şirketini Ekle:</strong> "Şirket Ekle" butonuna basarak firmanızın unvan, adres, vergi dairesi ve no bilgilerini girin. Logo, kaşe ve damgaları yükleyin.
+                    </div>
+                </div>
+                <div class="guide-step">
+                    <div class="step-num">2</div>
+                    <div class="step-desc">
+                        <strong>Aktif Şirketi Seç:</strong> Ana panelin üst kısmından hangi şirketinizle işlem yapacaksanız o şirketin kartına tıklayıp aktif hale getirin.
+                    </div>
+                </div>
+                <div class="guide-step">
+                    <div class="step-num">3</div>
+                    <div class="step-desc">
+                        <strong>Form Oluştur:</strong> "Form Oluştur" butonuna basın, Servis veya Teklif formundan birini seçerek düzenleme ekranına geçin.
+                    </div>
+                </div>
+                <div class="guide-step">
+                    <div class="step-num">4</div>
+                    <div class="step-desc">
+                        <strong>Tıkla ve Doldur (Inline Edit):</strong> Form üzerindeki tüm alanlar etkileşimlidir. Cihazları, kalemleri veya yapılan işlemleri tıklayarak klavyenizle doğrudan doldurun.
+                    </div>
+                </div>
+                <div class="guide-step">
+                    <div class="step-num">5</div>
+                    <div class="step-desc">
+                        <strong>İmzalat ve PDF İndir:</strong> İmza kutularına tıklayarak telefon ekranından parmakla dijital imza attırın. Üst bardaki "PDF İndir" butonuna basarak anında A4 boyutunda çıktısını indirin. Formunuz yerel geçmişe de otomatik olarak kaydedilecektir.
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" id="btn-close-how-to-footer">Anladım</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. FORM OLUŞTURMA SEÇİM MODALI -->
+    <div id="modal-create-form" class="modal-backdrop hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>Yeni Form Oluştur</h3>
+                <button class="modal-close" id="btn-close-create-form">✖</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="create-form-company">Şirketiniz</label>
+                    <select id="create-form-company" class="modal-select">
+                        <!-- Kayıtlı Şirketler Buraya Gelecek -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="create-form-type">Form Kategorisi</label>
+                    <select id="create-form-type" class="modal-select">
+                        <option value="servis">Teknik Servis Bilgi Formu</option>
+                        <option value="teklif">Proforma Fiyat Teklifi</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-primary" id="btn-start-form">Formu Hazırla ➡️</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. DİJİTAL İMZA KUTUSU (CANVAS MODAL) -->
+    <div id="modal-signature-pad" class="modal-backdrop hidden">
+        <div class="modal-card signature-pad-card">
+            <div class="modal-header">
+                <h3 id="sig-pad-title">Dokunmatik İmza Paneli</h3>
+                <button class="modal-close" id="btn-close-sig-pad">✖</button>
+            </div>
+            <div class="modal-body pad-body">
+                <p class="sig-pad-warning">
+                    ⚠️ Bu imza yalnızca bu oluşturulan formda tek seferlik kullanılmak üzere alınmaktadır.
+                </p>
+                <div class="canvas-wrapper">
+                    <canvas id="signature-canvas"></canvas>
+                </div>
+                <div class="sig-pad-presets" id="sig-presets-row">
+                    <!-- Kayıtlı hazır imza varsa buton olarak buraya gelecek -->
+                </div>
+            </div>
+            <div class="modal-footer sig-pad-footer">
+                <button class="btn-danger-small" id="btn-clear-sig-pad">🧹 Temizle</button>
+                <button class="btn-secondary-small hidden" id="btn-leave-blank-sig">📭 Boş Bırak</button>
+                <button class="btn-secondary-small hidden" id="btn-use-preset-sig">👤 Hazır İmzamı Kullan</button>
+                <button class="btn-primary-small" id="btn-save-sig-pad">💾 İmzayı Ekle</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. ÇIKIŞ ONAY MODALI -->
+    <div id="modal-confirm-exit" class="modal-backdrop hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>Çıkış Onayı</h3>
+                <button class="modal-close" id="btn-close-confirm-exit">✖</button>
+            </div>
+            <div class="modal-body">
+                <p style="color: var(--text-main); margin-bottom: 8px;">Kaydedilmemiş değişiklikler kaybolabilir. Çıkmak istediğinizden emin misiniz?</p>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary-small" id="btn-cancel-exit">Vazgeç</button>
+                <button class="btn-primary-small" id="btn-confirm-exit" style="background: var(--danger);">Çıkış Yap</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 6. GERİ BİLDİRİM VE HAKKINDA MODALI -->
+    <div id="modal-feedback" class="modal-backdrop hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>Geri Bildirim & Hakkında</h3>
+                <button class="modal-close" id="btn-close-feedback">✖</button>
+            </div>
+            <div class="modal-body">
+                <div class="feedback-tabs">
+                    <button id="tab-feedback-btn" class="tab-btn active">💬 Geri Bildirim</button>
+                    <button id="tab-about-btn" class="tab-btn">ℹ️ Hakkında & Kredi</button>
+                </div>
+                
+                <div id="tab-feedback-content">
+                    <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 12px;">Görüş, öneri veya hata bildirimlerinizi geliştiriciye doğrudan iletebilirsiniz.</p>
+                    <div class="form-group">
+                        <label for="feedback-message">Mesajınız</label>
+                        <textarea id="feedback-message" rows="5" placeholder="Geri bildiriminizi buraya yazın..." style="width: 100%; background: rgba(0,0,0,0.2); border: 1px solid var(--border-color); color: white; border-radius: 8px; padding: 10px; font-family: inherit; font-size: 0.88rem; outline: none; resize: none;"></textarea>
+                    </div>
+                    <button id="btn-send-feedback" class="btn-primary" style="width: 100%; margin-top: 10px; height: 40px;">Geri Bildirimi Gönder</button>
+                </div>
+
+                <div id="tab-about-content" class="hidden">
+                    <div style="font-size: 0.88rem; line-height: 1.6; color: var(--text-main);">
+                        <strong style="color: var(--secondary-light); font-size: 1rem;">Kolay Form v1.1.0</strong>
+                        <p style="margin-top: 8px;">Bu uygulama, teknik servis ekiplerinin ve işletmelerin hızlı, pratik ve çevrimdışı (offline) form & teklif yönetimi yapabilmesi amacıyla geliştirilmiştir.</p>
+                        
+                        <div style="margin-top: 16px; border-top: 1px solid var(--border-color); padding-top: 12px;">
+                            <strong style="color: var(--primary-light);">Geliştirici & Krediler:</strong>
+                            <p style="margin-top: 4px; font-size: 0.85rem; color: var(--text-muted);">
+                                💻 <strong>Tasarım & Geliştirme:</strong> Alieren3D<br>
+                                🎯 <strong>Vizyon & Katkılar:</strong> Haydar Şeker<br>
+                                🔒 <strong>Gizlilik:</strong> Uygulama tamamen cihazınızda çalışır, hiçbir veri uzak sunucuya aktarılmaz.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 7. TOPLU İNDİRME YÜKLEME OVERLAY -->
+    <div id="modal-bulk-loading" class="modal-backdrop hidden" style="z-index: 10000; background: rgba(0,0,0,0.85);">
+        <div class="modal-card" style="max-width: 350px; text-align: center;">
+            <div class="modal-body" style="padding: 30px;">
+                <div class="splash-loader" style="margin-bottom: 20px;">
+                    <div class="loader-bar"></div>
+                </div>
+                <h4 style="margin-bottom: 10px; color: white;">Toplu PDF İndiriliyor</h4>
+                <p id="bulk-loading-progress" style="color: var(--text-muted); font-size: 0.9rem;">Hazırlanıyor...</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 9. QR İLE BELGE ALMA (TARAMA) MODALI -->
+    <div id="modal-qr-scan" class="modal-backdrop hidden">
+        <div class="modal-card qr-scan-card">
+            <div class="modal-header">
+                <h3>📷 QR ile Belge Al</h3>
+                <button class="modal-close" id="btn-close-qr-scan">✖</button>
+            </div>
+            <div class="modal-body qr-scan-body">
+                <div class="qr-scan-viewport" id="qr-scan-viewport">
+                    <video id="qr-scan-video" playsinline muted></video>
+                    <div class="qr-scan-frame"></div>
+                </div>
+                <p class="qr-scan-status" id="qr-scan-status">Kamera başlatılıyor…</p>
+
+                <!-- Başarılı tarama sonucu özeti -->
+                <div class="qr-scan-result hidden" id="qr-scan-result">
+                    <div class="qr-result-line"><span>Belge Türü</span><strong id="qr-res-type">—</strong></div>
+                    <div class="qr-result-line"><span>Belge No</span><strong id="qr-res-id">—</strong></div>
+                    <div class="qr-result-line"><span>Müşteri</span><strong id="qr-res-client">—</strong></div>
+                    <div class="qr-result-line"><span>Tutar</span><strong id="qr-res-total">—</strong></div>
+                </div>
+
+                <p class="qr-scan-note">İpucu: QR okunmuyorsa, QR'ın net göründüğü bir fotoğrafı yükleyerek de tarayabilirsiniz.</p>
+                <input type="file" id="qr-file-input" accept="image/*" class="hidden">
+            </div>
+            <div class="modal-footer qr-scan-footer">
+                <button class="btn-secondary-small" id="btn-qr-from-image">🖼️ Görüntüden Tara</button>
+                <button class="btn-primary-small hidden" id="btn-qr-open-doc">📄 Belgeyi Aç</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 10. GÖRSEL KIRPMA (PERSPEKTİF DÜZELTME) MODALI -->
+    <div id="modal-crop" class="modal-backdrop hidden">
+        <div class="modal-card crop-card">
+            <div class="modal-header">
+                <h3>✂️ Görseli Kırp / Düzelt</h3>
+                <button class="modal-close" id="btn-close-crop">✖</button>
+            </div>
+            <div class="modal-body crop-body">
+                <p class="crop-hint">4 köşeyi sürükleyerek kırpılacak alanı belirleyin. Seçilen dörtgen düzeltilerek dik bir dikdörtgene çevrilir.</p>
+                <div class="crop-stage" id="crop-stage">
+                    <canvas id="crop-canvas"></canvas>
+                    <canvas id="crop-overlay"></canvas>
+                </div>
+            </div>
+            <div class="modal-footer crop-footer">
+                <button class="btn-secondary-small" id="btn-crop-reset">↺ Sıfırla</button>
+                <button class="btn-primary-small" id="btn-crop-apply">✓ Uygula</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 11. PREMIUM FIYATLANDIRMA MODALI -->
+    <div id="modal-premium" class="modal-backdrop hidden">
+        <div class="modal-card wide-card premium-modal-card">
+            <div class="modal-header">
+                <h3>👑 Kolay Form Premium</h3>
+                <button class="modal-close" id="btn-close-premium">✖</button>
+            </div>
+            <div class="modal-body">
+                <div class="premium-hero">
+                    <h4>Sınırsız Gücü Serbest Bırakın</h4>
+                    <p>Uygulamayı reklamsız kullanın, toplu indirmeleri sınırsızca yapın ve profesyonelliğinizi artırın.</p>
+                </div>
+                
+                <div class="premium-benefits">
+                    <div class="benefit-item"><span>✓</span> <strong>Sıfır Reklam:</strong> Form indirirken reklam beklemeyin.</div>
+                    <div class="benefit-item"><span>✓</span> <strong>Sınırsız Şirket Profili:</strong> İstediğiniz kadar şirket tanımlayın.</div>
+                    <div class="benefit-item"><span>✓</span> <strong>Gelişmiş QR Doğrulama:</strong> İnternet olmadan dijital form paylaşımı.</div>
+                    <div class="benefit-item"><span>✓</span> <strong>Toplu PDF İndirme:</strong> Tüm arşivi tek tuşla indirin.</div>
+                </div>
+
+                <div class="premium-plans-grid">
+                    <!-- Aylık Plan -->
+                    <div class="premium-plan-card">
+                        <div class="plan-badge">Aylık</div>
+                        <div class="plan-price">₺99<span> / ay</span></div>
+                        <p class="plan-desc">Küçük işletmeler ve serbest çalışanlar için ideal.</p>
+                        <button class="btn-buy-plan btn-primary" data-plan="monthly" data-price="₺99.00/Ay">Satın Al</button>
+                    </div>
+
+                    <!-- Yıllık Plan -->
+                    <div class="premium-plan-card popular">
+                        <div class="plan-popular-ribbon">En Popüler</div>
+                        <div class="plan-badge">Yıllık</div>
+                        <div class="plan-price">₺999<span> / yıl</span></div>
+                        <p class="plan-desc">Yıllık ödeme ile %15 tasarruf edin.</p>
+                        <button class="btn-buy-plan btn-primary" data-plan="yearly" data-price="₺999.00/Yıl">Satın Al</button>
+                    </div>
+
+                    <!-- Kurumsal Plan -->
+                    <div class="premium-plan-card">
+                        <div class="plan-badge">10 Kişilik / Sınırsız</div>
+                        <div class="plan-price">₺9999<span> / ömürlük</span></div>
+                        <p class="plan-desc">Büyük ekipler için tek seferlik sınırsız kullanım lisansı.</p>
+                        <button class="btn-buy-plan btn-primary" data-plan="enterprise" data-price="₺9999.00 Tek Sefer">Satın Al</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <p class="premium-footer-note">Güvenli faturalandırma Google Play üzerinden yapılmaktadır.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 12. REKLAM/PREMIUM SECIM MODALI -->
+    <div id="modal-ad-prompt" class="modal-backdrop hidden" style="z-index: 9998;">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3>📄 Belge İndirme Seçeneği</h3>
+                <button class="modal-close" id="btn-close-ad-prompt">✖</button>
+            </div>
+            <div class="modal-body" style="text-align: center; padding: 20px;">
+                <div style="font-size: 3rem; margin-bottom: 15px;">📽️</div>
+                <h4 style="margin-bottom: 10px; color: var(--text-main);">Ücretsiz İndirmek için Reklam İzleyin</h4>
+                <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 20px;">
+                    Bu özellik ücretsiz üyeler için ödüllü reklam izlemeyi gerektirir. 5 saniyelik kısa bir reklam izleyerek PDF belgenizi anında indirebilirsiniz.<br><br>
+                    Reklamları tamamen kaldırmak ve diğer tüm premium özelliklere erişmek için Premium'a geçebilirsiniz.
+                </p>
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <button id="btn-ad-prompt-watch" class="btn-primary" style="height: 44px; font-weight: 600; display: flex; justify-content: center; align-items: center; gap: 8px;">
+                        <span>▶</span> Reklamı İzle ve PDF İndir
+                    </button>
+                    <button id="btn-ad-prompt-premium" class="btn-secondary" style="height: 44px; font-weight: 600; border-color: #fbbf24; color: #fbbf24; display: flex; justify-content: center; align-items: center; gap: 8px;">
+                        <span>👑</span> Premium'a Yükselt (₺99/Ay)
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 13. REKLAM SIMULATORU MODALI -->
+    <div id="modal-ad-simulation" class="modal-backdrop hidden" style="z-index: 9999; background: rgba(0,0,0,0.95);">
+        <div class="modal-card ad-sim-card" style="max-width: 400px; border: 1px solid rgba(255,255,255,0.1);">
+            <div class="modal-header" style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                <h3 style="color: white;">📽️ Ödüllü Reklam Simülasyonu</h3>
+                <button class="modal-close hidden" id="btn-close-ad-sim" style="color: white;">✖</button>
+            </div>
+            <div class="modal-body ad-sim-body" style="padding: 30px; text-align: center; color: white;">
+                <div class="ad-sim-visual" style="position: relative; width: 100px; height: 100px; margin: 0 auto 20px;">
+                    <svg class="ad-sim-circle" width="100" height="100" viewBox="0 0 100 100">
+                        <circle cx="50" cy="50" r="45" stroke="rgba(255,255,255,0.1)" stroke-width="6" fill="none"/>
+                        <circle id="ad-sim-progress-bar" cx="50" cy="50" r="45" stroke="#06b6d4" stroke-width="6" fill="none" 
+                                stroke-dasharray="283" stroke-dashoffset="283" style="transition: stroke-dashoffset 1s linear; transform: rotate(-90deg); transform-origin: 50% 50%;"/>
+                    </svg>
+                    <div id="ad-sim-counter" style="position: absolute; top: 0; left: 0; width: 100px; height: 100px; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; font-weight: 700; font-family: 'Outfit', sans-serif;">5</div>
+                </div>
+                
+                <h4 style="margin-bottom: 8px; color: #06b6d4;">Ödüllü Reklam Oynatılıyor</h4>
+                <p style="font-size: 0.85rem; color: #a1a1aa; line-height: 1.5; margin-bottom: 25px;">
+                    Simülasyon Reklamı: Lütfen bekleyin. Video tamamlandığında belgeniz otomatik olarak indirilecektir.
+                </p>
+
+                <!-- Reklam Mock İçeriği -->
+                <div class="ad-mockup-display" style="background: rgba(255,255,255,0.05); border-radius: 8px; padding: 15px; border: 1px dashed rgba(255,255,255,0.15); display: flex; align-items: center; justify-content: center; gap: 10px;">
+                    <span style="font-size: 2rem;">🎮</span>
+                    <div style="text-align: left;">
+                        <div style="font-weight: 600; font-size: 0.85rem; color: white;">Kolay Form Premium Mobil Oyun</div>
+                        <div style="font-size: 0.75rem; color: #71717a;">Hemen İndir ve Oyna!</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 14. ODEME SIMULATORU MODALI -->
+    <div id="modal-iap-simulation" class="modal-backdrop hidden" style="z-index: 9999; display: flex; align-items: flex-end; background: rgba(0,0,0,0.6);">
+        <div class="iap-sim-sheet" style="width: 100%; max-width: 500px; background: #242424; border-top-left-radius: 16px; border-top-right-radius: 16px; box-shadow: 0 -10px 25px rgba(0,0,0,0.5); padding: 20px; font-family: 'Inter', sans-serif; color: #e4e4e7; margin: 0 auto; box-sizing: border-box;">
+            <div style="display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #3f3f46; padding-bottom: 12px; margin-bottom: 15px;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M19.224 8.796c-.347-.367-.803-.57-1.284-.57H5.21c-.482 0-.938.203-1.285.57A1.895 1.895 0 003.5 10.15v8.52c0 .506.196.98.552 1.347.347.367.803.57 1.284.57h12.728c.483 0 .939-.203 1.285-.57a1.898 1.898 0 00.551-1.347v-8.52a1.897 1.897 0 00-.476-1.354z" fill="#00e676"/>
+                        <path d="M17.94 8.226h-11.88a2.5 2.5 0 01-2.5-2.5v-.5a2.5 2.5 0 012.5-2.5h11.88a2.5 2.5 0 012.5 2.5v.5a2.5 2.5 0 01-2.5 2.5z" fill="#00c853"/>
+                    </svg>
+                    <span style="font-weight: 700; color: #ffffff; letter-spacing: 0.5px;">Google Play Satın Alma</span>
+                </div>
+                <button id="btn-close-iap-sim" style="background: none; border: none; color: #a1a1aa; font-size: 1.2rem; cursor: pointer;">✖</button>
+            </div>
+            
+            <div style="margin-bottom: 20px;">
+                <div style="font-size: 0.8rem; color: #a1a1aa; text-transform: uppercase; font-weight: 600; letter-spacing: 0.5px;">Uygulama</div>
+                <div style="font-weight: 700; font-size: 1.1rem; color: #ffffff; margin-top: 2px;">Kolay Form - Premium Üyelik</div>
+                
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px; background: #18181b; padding: 12px; border-radius: 8px; border: 1px solid #27272a;">
+                    <div>
+                        <div id="iap-sim-plan-name" style="font-weight: 600; color: #ffffff; font-size: 0.95rem;">Premium Yıllık Paket</div>
+                        <div style="font-size: 0.75rem; color: #71717a;">Google Play faturalandırma sistemi ile simüle edilir.</div>
+                    </div>
+                    <div id="iap-sim-plan-price" style="font-weight: 700; font-size: 1.1rem; color: #00e676;">₺999.00</div>
+                </div>
+            </div>
+
+            <!-- Fatura Detayı -->
+            <div style="font-size: 0.8rem; color: #a1a1aa; line-height: 1.4; margin-bottom: 20px;">
+                Fatura hesabı: <strong style="color: #e4e4e7;">test-user@gmail.com</strong><br>
+                Bu satın alma işlemi bir **test simülasyonudur**. Gerçek para çekilmeyecektir.
+            </div>
+
+            <!-- Onay Butonu -->
+            <button id="btn-iap-sim-pay" class="btn-primary" style="width: 100%; height: 48px; border-radius: 24px; font-weight: 700; font-size: 1rem; background: #00c853; border: none; color: white; display: flex; justify-content: center; align-items: center; gap: 8px; box-shadow: 0 4px 12px rgba(0,200,83,0.3); cursor: pointer;">
+                <span>🔒</span> TEK DOKUNUŞLA SATIN AL
+            </button>
+        </div>
+    </div>
+
+    <!-- JavaScript code -->
+    <script src="js/libs/html2pdf.bundle.min.js"></script>
+    <!-- QR Eklentisi kütüphaneleri (offline, vendored) -->
+    <script src="js/libs/pako.min.js"></script>
+    <script src="js/libs/qrcode-generator.min.js"></script>
+    <script src="js/libs/jsQR.min.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
