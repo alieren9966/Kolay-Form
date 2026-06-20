@@ -239,3 +239,47 @@ npx cap open android
 2. Üst menüden sırasıyla: **Build > Build Bundle(s) / APK(s) > Build APK(s)** adımlarını takip edin.
 3. Derleme tamamlandığında sağ altta bir bildirim kutusu çıkacaktır. Oradaki **"locate"** yazısına tıklayarak üretilen `app-debug.apk` dosyasını bulabilirsiniz.
 4. Bu APK dosyasını telefonunuza kablo, e-posta veya WhatsApp ile gönderip doğrudan kurabilirsiniz!
+
+---
+
+## 6. Uygulamayı iOS (App Store) için Codemagic ile Derleme ve Yayınlama Kılavuzu
+
+iOS işletim sistemi yapısı gereği Xcode derleme aracı sadece macOS (Mac bilgisayarlar) üzerinde çalışır. Ancak Windows üzerinde geliştirme yapıyorsanız, **GitHub** ve **Codemagic (bulut macOS derleme aracı)** kullanarak kodlarınyızı App Store'a gönderebilirsiniz.
+
+### Adım Adım iOS Paketleme Süreci:
+
+#### 1. Yerel Hazırlıklar (Zaten Yapıldı)
+Projenizde iOS desteği ve GitHub entegrasyonu başarıyla tamamlanmıştır:
+- `@capacitor/ios` kütüphanesi kuruldu ve `npx cap add ios` ile `ios/` klasörü oluşturuldu.
+- Kodlar `git` deposu haline getirilip GitHub üzerindeki [Kolay-Form Reposu](https://github.com/alieren9966/Kolay-Form.git) adresine yüklendi.
+- `package.json` içindeki sync komutu `npm run copy-assets && npx cap sync` olarak revize edildi, böylece her sync işleminde hem Android hem de iOS klasörleri güncellenir.
+
+#### 2. Kod Değişikliği Yaptığınızda Yapılacaklar
+Uygulama arayüzünde (HTML/CSS/JS) değişiklik yaptığınızda, bu değişiklikleri iOS ve Android platformlarına göndermek ve GitHub'a yüklemek için terminalde sırasıyla şu komutları çalıştırın:
+```bash
+# 1. Kodları platformlara kopyala ve eşitle
+npm run sync
+
+# 2. Değişiklikleri Git'e kaydet ve GitHub'a push et
+git add .
+git commit -m "Uygulama guncellendi"
+git push
+```
+
+#### 3. Apple Developer Hesabı ve API Key (Sadece 1 kez)
+Uygulamayı imzalamak ve App Store'a yüklemek için:
+1. Bir **Apple Developer** ($99/yıl) üyeliği açın.
+2. [App Store Connect API Portal](https://appstoreconnect.apple.com/access/api) adresine gidin.
+3. **Anahtarlar (Keys)** sekmesinden yeni bir API Key (Admin veya App Manager yetkili) oluşturun.
+4. Bilgisayarınıza inen `.p8` uzantılı API Key dosyasını güvenli bir yerde saklayın.
+5. Sayfada yazan **Key ID** ve **Issuer ID** değerlerini not edin.
+
+#### 4. Codemagic Bulut Kurulumu ve Derleme
+1. [Codemagic](https://codemagic.io/) sitesine **GitHub hesabınızla** giriş yapın.
+2. **Add application** diyerek `Kolay-Form` reponuzu bağlayın.
+3. Proje tipi olarak **Capacitor application** seçin.
+4. **iOS** derleme kutucuğunu işaretleyin.
+5. **App signing (Uygulama İmzalama)** kısmında **Automatic code signing** seçip Apple Developer API Key bilgilerinizi (dosya, Key ID, Issuer ID) yükleyin.
+6. **Publishing (Yayınlama)** kısmında **App Store Connect**'i aktif edin ve **Submit to TestFlight** seçeneğini seçin.
+7. **Start new build** butonuna basarak macOS sunucularında derlemeyi başlatın. Derleme bittiğinde uygulama otomatik olarak TestFlight hesabınıza yüklenecektir.
+
