@@ -50,3 +50,11 @@ Thumbs.db
 
 # Claude/Antigravity folders
 .claude/
+
+# Signing keys / secrets (ASLA commit edilmez)
+Key-PATH/
+*.keystore
+*.jks
+
+# Store/marketing asset üretim aracı ve çıktıları (büyük, yeniden üretilebilir)
+marketing/

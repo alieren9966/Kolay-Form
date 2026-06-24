@@ -5,6 +5,733 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // ==========================================
+    // TRANSLATIONS & MULTI-LANGUAGE ENGINE
+    // ==========================================
+    const translations = {
+        tr: {
+            "btn-theme-toggle": "Tema Değiştir",
+            "btn-feedback": "Geri Bildirim & Hakkında",
+            "btn-how-to": "Nasıl Kullanılır?",
+            "btn-settings": "Ayarlar",
+            "btn-go-premium": "Premium'a Geç",
+            "dashboard-title-companies": "Şirketiniz",
+            "dashboard-btn-create": "Form Oluştur",
+            "dashboard-btn-company": "Şirket Ekle",
+            "dashboard-btn-qr": "QR Oku",
+            "dashboard-security-note": "🔒 Oluşturulan formlar ve eklenen kaşeler yalnızca telefonunuzda saklanmaktadır.",
+            "dashboard-title-past": "Geçmiş Formlar",
+            "dashboard-btn-bulk": "Toplu İndir",
+            "dashboard-btn-filter": "Filtrele",
+            "filter-label-search": "Ara",
+            "filter-search-placeholder": "Müşteri Adı, Form ID veya Cihaz...",
+            "filter-label-type": "Form Türü",
+            "filter-type-all": "Tümü",
+            "filter-type-servis": "Servis Formu",
+            "filter-type-teklif": "Teklif Formu",
+            "filter-label-company": "Şirket",
+            "filter-company-all": "Tüm Şirketler",
+            "settings-title": "Genel Ayarlar",
+            "settings-label-kdv": "Varsayılan KDV Oranı (%)",
+            "settings-label-currency": "Varsayılan Para Birimi Sembolü",
+            "settings-label-lang": "Varsayılan Dil (Default Language)",
+            "settings-qr-text": "PDF Çıktılarına QR Doğrulama Kodu Ekle",
+            "settings-qr-lock": "👑 Sadece Pro",
+            "settings-premium-label": "Abonelik Durumu",
+            "settings-btn-save": "Ayarları Kaydet",
+            "howto-title": "Uygulama Kullanım Kılavuzu",
+            "howto-step1-title": "Şirketini Ekle:",
+            "howto-step1-desc": "\"Şirket Ekle\" butonuna basarak firmanızın unvan, adres, vergi dairesi ve no bilgilerini girin. Logo, kaşe ve damgaları yükleyin.",
+            "howto-step2-title": "Aktif Şirketi Seç:",
+            "howto-step2-desc": "Ana panelin üst kısmından hangi şirketinizle işlem yapacaksanız o şirketinin kartına tıklayıp aktif hale getirin.",
+            "howto-step3-title": "Form Oluştur:",
+            "howto-step3-desc": "\"Form Oluştur\" butonuna basın, Servis veya Teklif formundan birini seçerek düzenleme ekranına geçin.",
+            "howto-step4-title": "Tıkla ve Doldur (Inline Edit):",
+            "howto-step4-desc": "Form üzerindeki tüm alanlar etkileşimlidir. Cihazları, kalemleri veya yapılan işlemleri tıklayarak klavyenizle doğrudan doldurun.",
+            "howto-step5-title": "İmzalat ve PDF İndir:",
+            "howto-step5-desc": "İmza kutularına tıklayarak telefon ekranından parmakla dijital imza attırın. Üst bardaki \"PDF İndir\" butonuna basarak anında A4 boyutunda çıktısını indirin. Formunuz yerel geçmişe de otomatik olarak kaydedilecektir.",
+            "howto-btn-close": "Anladım",
+            "create-title": "Yeni Form Oluştur",
+            "create-label-company": "Şirketiniz",
+            "create-label-type": "Form Kategorisi",
+            "create-option-servis": "Teknik Servis Bilgi Formu",
+            "create-option-teklif": "Proforma Fiyat Teklifi",
+            "create-btn-start": "Formu Hazırla ➡️",
+            "sigpad-title": "Dokunmatik İmza Paneli",
+            "sigpad-warning": "⚠️ Bu imza yalnızca bu oluşturulan formda tek seferlik kullanılmak üzere alınmaktadır.",
+            "sigpad-btn-clear": "🧹 Temizle",
+            "sigpad-btn-blank": "📭 Boş Bırak",
+            "sigpad-btn-preset": "👤 Hazır İmzamı Kullan",
+            "sigpad-btn-save": "💾 İmzayı Ekle",
+            "exit-title": "Çıkış Onayı",
+            "exit-message": "Kaydedilmemiş değişiklikler kaybolabilir. Çıkmak istediğinizden emin misiniz?",
+            "exit-btn-cancel": "Vazgeç",
+            "exit-btn-confirm": "Çıkış Yap",
+            "feedback-title": "Geri Bildirim & Hakkında",
+            "feedback-tab-feedback": "💬 Geri Bildirim",
+            "feedback-tab-about": "ℹ️ Hakkında & Kredi",
+            "feedback-desc": "Görüş, öneri veya hata bildirimlerinizi geliştiriciye doğrudan iletebilirsiniz.",
+            "feedback-label-msg": "Mesajınız",
+            "feedback-placeholder": "Geri bildiriminizi buraya yazın...",
+            "feedback-btn-send": "Geri Bildirimi Gönder",
+            "about-title": "Kolay Form v1.1.0",
+            "about-desc": "Bu uygulama, teknik servis ekiplerinin ve işletmelerin hızlı, pratik ve çevrimdışı (offline) form & teklif yönetimi yapabilmesi amacıyla geliştirilmiştir.",
+            "about-dev-title": "Geliştirici & Krediler:",
+            "about-dev-desc": "💻 <strong>Tasarım & Geliştirme:</strong> Alieren3D<br>🎯 <strong>Vizyon & Katkılar:</strong> Haydar Şeker<br>🔒 <strong>Gizlilik:</strong> Uygulama tamamen cihazınızda çalışır, hiçbir veri uzak sunucuya aktarılmaz.",
+            "bulk-title": "Toplu PDF İndiriliyor",
+            "bulk-progress": "Hazırlanıyor...",
+            "qrscan-title": "📷 QR ile Belge Al",
+            "qrscan-status": "Kamera başlatılıyor…",
+            "qrscan-label-type": "Belge Türü",
+            "qrscan-label-no": "Belge No",
+            "qrscan-label-client": "Müşteri",
+            "qrscan-label-total": "Tutar",
+            "qrscan-note": "İpucu: QR okunmuyorsa, QR'ın net göründüğü bir fotoğrafı yükleyerek de tarayabilirsiniz.",
+            "qrscan-btn-image": "🖼️ Görüntüden Tara",
+            "qrscan-btn-open": "📄 Belgeyi Aç",
+            "crop-title": "✂️ Görseli Kırp / Düzelt",
+            "crop-hint": "4 köşeyi sürükleyerek kırpılacak alanı belirleyin. Seçilen dörtgen düzeltilerek dik bir dikdörtgene çevrilir.",
+            "crop-btn-reset": "↺ Sıfırla",
+            "crop-btn-apply": "✓ Uygula",
+            "premium-title": "👑 Kolay Form Premium",
+            "premium-hero-title": "Sınırsız Gücü Serbest Bırakın",
+            "premium-hero-desc": "Uygulamayı reklamsız kullanın, toplu indirmeleri sınırsızca yapın ve profesyonelliğinizi artırın.",
+            "premium-benefit1": "✓ <strong>Sınırsız PDF İndirme:</strong> Günlük indirme limitini kaldırın ve reklam izlemeden anında indirin.",
+            "premium-benefit2": "✓ <strong>PDF QR Doğrulama Kodu:</strong> PDF çıktılarınızın altına dijital doğrulama ve aktarım için QR kod ekleyin.",
+            "premium-benefit3": "✓ <strong>Toplu PDF İndirme:</strong> Tüm geçmiş arşivi tek tuşla birleşik PDF raporu olarak indirin.",
+            "premium-benefit4": "✓ <strong>Sınırsız Şirket Profili:</strong> İstediğiniz kadar şirket tanımlayın ve yönetin.",
+            "premium-btn-buy": "Satın Al",
+            "premium-plan-monthly": "Aylık",
+            "premium-plan-monthly-desc": "Küçük işletmeler ve serbest çalışanlar için ideal.",
+            "premium-plan-yearly": "Yıllık",
+            "premium-plan-yearly-desc": "Uzun vadeli kullanımda en iyi tasarruf.",
+            "premium-plan-enterprise": "Sınırsız",
+            "premium-plan-enterprise-desc": "Büyük ekipler ve yoğun kullanım için.",
+            "company-label-name": "Şirket Adı",
+            "company-placeholder-name": "Örn: ABC Ajans Ltd. Şti.",
+            "company-label-phone": "Telefon",
+            "company-placeholder-phone": "Örn: 0216 216 16 16",
+            "company-label-email": "E-Posta",
+            "company-placeholder-email": "info@abc.com",
+            "company-label-website": "Web Sitesi",
+            "company-placeholder-website": "Örn: www.abc.com",
+            "company-label-taxoffice": "Vergi Dairesi",
+            "company-placeholder-taxoffice": "Beşiktaş",
+            "company-label-taxnumber": "Vergi Numarası",
+            "company-placeholder-taxnumber": "Örn: 1234567890",
+            "company-label-mersis": "Mersis No",
+            "company-placeholder-mersis": "Örn: 1234567890123456",
+            "company-label-address": "Şirket Adresi",
+            "company-placeholder-address": "Örn: Hisar Mah. 1202 Sk. No: 99 Beşiktaş/İstanbul",
+            "company-section-media": "Şirket Görselleri (Sıkıştırılmış & Kaydedilmiş)",
+            "company-label-logo": "Şirket Logosu",
+            "company-placeholder-logo": "Logo Seç/Bırak",
+            "company-btn-crop": "✂️ Kırp / Düzelt",
+            "company-label-stamp": "Şirket Kaşesi",
+            "company-placeholder-stamp": "Kaşe Seç/Bırak",
+            "company-label-sig": "Varsayılan Yetkili İmzası",
+            "company-btn-draw-sig": "✍️ İmza Çiz",
+            "company-or": "veya",
+            "company-placeholder-sig-empty": "İmza Yok",
+            "company-section-certs": "Tescil/Sertifika Damgaları (TSE, ISO, CE vb.)",
+            "company-btn-add-cert": "➕ Damga Ekle",
+            "company-btn-save": "Şirketi Kaydet",
+            "company-btn-delete": "Şirketi Sil",
+            "service-title": "Servis Formu Düzenleyici",
+            "service-btn-exit": "⬅️ Çıkış",
+            "service-btn-save": "💾 Kaydet",
+            "service-btn-pdf": "📥 PDF İndir",
+            "service-print-title": "TEKNİK SERVİS BİLGİ FORMU",
+            "service-print-label-date": "Tarih:",
+            "service-print-label-no": "No:",
+            "service-print-section-client": "KURUM BİLGİLERİ",
+            "service-print-label-client-name": "Kurum Adı:",
+            "service-print-placeholder-client-name": "Kurum adını yazın...",
+            "service-print-label-city": "Şehir:",
+            "service-print-placeholder-city": "Şehir yazın...",
+            "service-print-section-device": "CİHAZ BİLGİLERİ",
+            "service-print-btn-add-device": "➕ Satır Ekle",
+            "service-print-th-model": "Marka / Model",
+            "service-print-th-sn": "Künye / Seri No",
+            "service-print-th-contract": "Bakım Anlaşması",
+            "service-print-th-action": "İşlem",
+            "service-print-section-reason": "SERVİS NEDENİ",
+            "service-print-chk-bakim": " Bakım",
+            "service-print-chk-onarim": " Onarım",
+            "service-print-chk-ariza": " Arıza Tespiti",
+            "service-print-chk-kontrol": " Kontrol",
+            "service-print-chk-garanti": " Garanti",
+            "service-print-chk-kurulum": " Kurulum",
+            "service-print-section-process": "YAPILAN İŞLEM",
+            "service-print-placeholder-process": "Servis sürecinde yapılan işlemleri detaylandırın...",
+            "service-print-section-parts": "DEĞİŞİMİ TAVSİYE EDİLEN / DEĞİŞEN PARÇALAR",
+            "service-print-btn-add-part": "➕ Parça Ekle",
+            "service-print-th-part-code": "Parça Kodu",
+            "service-print-th-part-name": "Yedek Parça İsmi",
+            "service-print-th-part-qty": "Adet",
+            "service-print-th-part-changed": "Değişti",
+            "service-print-th-part-recommend": "Tavsiye",
+            "service-print-section-result": "SONUÇ",
+            "service-print-placeholder-result": "Servis sonucu veya tavsiyeler...",
+            "service-print-section-signatures": "ONAY VE İMZALAR",
+            "service-print-sig-tech": "FİRMA YETKİLİSİ",
+            "service-print-sig-client": "KURUM SORUMLUSU",
+            "service-print-sig-unit": "KLİNİK MÜH. / TEKNİK BİRİM",
+            "service-print-placeholder-sign": "İmza Atmak İçin Tıklayın",
+            "service-print-placeholder-name": "İsim Soyisim",
+            "service-print-placeholder-name-unit": "İsim Soyisim / Birim",
+            "service-print-footer-text": "Oluşturulan bu teknik servis formu elektronik ortamda onaylanmıştır.",
+            "quote-title": "Fiyat Teklifi Düzenleyici",
+            "quote-btn-exit": "⬅️ Çıkış",
+            "quote-btn-save": "💾 Kaydet",
+            "quote-btn-pdf": "📥 PDF İndir",
+            "quote-print-title": "PROFORMA FİYAT TEKLİF MEKTUBU",
+            "quote-print-footer-text": "Oluşturulan bu Proforma teklif mektubu elektronik ortamda onaylanmıştır.",
+            "quote-print-section-client": "TEKLİF SUNULAN KURUM",
+            "quote-print-placeholder-client-name": "Kişi / Kurum Adı yazınız...",
+            "quote-print-placeholder-client-addr": "Kurum adresi...",
+            "quote-print-placeholder-client-city": "Şehir yazın...",
+            "quote-print-section-meta": "TEKLİF BİLGİLERİ",
+            "quote-print-label-date": "TARİH:",
+            "quote-print-label-no": "TEKLİF NO:",
+            "quote-print-placeholder-no": "Örn: DRP-0621",
+            "quote-print-section-items": "TEKLİF KALEMLERİ",
+            "quote-print-btn-add-item": "➕ Kalem Ekle",
+            "quote-print-th-index": "Sıra",
+            "quote-print-th-desc": "Mal / Hizmet Açıklaması",
+            "quote-print-th-qty": "Miktar",
+            "quote-print-th-unit": "Birim",
+            "quote-print-th-price": "Birim Fiyat",
+            "quote-print-th-discount": "İskonto %",
+            "quote-print-th-kdv": "KDV %",
+            "quote-print-th-total": "Toplam",
+            "quote-print-th-action": "İşlem",
+            "quote-print-label-subtotal": "Ara Toplam:",
+            "quote-print-label-tax": "KDV Toplamı:",
+            "quote-print-label-grand": "Genel Toplam:",
+            "quote-print-section-conditions": "TEKLİF KOŞULLARI VE ŞARTLARI",
+            "quote-print-placeholder-conditions": "* Fiyatlarımız KDV hariçtir.\n* Teslim süresi 15 gündür.",
+            "quote-print-sig-title": "Kaşe & Yetkili İmza",
+            "pro-title": "👑 Kolay Form Pro",
+            "pro-badge-text": "Pro Pakete Sahipsiniz!",
+            "pro-thanks-text": "Uygulamamızı desteklediğiniz için yürekten teşekkür ederiz. Pro üyelik avantajlarınızın keyfini çıkarın!",
+            "pro-sub-type-label": "Abonelik Tipi:",
+            "pro-sub-start-label": "Başlangıç Tarihi:",
+            "pro-feat-unlimited": "✓ Sınırsız PDF İndirme",
+            "pro-feat-qr": "✓ QR Kod Doğrulama",
+            "pro-feat-bulk": "✓ Toplu PDF İndirme",
+            "pro-feat-companies": "✓ Sınırsız Şirket Profilili",
+            "pro-btn-close": "Harika!"
+        },
+        en: {
+            "btn-theme-toggle": "Toggle Theme",
+            "btn-feedback": "Feedback & About",
+            "btn-how-to": "How to Use?",
+            "btn-settings": "Settings",
+            "btn-go-premium": "Upgrade to Pro",
+            "dashboard-title-companies": "Your Companies",
+            "dashboard-btn-create": "Create Form",
+            "dashboard-btn-company": "Add Company",
+            "dashboard-btn-qr": "Scan QR",
+            "dashboard-security-note": "🔒 Created forms and added stamps are only stored on your phone.",
+            "dashboard-title-past": "Past Forms",
+            "dashboard-btn-bulk": "Bulk Download",
+            "dashboard-btn-filter": "Filter",
+            "filter-label-search": "Search",
+            "filter-search-placeholder": "Client Name, Form ID or Device...",
+            "filter-label-type": "Form Type",
+            "filter-type-all": "All",
+            "filter-type-servis": "Service Form",
+            "filter-type-teklif": "Quote Form",
+            "filter-label-company": "Company",
+            "filter-company-all": "All Companies",
+            "settings-title": "General Settings",
+            "settings-label-kdv": "Default VAT Rate (%)",
+            "settings-label-currency": "Default Currency Symbol",
+            "settings-label-lang": "Default Language",
+            "settings-qr-text": "Add QR Verification Code to PDF Outputs",
+            "settings-qr-lock": "👑 Pro Only",
+            "settings-premium-label": "Subscription Status",
+            "settings-btn-save": "Save Settings",
+            "howto-title": "Application User Guide",
+            "howto-step1-title": "Add Your Company:",
+            "howto-step1-desc": "Click the \"Add Company\" button to enter your company's title, address, tax office, and tax number. Upload your logo, stamp, and certification stamps.",
+            "howto-step2-title": "Select Active Company:",
+            "howto-step2-desc": "Click on the card of the company you want to use from the top section of the dashboard to activate it.",
+            "howto-step3-title": "Create Form:",
+            "howto-step3-desc": "Click the \"Create Form\" button, choose either Service or Quote form, and proceed to the editor screen.",
+            "howto-step4-title": "Click and Fill (Inline Edit):",
+            "howto-step4-desc": "All fields on the form are interactive. Directly fill in the details of devices, items, or performed processes using your keyboard.",
+            "howto-step5-title": "Sign and Download PDF:",
+            "howto-step5-desc": "Click on signature boxes to get a digital signature by drawing with a finger on the phone screen. Click \"Download PDF\" on the top bar to download the A4-size document. Your form will be saved to history automatically.",
+            "howto-btn-close": "Got it",
+            "create-title": "Create New Form",
+            "create-label-company": "Your Company",
+            "create-label-type": "Form Category",
+            "create-option-servis": "Technical Service Information Form",
+            "create-option-teklif": "Proforma Price Quotation",
+            "create-btn-start": "Prepare Form ➡️",
+            "sigpad-title": "Touchscreen Signature Pad",
+            "sigpad-warning": "⚠️ This signature is taken only for one-time use on this created form.",
+            "sigpad-btn-clear": "🧹 Clear",
+            "sigpad-btn-blank": "📭 Leave Blank",
+            "sigpad-btn-preset": "👤 Use Saved Signature",
+            "sigpad-btn-save": "💾 Add Signature",
+            "exit-title": "Confirm Exit",
+            "exit-message": "Unsaved changes may be lost. Are you sure you want to exit?",
+            "exit-btn-cancel": "Cancel",
+            "exit-btn-confirm": "Exit",
+            "feedback-title": "Feedback & About",
+            "feedback-tab-feedback": "💬 Feedback",
+            "feedback-tab-about": "ℹ️ About & Credits",
+            "feedback-desc": "You can send your feedback, suggestions, or bug reports directly to the developer.",
+            "feedback-label-msg": "Your Message",
+            "feedback-placeholder": "Write your feedback here...",
+            "feedback-btn-send": "Send Feedback",
+            "about-title": "Easy Form v1.1.0",
+            "about-desc": "This application was developed to allow technical service teams and businesses to quickly, practically, and offline manage forms & quotes.",
+            "about-dev-title": "Developer & Credits:",
+            "about-dev-desc": "💻 <strong>Design & Development:</strong> Alieren3D<br>🎯 <strong>Vision & Contributions:</strong> Haydar Şeker<br>🔒 <strong>Privacy:</strong> The app runs entirely on your device, no data is sent to remote servers.",
+            "bulk-title": "Downloading Bulk PDF",
+            "bulk-progress": "Preparing...",
+            "qrscan-title": "📷 Import Document via QR",
+            "qrscan-status": "Initializing camera...",
+            "qrscan-label-type": "Document Type",
+            "qrscan-label-no": "Document No",
+            "qrscan-label-client": "Client",
+            "qrscan-label-total": "Total Amount",
+            "qrscan-note": "Tip: If the QR is not read, you can also scan it by uploading a clear photo of the QR.",
+            "qrscan-btn-image": "🖼️ Scan from Image",
+            "qrscan-btn-open": "📄 Open Document",
+            "crop-title": "✂️ Crop / Correct Image",
+            "crop-hint": "Determine the crop area by dragging the 4 corners. The selected quadrilateral will be warped and corrected.",
+            "crop-btn-reset": "↺ Reset",
+            "crop-btn-apply": "✓ Apply",
+            "premium-title": "👑 Easy Form Premium",
+            "premium-hero-title": "Unleash Unlimited Power",
+            "premium-hero-desc": "Use the application ad-free, perform unlimited bulk downloads, and increase your professionalism.",
+            "premium-benefit1": "✓ <strong>Unlimited PDF Downloads:</strong> Remove daily download limit and download instantly without ads.",
+            "premium-benefit2": "✓ <strong>PDF QR Verification Code:</strong> Add QR code under PDF outputs for digital verification and transfer.",
+            "premium-benefit3": "✓ <strong>Bulk PDF Download:</strong> Download the entire history archive as a single combined PDF report.",
+            "premium-benefit4": "✓ <strong>Unlimited Company Profiles:</strong> Define and manage as many companies as you want.",
+            "premium-btn-buy": "Buy Plan",
+            "premium-plan-monthly": "Monthly",
+            "premium-plan-monthly-desc": "Ideal for small businesses and freelancers.",
+            "premium-plan-yearly": "Yearly",
+            "premium-plan-yearly-desc": "Best value for long-term usage.",
+            "premium-plan-enterprise": "Unlimited",
+            "premium-plan-enterprise-desc": "For large teams and intensive usage.",
+            "company-label-name": "Company Name",
+            "company-placeholder-name": "e.g. ABC Agency Ltd. Co.",
+            "company-label-phone": "Phone",
+            "company-placeholder-phone": "e.g. +90 216 216 16 16",
+            "company-label-email": "Email",
+            "company-placeholder-email": "info@abc.com",
+            "company-label-website": "Website",
+            "company-placeholder-website": "e.g. www.abc.com",
+            "company-label-taxoffice": "Tax Office",
+            "company-placeholder-taxoffice": "Besiktas",
+            "company-label-taxnumber": "Tax Number",
+            "company-placeholder-taxnumber": "e.g. 1234567890",
+            "company-label-mersis": "Mersis No",
+            "company-placeholder-mersis": "e.g. 1234567890123456",
+            "company-label-address": "Company Address",
+            "company-placeholder-address": "e.g. Hisar Mah. 1202 Sk. No: 99 Besiktas/Istanbul",
+            "company-section-media": "Company Images (Compressed & Saved)",
+            "company-label-logo": "Company Logo",
+            "company-placeholder-logo": "Select/Drop Logo",
+            "company-label-stamp": "Company Stamp",
+            "company-placeholder-stamp": "Select/Drop Stamp",
+            "company-label-sig": "Default Authorized Signature",
+            "company-btn-draw-sig": "✍️ Draw Signature",
+            "company-or": "or",
+            "company-placeholder-sig-empty": "No Signature",
+            "company-section-certs": "Registration/Certification Seals (TSE, ISO, CE etc.)",
+            "company-btn-add-cert": "➕ Add Seal",
+            "company-btn-save": "Save Company",
+            "company-btn-delete": "Delete Company",
+            "service-title": "Service Form Editor",
+            "service-btn-exit": "⬅️ Exit",
+            "service-btn-save": "💾 Save",
+            "service-btn-pdf": "📥 Download PDF",
+            "service-print-title": "TECHNICAL SERVICE INFORMATION FORM",
+            "service-print-label-date": "Date:",
+            "service-print-label-no": "No:",
+            "service-print-section-client": "CLIENT INFORMATION",
+            "service-print-label-client-name": "Client Name:",
+            "service-print-placeholder-client-name": "Write client name...",
+            "service-print-label-city": "City:",
+            "service-print-placeholder-city": "Write city...",
+            "service-print-section-device": "DEVICE INFORMATION",
+            "service-print-btn-add-device": "➕ Add Row",
+            "service-print-th-model": "Brand / Model",
+            "service-print-th-sn": "Asset / Serial No",
+            "service-print-th-contract": "Maintenance Contract",
+            "service-print-th-action": "Action",
+            "service-print-section-reason": "SERVICE REASON",
+            "service-print-chk-bakim": " Maintenance",
+            "service-print-chk-onarim": " Repair",
+            "service-print-chk-ariza": " Diagnosis",
+            "service-print-chk-kontrol": " Inspection",
+            "service-print-chk-garanti": " Warranty",
+            "service-print-chk-kurulum": " Installation",
+            "service-print-section-process": "PROCESS PERFORMED",
+            "service-print-placeholder-process": "Detail the processes performed during the service...",
+            "service-print-section-parts": "RECOMMENDED / CHANGED SPARE PARTS",
+            "service-print-btn-add-part": "➕ Add Part",
+            "service-print-th-part-code": "Part Code",
+            "service-print-th-part-name": "Spare Part Name",
+            "service-print-th-part-qty": "Qty",
+            "service-print-th-part-changed": "Changed",
+            "service-print-th-part-recommend": "Recommend",
+            "service-print-section-result": "RESULT",
+            "service-print-placeholder-result": "Service results or recommendations...",
+            "service-print-section-signatures": "APPROVALS AND SIGNATURES",
+            "service-print-sig-tech": "COMPANY REPRESENTATIVE",
+            "service-print-sig-client": "CLIENT REPRESENTATIVE",
+            "service-print-sig-unit": "CLINICAL ENG. / TECHNICAL UNIT",
+            "service-print-placeholder-sign": "Click to Sign",
+            "service-print-placeholder-name": "Name Surname",
+            "service-print-placeholder-name-unit": "Name Surname / Unit",
+            "service-print-footer-text": "This technical service form has been approved electronically.",
+            "quote-title": "Price Quote Editor",
+            "quote-btn-exit": "⬅️ Exit",
+            "quote-btn-save": "💾 Save",
+            "quote-btn-pdf": "📥 Download PDF",
+            "quote-print-title": "PROFORMA PRICE QUOTATION",
+            "quote-print-footer-text": "This Proforma quotation letter has been electronically approved.",
+            "quote-print-section-client": "CLIENT DETAILS",
+            "quote-print-placeholder-client-name": "Write Person / Client Name...",
+            "quote-print-placeholder-client-addr": "Client address...",
+            "quote-print-placeholder-client-city": "Write city...",
+            "quote-print-section-meta": "QUOTATION INFORMATION",
+            "quote-print-label-date": "DATE:",
+            "quote-print-label-no": "QUOTATION NO:",
+            "quote-print-placeholder-no": "e.g. DRP-0621",
+            "quote-print-section-items": "QUOTATION ITEMS",
+            "quote-print-btn-add-item": "➕ Add Item",
+            "quote-print-th-index": "No",
+            "quote-print-th-desc": "Item / Service Description",
+            "quote-print-th-qty": "Quantity",
+            "quote-print-th-unit": "Unit",
+            "quote-print-th-price": "Unit Price",
+            "quote-print-th-discount": "Discount %",
+            "quote-print-th-kdv": "VAT %",
+            "quote-print-th-total": "Total",
+            "quote-print-th-action": "Action",
+            "quote-print-label-subtotal": "Subtotal:",
+            "quote-print-label-tax": "VAT Total:",
+            "quote-print-label-grand": "Grand Total:",
+            "quote-print-section-conditions": "QUOTATION TERMS AND CONDITIONS",
+            "quote-print-placeholder-conditions": "* Our prices exclude VAT.\n* Delivery time is 15 days.",
+            "quote-print-sig-title": "Stamp & Authorized Signature",
+            "pro-title": "👑 Easy Form Pro",
+            "pro-badge-text": "You Have Pro Plan!",
+            "pro-thanks-text": "Thank you from the bottom of our hearts for supporting our app. Enjoy your Pro membership benefits!",
+            "pro-sub-type-label": "Subscription Type:",
+            "pro-sub-start-label": "Start Date:",
+            "pro-feat-unlimited": "✓ Unlimited PDF Downloads",
+            "pro-feat-qr": "✓ QR Code Verification",
+            "pro-feat-bulk": "✓ Bulk PDF Download",
+            "pro-feat-companies": "✓ Unlimited Company Profiles",
+            "pro-btn-close": "Awesome!"
+        }
+    };
+
+    function applyLanguage(lang) {
+        state.settings.lang = lang;
+        const dict = translations[lang];
+        if (!dict) return;
+
+        const mappings = {
+            "btn-theme-toggle": { id: "btn-theme-toggle", attr: "title" },
+            "btn-feedback": { id: "btn-feedback", attr: "title" },
+            "btn-how-to": { id: "btn-how-to", attr: "title" },
+            "btn-settings": { id: "btn-settings", attr: "title" },
+            "btn-go-premium": { id: "btn-go-premium", attr: "title" },
+            "dashboard-title-companies": { selector: ".company-selection-section .section-title" },
+            "dashboard-btn-create": { selector: "#btn-create-form .btn-text" },
+            "dashboard-btn-company": { selector: "#btn-add-company .btn-text" },
+            "dashboard-btn-qr": { selector: "#btn-scan-qr .btn-text" },
+            "dashboard-security-note": { selector: ".security-privacy-note" },
+            "dashboard-title-past": { selector: ".past-forms-section .section-title" },
+            "dashboard-btn-bulk": { selector: "#btn-bulk-download .btn-text" },
+            "dashboard-btn-filter": { selector: "#filter-toggle .btn-text" },
+            "filter-label-search": { selector: "label[for='search-input']" },
+            "filter-search-placeholder": { id: "search-input", attr: "placeholder" },
+            "filter-label-type": { selector: "label[for='filter-type']" },
+            "filter-type-all": { selector: "#filter-type option[value='all']" },
+            "filter-type-servis": { selector: "#filter-type option[value='servis']" },
+            "filter-type-teklif": { selector: "#filter-type option[value='teklif']" },
+            "filter-label-company": { selector: "label[for='filter-company']" },
+            "filter-company-all": { selector: "#filter-company option[value='all']" },
+            "settings-title": { selector: "#modal-settings .modal-header h3" },
+            "settings-label-kdv": { selector: "label[for='settings-kdv']" },
+            "settings-label-currency": { selector: "label[for='settings-currency']" },
+            "settings-label-lang": { selector: "label[for='settings-lang']" },
+            "settings-qr-text": { id: "settings-qr-label-text" },
+            "settings-qr-lock": { id: "settings-qr-premium-lock" },
+            "settings-premium-label": { selector: ".settings-premium-divider label" },
+            "settings-btn-save": { id: "btn-save-settings" },
+            "howto-title": { selector: "#modal-how-to h3" },
+            "howto-step1-title": { selector: ".guide-step:nth-child(1) strong" },
+            "howto-step1-desc": { selector: ".guide-step:nth-child(1) .step-desc", html: true },
+            "howto-step2-title": { selector: ".guide-step:nth-child(2) strong" },
+            "howto-step2-desc": { selector: ".guide-step:nth-child(2) .step-desc", html: true },
+            "howto-step3-title": { selector: ".guide-step:nth-child(3) strong" },
+            "howto-step3-desc": { selector: ".guide-step:nth-child(3) .step-desc", html: true },
+            "howto-step4-title": { selector: ".guide-step:nth-child(4) strong" },
+            "howto-step4-desc": { selector: ".guide-step:nth-child(4) .step-desc", html: true },
+            "howto-step5-title": { selector: ".guide-step:nth-child(5) strong" },
+            "howto-step5-desc": { selector: ".guide-step:nth-child(5) .step-desc", html: true },
+            "howto-btn-close": { id: "btn-close-how-to-footer" },
+            "create-title": { selector: "#modal-create-form h3" },
+            "create-label-company": { selector: "label[for='create-form-company']" },
+            "create-label-type": { selector: "label[for='create-form-type']" },
+            "create-option-servis": { selector: "#create-form-type option[value='servis']" },
+            "create-option-teklif": { selector: "#create-form-type option[value='teklif']" },
+            "create-btn-start": { id: "btn-start-form" },
+            "sigpad-title": { id: "sig-pad-title" },
+            "sigpad-warning": { selector: ".sig-pad-warning" },
+            "sigpad-btn-clear": { id: "btn-clear-sig-pad" },
+            "sigpad-btn-blank": { id: "btn-leave-blank-sig" },
+            "sigpad-btn-preset": { id: "btn-use-preset-sig" },
+            "sigpad-btn-save": { id: "btn-save-sig-pad" },
+            "exit-title": { selector: "#modal-confirm-exit h3" },
+            "exit-message": { selector: "#modal-confirm-exit p" },
+            "exit-btn-cancel": { id: "btn-cancel-exit" },
+            "exit-btn-confirm": { id: "btn-confirm-exit" },
+            "feedback-title": { selector: "#modal-feedback h3" },
+            "feedback-tab-feedback": { id: "tab-feedback-btn" },
+            "feedback-tab-about": { id: "tab-about-btn" },
+            "feedback-desc": { selector: "#tab-feedback-content p" },
+            "feedback-label-msg": { selector: "#tab-feedback-content label" },
+            "feedback-placeholder": { id: "feedback-message", attr: "placeholder" },
+            "feedback-btn-send": { id: "btn-send-feedback" },
+            "about-title": { selector: "#tab-about-content strong" },
+            "about-desc": { selector: "#tab-about-content p", html: true },
+            "about-dev-title": { selector: "#tab-about-content div strong:nth-of-type(1)" },
+            "about-dev-desc": { selector: "#tab-about-content div p:nth-of-type(2)", html: true },
+            "bulk-title": { selector: "#modal-bulk-loading h4" },
+            "bulk-progress": { id: "bulk-loading-progress" },
+            "qrscan-title": { selector: "#modal-qr-scan h3" },
+            "qrscan-status": { id: "qr-scan-status" },
+            "qrscan-label-type": { selector: ".qr-result-line:nth-child(1) span" },
+            "qrscan-label-no": { selector: ".qr-result-line:nth-child(2) span" },
+            "qrscan-label-client": { selector: ".qr-result-line:nth-child(3) span" },
+            "qrscan-label-total": { selector: ".qr-result-line:nth-child(4) span" },
+            "qrscan-note": { selector: ".qr-scan-note" },
+            "qrscan-btn-image": { id: "btn-qr-from-image" },
+            "qrscan-btn-open": { id: "btn-qr-open-doc" },
+            "crop-title": { selector: "#modal-crop h3" },
+            "crop-hint": { selector: ".crop-hint" },
+            "crop-btn-reset": { id: "btn-crop-reset" },
+            "crop-btn-apply": { id: "btn-crop-apply" },
+            "premium-title": { selector: "#modal-premium h3" },
+            "premium-hero-title": { selector: ".premium-hero h4" },
+            "premium-hero-desc": { selector: ".premium-hero p" },
+            "premium-benefit1": { selector: ".premium-benefits .benefit-item:nth-child(1)", html: true },
+            "premium-benefit2": { selector: ".premium-benefits .benefit-item:nth-child(2)", html: true },
+            "premium-benefit3": { selector: ".premium-benefits .benefit-item:nth-child(3)", html: true },
+            "premium-benefit4": { selector: ".premium-benefits .benefit-item:nth-child(4)", html: true },
+            "company-label-name": { selector: "label[for='company-name']" },
+            "company-placeholder-name": { id: "company-name", attr: "placeholder" },
+            "company-label-phone": { selector: "label[for='company-phone']" },
+            "company-placeholder-phone": { id: "company-phone", attr: "placeholder" },
+            "company-label-email": { selector: "label[for='company-email']" },
+            "company-placeholder-email": { id: "company-email", attr: "placeholder" },
+            "company-label-website": { selector: "label[for='company-website']" },
+            "company-placeholder-website": { id: "company-website", attr: "placeholder" },
+            "company-label-taxoffice": { selector: "label[for='company-taxoffice']" },
+            "company-placeholder-taxoffice": { id: "company-taxoffice", attr: "placeholder" },
+            "company-label-taxnumber": { selector: "label[for='company-taxnumber']" },
+            "company-placeholder-taxnumber": { id: "company-taxnumber", attr: "placeholder" },
+            "company-label-mersis": { selector: "label[for='company-mersis']" },
+            "company-placeholder-mersis": { id: "company-mersis", attr: "placeholder" },
+            "company-label-address": { selector: "label[for='company-address']" },
+            "company-placeholder-address": { id: "company-address", attr: "placeholder" },
+            "company-section-media": { selector: ".media-upload-section .media-section-title" },
+            "company-label-logo": { selector: ".upload-card:nth-child(1) label" },
+            "company-placeholder-logo": { selector: "#preview-logo .upload-placeholder" },
+            "company-label-stamp": { selector: ".upload-card:nth-child(2) label" },
+            "company-placeholder-stamp": { selector: "#preview-stamp .upload-placeholder" },
+            "company-label-sig": { selector: ".upload-card:nth-child(3) label" },
+            "company-btn-draw-sig": { id: "btn-draw-default-sig" },
+            "company-or": { selector: ".upload-or-text" },
+            "company-placeholder-sig-empty": { selector: "#preview-sig .upload-placeholder" },
+            "company-section-certs": { selector: ".certification-section .media-section-title" },
+            "company-btn-add-cert": { id: "btn-add-cert" },
+            "company-btn-save": { id: "btn-save-company" },
+            "company-btn-delete": { id: "btn-delete-company" },
+            "service-title": { selector: "#service-form-view .editor-title-sticky" },
+            "service-btn-exit": { id: "btn-close-service-editor" },
+            "service-btn-save": { id: "btn-save-service-form" },
+            "service-btn-pdf": { id: "btn-pdf-service-form" },
+            "service-print-title": { selector: "#service-print-area .form-print-title" },
+            "service-print-label-date": { selector: "#srv-label-date" },
+            "service-print-label-no": { selector: "#srv-label-no" },
+            "service-print-section-client": { selector: "#service-print-area .form-print-section:nth-of-type(1) .print-section-title" },
+            "service-print-label-client-name": { selector: "#service-print-area .print-grid-2 .print-form-field:nth-child(1) label" },
+            "service-print-placeholder-client-name": { id: "srv-input-client-name", attr: "placeholder" },
+            "service-print-label-city": { selector: "#service-print-area .print-grid-2 .print-form-field:nth-child(2) label" },
+            "service-print-placeholder-city": { id: "srv-input-client-city", attr: "placeholder" },
+            "service-print-section-device": { selector: "#service-print-area .form-print-section:nth-of-type(2) .print-section-title" },
+            "service-print-btn-add-device": { id: "srv-btn-add-device" },
+            "service-print-th-model": { selector: "#srv-table-devices th:nth-child(1)" },
+            "service-print-th-sn": { selector: "#srv-table-devices th:nth-child(2)" },
+            "service-print-th-contract": { selector: "#srv-table-devices th:nth-child(3)" },
+            "service-print-th-action": { selector: "#srv-table-devices th:nth-child(4)" },
+            "service-print-section-reason": { selector: "#service-print-area .form-print-section:nth-of-type(3) .print-section-title" },
+            "service-print-section-process": { selector: "#service-print-area .form-print-section:nth-of-type(4) .print-section-title" },
+            "service-print-placeholder-process": { id: "srv-txt-process", attr: "placeholder" },
+            "service-print-section-parts": { selector: "#service-print-area .form-print-section:nth-of-type(5) .print-section-title" },
+            "service-print-btn-add-part": { id: "srv-btn-add-part" },
+            "service-print-th-part-code": { selector: "#srv-table-parts th:nth-child(1)" },
+            "service-print-th-part-name": { selector: "#srv-table-parts th:nth-child(2)" },
+            "service-print-th-part-qty": { selector: "#srv-table-parts th:nth-child(3)" },
+            "service-print-th-part-changed": { selector: "#srv-table-parts th:nth-child(4)" },
+            "service-print-th-part-recommend": { selector: "#srv-table-parts th:nth-child(5)" },
+            "service-print-section-result": { selector: "#service-print-area .form-print-section:nth-of-type(6) .print-section-title" },
+            "service-print-placeholder-result": { id: "srv-txt-result", attr: "placeholder" },
+            "service-print-section-signatures": { selector: "#service-print-area .form-print-section:nth-of-type(7) .print-section-title" },
+            "service-print-sig-tech": { selector: "#srv-sig-box-tech .sig-title" },
+            "service-print-sig-client": { selector: "#srv-sig-box-client .sig-title" },
+            "service-print-sig-unit": { selector: "#srv-sig-box-unit .sig-title" },
+            "service-print-footer-text": { selector: "#service-print-area .form-print-footer-text" },
+            "quote-title": { selector: "#quote-form-view .editor-title-sticky" },
+            "quote-btn-exit": { id: "btn-close-quote-editor" },
+            "quote-btn-save": { id: "btn-save-quote-form" },
+            "quote-btn-pdf": { id: "btn-pdf-quote-form" },
+            "quote-print-title": { selector: "#quote-print-area .form-print-title" },
+            "quote-print-footer-text": { selector: "#qte-print-footer-text" },
+            "quote-print-section-client": { selector: "#quote-print-area .client-box .quote-meta-title" },
+            "quote-print-placeholder-client-name": { id: "qte-input-client-title", attr: "placeholder" },
+            "quote-print-placeholder-client-addr": { id: "qte-input-client-address", attr: "placeholder" },
+            "quote-print-placeholder-client-city": { id: "qte-input-client-city", attr: "placeholder" },
+            "quote-print-section-meta": { selector: "#quote-print-area .details-box .quote-meta-title" },
+            "quote-print-label-date": { selector: "#quote-print-area .details-box label:nth-child(1)" },
+            "quote-print-label-no": { selector: "#quote-print-area .details-box label:nth-child(2)" },
+            "quote-print-placeholder-no": { id: "qte-input-no", attr: "placeholder" },
+            "quote-print-section-items": { selector: "#quote-print-area .form-print-section:nth-of-type(1) .print-section-title" },
+            "quote-print-btn-add-item": { id: "qte-btn-add-item" },
+            "quote-print-th-index": { selector: "#qte-table-items th:nth-child(1)" },
+            "quote-print-th-desc": { selector: "#qte-table-items th:nth-child(2)" },
+            "quote-print-th-qty": { selector: "#qte-table-items th:nth-child(3)" },
+            "quote-print-th-unit": { selector: "#qte-table-items th:nth-child(4)" },
+            "quote-print-th-price": { selector: "#qte-table-items th:nth-child(5)" },
+            "quote-print-th-discount": { selector: "#qte-table-items th:nth-child(6)" },
+            "quote-print-th-kdv": { selector: "#qte-table-items th:nth-child(7)" },
+            "quote-print-th-total": { selector: "#qte-table-items th:nth-child(8)" },
+            "quote-print-th-action": { selector: "#qte-table-items th:nth-child(9)" },
+            "quote-print-label-subtotal": { selector: "#quote-print-area .quote-summary-row:nth-child(1) .summary-label" },
+            "quote-print-label-tax": { selector: "#quote-print-area .quote-summary-row:nth-child(2) .summary-label" },
+            "quote-print-label-grand": { selector: "#quote-print-area .quote-summary-row:nth-child(3) .summary-label" },
+            "quote-print-section-conditions": { selector: "#quote-print-area .form-print-section:nth-of-type(2) .print-section-title" },
+            "quote-print-placeholder-conditions": { id: "qte-txt-conditions", attr: "placeholder" },
+            "quote-print-sig-title": { selector: ".quote-stamp-sig-title" },
+            "pro-title": { id: "pro-title" },
+            "pro-badge-text": { id: "pro-badge-text" },
+            "pro-thanks-text": { id: "pro-thanks-text" },
+            "pro-sub-type-label": { id: "pro-sub-type-label" },
+            "pro-sub-start-label": { id: "pro-sub-start-label" },
+            "pro-feat-unlimited": { id: "pro-feat-unlimited" },
+            "pro-feat-qr": { id: "pro-feat-qr" },
+            "pro-feat-bulk": { id: "pro-feat-bulk" },
+            "pro-feat-companies": { id: "pro-feat-companies" },
+            "pro-btn-close": { id: "btn-close-pro-status-footer" }
+        };
+
+        for (const [key, text] of Object.entries(dict)) {
+            const rule = mappings[key];
+            if (!rule) continue;
+
+            const elements = rule.id 
+                ? [document.getElementById(rule.id)] 
+                : (rule.selector ? (rule.all ? document.querySelectorAll(rule.selector) : [document.querySelector(rule.selector)]) : []);
+
+            elements.forEach(el => {
+                if (!el) return;
+                if (rule.attr) {
+                    el.setAttribute(rule.attr, text);
+                } else if (rule.html) {
+                    el.innerHTML = text;
+                } else {
+                    el.textContent = text;
+                }
+            });
+        }
+
+        const serviceReasonLabels = document.querySelectorAll("#service-print-area .print-checkbox-label");
+        if (serviceReasonLabels.length >= 6) {
+            const reasons = ["chk-bakim", "chk-onarim", "chk-ariza", "chk-kontrol", "chk-garanti", "chk-kurulum"];
+            reasons.forEach((id, idx) => {
+                const label = serviceReasonLabels[idx];
+                if (!label) return;
+                const input = label.querySelector("input");
+                if (input) {
+                    label.innerHTML = "";
+                    label.appendChild(input);
+                    label.appendChild(document.createTextNode(dict["service-print-" + id.replace("chk-", "chk")] || ""));
+                }
+            });
+        }
+        
+        const cropLogoBtn = document.getElementById("btn-crop-logo");
+        if (cropLogoBtn) cropLogoBtn.textContent = dict["company-btn-crop"];
+        const cropStampBtn = document.getElementById("btn-crop-stamp");
+        if (cropStampBtn) cropStampBtn.textContent = dict["company-btn-crop"];
+        const cropSigBtn = document.getElementById("btn-crop-sig");
+        if (cropSigBtn) cropSigBtn.textContent = dict["company-btn-crop"];
+
+        const techNameInput = document.getElementById("srv-input-tech-name");
+        if (techNameInput) techNameInput.placeholder = dict["service-print-placeholder-name"];
+        const clientPersonInput = document.getElementById("srv-input-client-person");
+        if (clientPersonInput) clientPersonInput.placeholder = dict["service-print-placeholder-name"];
+        const unitPersonInput = document.getElementById("srv-input-unit-person");
+        if (unitPersonInput) unitPersonInput.placeholder = dict["service-print-placeholder-name-unit"];
+        
+        const techSigCont = document.getElementById("srv-sig-tech-img-cont");
+        if (techSigCont && !techSigCont.querySelector("img")) {
+            const span = techSigCont.querySelector(".sig-placeholder-text");
+            if (span) span.textContent = dict["service-print-placeholder-sign"];
+        }
+        const clientSigCont = document.getElementById("srv-sig-client-img-cont");
+        if (clientSigCont && !clientSigCont.querySelector("img")) {
+            const span = clientSigCont.querySelector(".sig-placeholder-text");
+            if (span) span.textContent = dict["service-print-placeholder-sign"];
+        }
+        const unitSigCont = document.getElementById("srv-sig-unit-img-cont");
+        if (unitSigCont && !unitSigCont.querySelector("img")) {
+            const span = unitSigCont.querySelector(".sig-placeholder-text");
+            if (span) span.textContent = dict["service-print-placeholder-sign"];
+        }
+        
+        const companyViewTitle = document.getElementById("company-view-title");
+        if (companyViewTitle) {
+            const compId = document.getElementById("company-edit-id").value;
+            companyViewTitle.textContent = compId ? dict["company-editor-title-edit"] : dict["company-editor-title-add"];
+        }
+
+        const isFilterHidden = document.getElementById('filter-panel').classList.contains('hidden');
+        const filterToggle = document.getElementById('filter-toggle');
+        if (filterToggle) {
+            if (lang === 'en') {
+                filterToggle.innerHTML = isFilterHidden 
+                    ? '<span>🔍</span><span class="btn-text">Filter</span>' 
+                    : '<span>❌</span><span class="btn-text">Close Filter</span>';
+            } else {
+                filterToggle.innerHTML = isFilterHidden 
+                    ? '<span>🔍</span><span class="btn-text">Filtrele</span>' 
+                    : '<span>❌</span><span class="btn-text">Filtreyi Kapat</span>';
+            }
+        }
+
+        renderCompanyCards();
+        renderFormsList();
+        updateFilterSelectors();
+        updatePremiumUI();
+    }
+
+    // ==========================================
     // 1. STATE & LOCALSTORAGE YÖNETİMİ
     // ==========================================
     let state = {
@@ -39,6 +766,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             if (state.settings.enableQr === undefined) {
                 state.settings.enableQr = true;
+            }
+            if (state.settings.lang === undefined) {
+                state.settings.lang = 'tr';
             }
         } else {
             state.settings = {
@@ -95,16 +825,80 @@ document.addEventListener('DOMContentLoaded', () => {
                         this.admob = window.Capacitor.Plugins.AdMob;
                         await this.admob.initialize({
                             requestTrackingAuthorization: true,
-                            initializeForTesting: true
+                            initializeForTesting: false // Canlı reklam birimleri için test modu kapatıldı
                         });
                         this.isInitialized = true;
                         console.log("AdMob native initialized successfully.");
+
+                        // Premium olmayan kullanıcılar için açılışta banner'ı göster ve ödüllü reklamı önbelleğe al
+                        if (!state.settings.isPremium) {
+                            this.showBanner();
+                            this.preloadRewardedAd();
+                        }
                     }
                 } catch (err) {
                     console.error("AdMob native initialization failed:", err);
                 }
             } else {
                 console.log("AdMob runs in browser simulation mode.");
+            }
+        },
+
+        async showBanner() {
+            if (state.settings.isPremium) return;
+            const isNative = window.Capacitor && window.Capacitor.isNativePlatform();
+            if (isNative && this.admob) {
+                try {
+                    const platform = window.Capacitor.getPlatform();
+                    const adId = platform === 'ios'
+                        ? 'ca-app-pub-3016010033385907/2802981634' // iOS Live Banner ID
+                        : 'ca-app-pub-3016010033385907/4750754053'; // Android Live Banner ID
+
+                    await this.admob.showBanner({
+                        adId: adId,
+                        position: 'BOTTOM_CENTER',
+                        adSize: 'ADAPTIVE_BANNER',
+                        margin: 0
+                    });
+                    document.body.classList.add('has-banner');
+                    console.log("AdMob banner shown successfully.");
+                } catch (err) {
+                    console.error("AdMob showBanner failed:", err);
+                }
+            }
+        },
+
+        async removeBanner() {
+            const isNative = window.Capacitor && window.Capacitor.isNativePlatform();
+            if (isNative && this.admob) {
+                try {
+                    await this.admob.removeBanner();
+                    document.body.classList.remove('has-banner');
+                    console.log("AdMob banner removed successfully.");
+                } catch (err) {
+                    console.error("AdMob removeBanner failed:", err);
+                }
+            }
+        },
+
+        async preloadRewardedAd() {
+            if (state.settings.isPremium) return;
+            const isNative = window.Capacitor && window.Capacitor.isNativePlatform();
+            if (isNative && this.admob) {
+                try {
+                    const platform = window.Capacitor.getPlatform();
+                    const adId = platform === 'ios'
+                        ? 'ca-app-pub-3016010033385907/3521432860' // iOS Live Rewarded ID
+                        : 'ca-app-pub-3016010033385907/5026086228'; // Android Live Rewarded ID
+
+                    await this.admob.prepareRewardVideoAd({
+                        adId: adId,
+                        isTesting: false
+                    });
+                    console.log("AdMob Rewarded Ad preloaded successfully.");
+                } catch (err) {
+                    console.error("AdMob preloading Rewarded Ad failed:", err);
+                }
             }
         },
 
@@ -117,20 +911,23 @@ document.addEventListener('DOMContentLoaded', () => {
             const isNative = window.Capacitor && window.Capacitor.isNativePlatform();
             if (isNative && this.admob) {
                 try {
-                    const adId = 'ca-app-pub-3940256099942544/5224354917'; // Android Test Rewarded ID
-                    
-                    await this.admob.prepareRewarded({
+                    const platform = window.Capacitor.getPlatform();
+                    const adId = platform === 'ios'
+                        ? 'ca-app-pub-3016010033385907/3521432860' // iOS Live Rewarded ID
+                        : 'ca-app-pub-3016010033385907/5026086228'; // Android Live Rewarded ID
+
+                    await this.admob.prepareRewardVideoAd({
                         adId: adId,
-                        clearPriorAd: true
+                        isTesting: false
                     });
 
-                    let rewardedListener = await this.admob.addListener('onAdReward', (info) => {
+                    let rewardedListener = await this.admob.addListener('rewarded', (info) => {
                         console.log("AdMob Reward Earned:", info);
                         rewardedListener.remove();
                         if (onRewardCallback) onRewardCallback();
                     });
 
-                    await this.admob.showRewarded();
+                    await this.admob.showRewardVideoAd();
                     return;
                 } catch (err) {
                     console.error("Native ad play failed, falling back to simulation:", err);
@@ -193,10 +990,16 @@ document.addEventListener('DOMContentLoaded', () => {
             
             state.settings.isPremium = true;
             state.settings.enableQr = true;
+            state.settings.premiumType = this.activePlan ? this.activePlan.planId : 'yearly';
+            state.settings.premiumStartDate = new Date().toISOString();
+            
             saveSettings();
             updatePremiumUI();
             
-            alert("Tebrikler! Satın alma işlemi başarıyla gerçekleşti ve Premium özellikler tanımlandı.");
+            const successMsg = state.settings.lang === 'en'
+                ? "Congratulations! Your purchase was successful and Pro features have been unlocked."
+                : "Tebrikler! Satın alma işlemi başarıyla gerçekleşti ve Premium özellikler tanımlandı.";
+            alert(successMsg);
             
             this.activePlan = null;
         }
@@ -208,13 +1011,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const settingsPremiumBtn = document.getElementById('btn-settings-premium');
         
         if (state.settings.isPremium) {
+            AdService.removeBanner(); // Premium aktif ise reklamı kaldır
             if (premiumBtn) {
-                premiumBtn.innerHTML = '<span>👑 Premium</span>';
+                premiumBtn.innerHTML = '<span>👑 Pro</span>';
                 premiumBtn.classList.add('is-active-premium');
-                premiumBtn.title = 'Premium Üyesiniz';
+                premiumBtn.title = state.settings.lang === 'en' ? 'Pro Member' : 'Pro Üyesiniz';
             }
             if (settingsStatus) {
-                settingsStatus.textContent = 'Premium Üye (Reklamsız)';
+                settingsStatus.textContent = state.settings.lang === 'en' ? 'Pro Member (Ad-free)' : 'Pro Üye (Reklamsız)';
                 settingsStatus.style.color = '#fbbf24';
             }
             if (settingsPremiumBtn) {
@@ -224,10 +1028,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (premiumBtn) {
                 premiumBtn.innerHTML = '<span>👑</span>';
                 premiumBtn.classList.remove('is-active-premium');
-                premiumBtn.title = "Premium'a Geç";
+                premiumBtn.title = state.settings.lang === 'en' ? 'Go Pro' : "Premium'a Geç";
             }
             if (settingsStatus) {
-                settingsStatus.textContent = 'Standart Üye (Reklamlı)';
+                settingsStatus.textContent = state.settings.lang === 'en' ? 'Standard Member (Ad-supported)' : 'Standart Üye (Reklamlı)';
                 settingsStatus.style.color = 'var(--text-main)';
             }
             if (settingsPremiumBtn) {
@@ -236,7 +1040,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function checkAndIncrementDownloadLimit() {
+    function checkDownloadLimit() {
         if (state.settings.isPremium) {
             return true;
         }
@@ -262,8 +1066,36 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         if (data.count >= 3) {
-            showFreeLimitReachedModal(data.firstDownloadTime);
+            showFreeLimitReachedModal(data.firstDownloadTime || now);
             return false;
+        }
+        
+        return true;
+    }
+
+    function incrementDownloadLimit() {
+        if (state.settings.isPremium) {
+            return;
+        }
+        
+        const now = Date.now();
+        const oneDay = 24 * 60 * 60 * 1000;
+        
+        let downloadData = localStorage.getItem('kolayform_free_downloads');
+        let data = { firstDownloadTime: 0, count: 0 };
+        
+        if (downloadData) {
+            try {
+                data = JSON.parse(downloadData);
+            } catch (e) {
+                console.error("Download limit parse error:", e);
+            }
+        }
+        
+        // Eger ilk indirmeden itibaren 24 saat gectiyse haklari sıfırla
+        if (data.firstDownloadTime && (now - data.firstDownloadTime >= oneDay)) {
+            data.count = 0;
+            data.firstDownloadTime = 0;
         }
         
         data.count++;
@@ -272,7 +1104,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         localStorage.setItem('kolayform_free_downloads', JSON.stringify(data));
-        return true;
     }
 
     function showFreeLimitReachedModal(firstDownloadTime) {
@@ -336,17 +1167,23 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
         
-        // Free user download limit check
-        if (!checkAndIncrementDownloadLimit()) {
-            return;
-        }
-        
         const adPromptModal = document.getElementById('modal-ad-prompt');
         adPromptModal.classList.remove('hidden');
         
+        // Kullanıcı modala bakarken arka planda ödüllü reklamı hemen yükle
+        AdService.preloadRewardedAd();
+        
         document.getElementById('btn-ad-prompt-watch').onclick = () => {
             adPromptModal.classList.add('hidden');
-            AdService.showRewardedAd(onConfirmAction);
+            
+            // Reklam izlenmesini başlatıyoruz. Reklam bittiğinde veya simüle edildiğinde callback çalışacak.
+            AdService.showRewardedAd(() => {
+                // Reklam bittikten sonra limiti kontrol ediyoruz
+                if (checkDownloadLimit()) {
+                    incrementDownloadLimit(); // Sadece indirme başarılı olduğunda haktan düşüyoruz
+                    onConfirmAction();
+                }
+            });
         };
         
         document.getElementById('btn-ad-prompt-premium').onclick = () => {
@@ -361,7 +1198,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const views = {
         dashboard: document.getElementById('dashboard-view'),
         companyEdit: document.getElementById('company-edit-view'),
+        serviceEntry: document.getElementById('service-entry-view'),
         serviceEditor: document.getElementById('service-form-view'),
+        quoteEntry: document.getElementById('quote-entry-view'),
         quoteEditor: document.getElementById('quote-form-view')
     };
 
@@ -373,6 +1212,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 views[key].classList.add('hidden');
             }
         });
+        // Sabit alt aksiyon butonları (Form Oluştur / QR Oku) yalnızca ana menüde görünsün
+        const fabBar = document.getElementById('dashboard-fab-bar');
+        if (fabBar) fabBar.style.display = (viewName === 'dashboard') ? 'flex' : 'none';
         window.scrollTo(0, 0);
     }
 
@@ -671,7 +1513,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Şirket Silme Butonu
     document.getElementById('btn-delete-company').addEventListener('click', () => {
         const id = document.getElementById('company-edit-id').value;
-        if (id && confirm("Bu şirketi ve şirkete ait verileri silmek istediğinizden emin misiniz?")) {
+        const confirmMsg = state.settings.lang === 'en'
+            ? "Are you sure you want to delete this company and all its related data?"
+            : "Bu şirketi ve şirkete ait verileri silmek istediğinizden emin misiniz?";
+        if (id && confirm(confirmMsg)) {
             state.companies = state.companies.filter(c => c.id !== id);
             saveCompanies();
             
@@ -957,6 +1802,7 @@ document.addEventListener('DOMContentLoaded', () => {
             state.currentEditingForm = formData;
             
             document.getElementById('srv-input-date').value = formData.date;
+            document.getElementById('srv-input-no').value = formData.id;
             document.getElementById('srv-input-client-name').value = formData.clientName;
             document.getElementById('srv-input-client-city').value = formData.clientCity;
             
@@ -1013,6 +1859,14 @@ document.addEventListener('DOMContentLoaded', () => {
             // Yeni Form Modu
             state.currentEditingForm = null;
             document.getElementById('srv-input-date').valueAsDate = new Date();
+            
+            // Servis No Otomatik Sayaç oluştur
+            const dateStr = new Date().toISOString().split('T')[0];
+            const year = dateStr.split('-')[0];
+            const count = state.forms.filter(f => f.type === 'servis' && f.date.startsWith(year)).length + 1;
+            const padCount = String(count).padStart(4, '0');
+            document.getElementById('srv-input-no').value = `SRV-${year}-${padCount}`;
+
             document.getElementById('srv-input-client-name').value = '';
             document.getElementById('srv-input-client-city').value = '';
             
@@ -1123,13 +1977,11 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Form ID oluşturma veya koruma
-        let formId = state.currentEditingForm ? state.currentEditingForm.id : null;
+        // Form ID'sini girdiden oku
+        const formId = document.getElementById('srv-input-no').value.trim();
         if (!formId) {
-            const year = date ? date.split('-')[0] : new Date().getFullYear();
-            const count = state.forms.filter(f => f.type === 'servis' && f.date.startsWith(year)).length + 1;
-            const padCount = String(count).padStart(4, '0');
-            formId = `SRV-${year}-${padCount}`;
+            alert(state.settings.lang === 'en' ? "Please enter a form number." : "Lütfen bir servis numarası girin.");
+            return null;
         }
 
         return {
@@ -1184,7 +2036,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let quoteSignatures = { stamp: null, signature: null };
 
     // Teklif Kalemi Ekle (Dinamik Hesaplamalı)
-    function addQuoteItemRow(item = { desc: '', qty: 1, unit: 'AD', price: 0, kdv: null }) {
+    function addQuoteItemRow(item = { desc: '', qty: 1, unit: 'AD', price: 0, discount: 0, kdv: null }) {
         const tbody = document.querySelector('#qte-table-items tbody');
         const tr = document.createElement('tr');
         
@@ -1193,13 +2045,18 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // Eğer KDV girilmemişse ayarlardakini kullan
         const kdvVal = item.kdv === null ? state.settings.defaultKdv : item.kdv;
+        const discountVal = item.discount !== undefined ? item.discount : 0;
         
+        const descPlaceholder = state.settings.lang === 'en' ? 'Item / Service Description...' : 'Mal / Hizmet Açıklaması...';
+        const unitPlaceholder = state.settings.lang === 'en' ? 'Unit' : 'Birim';
+
         tr.innerHTML = `
             <td class="qte-row-index" style="text-align:center; font-weight:700"></td>
-            <td><input type="text" class="print-inline-input val-desc bold-input" value="${item.desc}" placeholder="Mal / Hizmet Açıklaması..."></td>
+            <td><textarea class="print-inline-input val-desc bold-input" rows="1" placeholder="${descPlaceholder}" style="resize:none; overflow-y:hidden;">${item.desc}</textarea></td>
             <td><input type="number" class="print-inline-input val-qty" value="${item.qty}" min="0.01" step="any" style="text-align:center"></td>
-            <td><input type="text" class="print-inline-input val-unit" value="${item.unit}" placeholder="Birim" style="text-align:center"></td>
+            <td><textarea class="print-inline-input val-unit" rows="1" placeholder="${unitPlaceholder}" style="resize:none; overflow-y:hidden; text-align:center;">${item.unit}</textarea></td>
             <td><input type="number" class="print-inline-input val-price" value="${item.price}" min="0" step="any" style="text-align:right"></td>
+            <td><input type="number" class="print-inline-input val-discount" value="${discountVal}" min="0" max="100" style="text-align:center"></td>
             <td><input type="number" class="print-inline-input val-kdv" value="${kdvVal}" min="0" max="100" style="text-align:center"></td>
             <td class="qte-row-total" style="text-align:right; font-weight:700">0.00</td>
             <td class="no-print">
@@ -1209,11 +2066,30 @@ document.addEventListener('DOMContentLoaded', () => {
         
         tbody.appendChild(tr);
 
-        // Input olaylarını bağla (Her değişiklikte hesaplama tetikle)
-        const inputs = tr.querySelectorAll('input');
+        // Textarea yüksekliklerini otomatik ayarlama
+        const descArea = tr.querySelector('.val-desc');
+        const unitArea = tr.querySelector('.val-unit');
+        
+        const adjustHeight = (el) => {
+            if (!el) return;
+            el.style.height = 'auto';
+            el.style.height = el.scrollHeight + 'px';
+        };
+
+        descArea.addEventListener('input', () => adjustHeight(descArea));
+        unitArea.addEventListener('input', () => adjustHeight(unitArea));
+
+        // Input/textarea olaylarını bağla (Her değişiklikte hesaplama tetikle)
+        const inputs = tr.querySelectorAll('input, textarea');
         inputs.forEach(input => {
             input.addEventListener('input', recalculateQuoteTotals);
         });
+
+        // DOM'a eklendikten hemen sonra yükseklikleri hesapla
+        setTimeout(() => {
+            adjustHeight(descArea);
+            adjustHeight(unitArea);
+        }, 50);
 
         recalculateQuoteTotals();
     }
@@ -1230,9 +2106,11 @@ document.addEventListener('DOMContentLoaded', () => {
             
             const qty = parseFloat(tr.querySelector('.val-qty').value) || 0;
             const price = parseFloat(tr.querySelector('.val-price').value) || 0;
+            const discount = parseFloat(tr.querySelector('.val-discount').value) || 0;
             const kdv = parseFloat(tr.querySelector('.val-kdv').value) || 0;
             
-            const rowTotal = qty * price;
+            const discountedPrice = price * (1 - discount / 100);
+            const rowTotal = qty * discountedPrice;
             const rowTax = rowTotal * (kdv / 100);
 
             tr.querySelector('.qte-row-total').textContent = formatCurrency(rowTotal);
@@ -1251,7 +2129,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Para birimi biçimlendir
     function formatCurrency(amount) {
-        return state.settings.currency + ' ' + amount.toLocaleString('tr-TR', {
+        const locale = state.settings.lang === 'en' ? 'en-US' : 'tr-TR';
+        return state.settings.currency + ' ' + amount.toLocaleString(locale, {
             minimumFractionDigits: 2,
             maximumFractionDigits: 2
         });
@@ -1404,12 +2283,14 @@ document.addEventListener('DOMContentLoaded', () => {
         const formId = document.getElementById('qte-input-no').value.trim();
 
         if (!clientName) {
-            alert("Lütfen teklif sunulan kurum adını girin.");
+            const errName = state.settings.lang === 'en' ? "Please enter the client name." : "Lütfen teklif sunulan kurum adını girin.";
+            alert(errName);
             return null;
         }
 
         if (!formId) {
-            alert("Lütfen bir teklif numarası girin.");
+            const errNo = state.settings.lang === 'en' ? "Please enter a quotation number." : "Lütfen bir teklif numarası girin.";
+            alert(errNo);
             return null;
         }
 
@@ -1423,12 +2304,14 @@ document.addEventListener('DOMContentLoaded', () => {
             const qty = parseFloat(tr.querySelector('.val-qty').value) || 0;
             const unit = tr.querySelector('.val-unit').value.trim();
             const price = parseFloat(tr.querySelector('.val-price').value) || 0;
+            const discount = parseFloat(tr.querySelector('.val-discount').value) || 0;
             const kdv = parseFloat(tr.querySelector('.val-kdv').value) || 0;
             
             if (desc || qty || price) {
-                items.push({ desc, qty, unit, price, kdv });
+                items.push({ desc, qty, unit, price, discount, kdv });
                 
-                const itemTotal = qty * price;
+                const discountedPrice = price * (1 - discount / 100);
+                const itemTotal = qty * discountedPrice;
                 subtotal += itemTotal;
                 taxTotal += itemTotal * (kdv / 100);
             }
@@ -1468,7 +2351,10 @@ document.addEventListener('DOMContentLoaded', () => {
             state.forms[idx] = formData;
         } else if (idx !== -1 && !state.currentEditingForm) {
             // Yeni oluşturulurken çakışma varsa
-            if (confirm("Bu teklif numarasıyla başka bir teklif zaten var. Üzerine yazmak ister misiniz?")) {
+            const confirmMsg = state.settings.lang === 'en'
+                ? "A quotation with this number already exists. Do you want to overwrite it?"
+                : "Bu teklif numarasıyla başka bir teklif zaten var. Üzerine yazmak ister misiniz?";
+            if (confirm(confirmMsg)) {
                 state.forms[idx] = formData;
             } else {
                 return;
@@ -1718,14 +2604,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         ${comp.logo ? `<img src="${comp.logo}" alt="Logo">` : '<span>🏢</span>'}
                     </div>
                     <div class="company-card-title">${comp.name}</div>
-                    <button class="btn-small-action btn-edit-comp" data-id="${comp.id}">⚙️ Düzenle</button>
+                    <div class="company-card-compact-actions">
+                        <button class="cc-icon-btn btn-edit-comp" data-id="${comp.id}" title="Düzenle">⚙️</button>
+                        <button class="cc-icon-btn cc-del btn-delete-comp" data-id="${comp.id}" title="Sil">🗑️</button>
+                    </div>
                 </div>
-                <div class="company-card-details">
-                    <p><span>Tescil Damgaları:</span> <strong>${comp.stamps ? comp.stamps.length : 0} Adet</strong></p>
-                    <p><span>Telefon:</span> <strong>${comp.phone || 'Yok'}</strong></p>
-                    <p><span>Vergi No:</span> <strong>${comp.taxNumber || 'Yok'}</strong></p>
-                </div>
-                <button class="btn-delete-comp" data-id="${comp.id}">🗑️ Şirketi Sil</button>
+                <div class="company-card-taxno"><span>No:</span> <strong>${comp.taxNumber || '—'}</strong></div>
             `;
 
             // Tıklayınca aktif şirket yap
@@ -1755,7 +2639,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Şirketi sil (kart üzerindeki kırmızı buton ve editördeki sil butonu için ortak)
     function deleteCompanyById(id) {
-        if (!confirm("Bu şirketi ve şirkete ait bilgileri silmek istediğinizden emin misiniz?")) return;
+        const confirmMsg = state.settings.lang === 'en'
+            ? "Are you sure you want to delete this company and all its related data?"
+            : "Bu şirketi ve şirkete ait bilgileri silmek istediğinizden emin misiniz?";
+        if (!confirm(confirmMsg)) return;
         state.companies = state.companies.filter(c => c.id !== id);
         saveCompanies();
 
@@ -1801,9 +2688,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // Arama filtresi
             const matchesQuery = !query || 
-                f.id.toLowerCase().includes(query) ||
-                f.clientName.toLowerCase().includes(query) ||
-                f.clientCity.toLowerCase().includes(query) ||
+                (f.id && f.id.toLowerCase().includes(query)) ||
+                (f.clientName && f.clientName.toLowerCase().includes(query)) ||
+                (f.clientCity && f.clientCity.toLowerCase().includes(query)) ||
                 matchesDevice;
 
             // Tip filtresi
@@ -1816,10 +2703,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         if (filtered.length === 0) {
+            const emptyMsg = state.settings.lang === 'en'
+                ? 'No registered documents found matching criteria.'
+                : 'Aranan kriterlere uygun form bulunamadı.';
             container.innerHTML = `
                 <div class="empty-forms-placeholder">
                     <span class="empty-forms-icon">📂</span>
-                    <span>Aranan kriterlere uygun form bulunamadı.</span>
+                    <span>${emptyMsg}</span>
                 </div>
             `;
             return;
@@ -1852,16 +2742,20 @@ document.addEventListener('DOMContentLoaded', () => {
                     </div>
                 </div>
                 <div class="form-card-right">
-                    <div class="form-card-total">${form.type === 'teklif' ? formatCurrency(parseFloat(form.grandTotal)) : 'Ücretsiz'}</div>
-                    <div class="form-card-date">${new Date(form.date).toLocaleDateString('tr-TR')}</div>
+                <div class="form-card-right">
+                    <div class="form-card-total">${form.type === 'teklif' ? formatCurrency(parseFloat(form.grandTotal)) : (state.settings.lang === 'en' ? 'Free' : 'Ücretsiz')}</div>
+                    <div class="form-card-date">${new Date(form.date).toLocaleDateString(state.settings.lang === 'en' ? 'en-US' : 'tr-TR')}</div>
                 </div>
-                <button class="btn-card-delete" title="Formu Sil">🗑️</button>
+                <button class="btn-card-delete" title="${state.settings.lang === 'en' ? 'Delete Form' : 'Formu Sil'}">🗑️</button>
             `;
 
             // Kırmızı silme butonu (karta tıklamayı tetiklemesin)
             card.querySelector('.btn-card-delete').addEventListener('click', (e) => {
                 e.stopPropagation();
-                if (confirm(`"${form.id}" numaralı formu geçmişten silmek istediğinize emin misiniz?`)) {
+                const confirmMsg = state.settings.lang === 'en'
+                    ? `Are you sure you want to delete form "${form.id}" from history?`
+                    : `"${form.id}" numaralı formu geçmişten silmek istediğinize emin misiniz?`;
+                if (confirm(confirmMsg)) {
                     state.forms = state.forms.filter(f => f.id !== form.id);
                     saveForms();
                     renderFormsList();
@@ -1931,10 +2825,11 @@ document.addEventListener('DOMContentLoaded', () => {
         setActiveCompany(compId);
         createFormModal.classList.add('hidden');
 
+        // Yeni akış: önce temiz bilgi giriş listesi, sonra "Kaydet ve Ön İzle" ile PDF canvas'ı
         if (formType === 'servis') {
-            openServiceFormEditor();
+            openServiceEntry();
         } else {
-            openQuoteFormEditor();
+            openQuoteEntry();
         }
     });
 
@@ -1966,7 +2861,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const filterPanel = document.getElementById('filter-panel');
     filterToggle.addEventListener('click', () => {
         filterPanel.classList.toggle('hidden');
-        filterToggle.textContent = filterPanel.classList.contains('hidden') ? '🔍 Filtrele' : '❌ Filtreyi Kapat';
+        const isHidden = filterPanel.classList.contains('hidden');
+        if (state.settings.lang === 'en') {
+            filterToggle.innerHTML = isHidden 
+                ? '<span>🔍</span><span class="btn-text">Filter</span>' 
+                : '<span>❌</span><span class="btn-text">Close Filter</span>';
+        } else {
+            filterToggle.innerHTML = isHidden 
+                ? '<span>🔍</span><span class="btn-text">Filtrele</span>' 
+                : '<span>❌</span><span class="btn-text">Filtreyi Kapat</span>';
+        }
+        if (!isHidden) {
+            filterToggle.classList.add('active-filter');
+        } else {
+            filterToggle.classList.remove('active-filter');
+        }
     });
 
     // Filtre Değişim Dinleyicileri
@@ -1993,9 +2902,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 );
             }
             const matchesQuery = !query ||
-                f.id.toLowerCase().includes(query) ||
-                f.clientName.toLowerCase().includes(query) ||
-                f.clientCity.toLowerCase().includes(query) ||
+                (f.id && f.id.toLowerCase().includes(query)) ||
+                (f.clientName && f.clientName.toLowerCase().includes(query)) ||
+                (f.clientCity && f.clientCity.toLowerCase().includes(query)) ||
                 matchesDevice;
             const matchesType = type === 'all' || f.type === type;
             const matchesComp = companyId === 'all' || f.companyId === companyId;
@@ -2227,6 +3136,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('btn-settings').addEventListener('click', () => {
         document.getElementById('settings-kdv').value = state.settings.defaultKdv;
         document.getElementById('settings-currency').value = state.settings.currency;
+        document.getElementById('settings-lang').value = state.settings.lang || 'tr';
         
         // Load QR checkbox state and lock if not premium
         const enableQrCheckbox = document.getElementById('settings-enable-qr');
@@ -2237,14 +3147,24 @@ document.addEventListener('DOMContentLoaded', () => {
             enableQrCheckbox.disabled = false;
             enableQrCheckbox.checked = state.settings.enableQr !== false; // default true
             premiumLock.style.display = 'none';
-            qrHelp.textContent = "PDF çıktılarının altına doğrulama ve dijital aktarım için QR kod yerleştirilir.";
-            qrHelp.style.color = "var(--text-muted)";
+            if (state.settings.lang === 'en') {
+                qrHelp.textContent = "QR verification code is placed under PDF outputs for digital validation.";
+                qrHelp.style.color = "var(--text-muted)";
+            } else {
+                qrHelp.textContent = "PDF çıktılarının altına doğrulama ve dijital aktarım için QR kod yerleştirilir.";
+                qrHelp.style.color = "var(--text-muted)";
+            }
         } else {
             enableQrCheckbox.disabled = true;
             enableQrCheckbox.checked = false;
             premiumLock.style.display = 'inline-block';
-            qrHelp.textContent = "🔒 QR Doğrulama Kodu ekleme özelliği sadece Premium üyeler içindir.";
-            qrHelp.style.color = "#fbbf24";
+            if (state.settings.lang === 'en') {
+                qrHelp.textContent = "🔒 Adding QR Verification Code is a Pro feature only.";
+                qrHelp.style.color = "#fbbf24";
+            } else {
+                qrHelp.textContent = "🔒 QR Doğrulama Kodu ekleme özelliği sadece Premium üyeler içindir.";
+                qrHelp.style.color = "#fbbf24";
+            }
         }
         
         settingsModal.classList.remove('hidden');
@@ -2257,6 +3177,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('btn-save-settings').addEventListener('click', () => {
         state.settings.defaultKdv = parseInt(document.getElementById('settings-kdv').value) || 20;
         state.settings.currency = document.getElementById('settings-currency').value;
+        state.settings.lang = document.getElementById('settings-lang').value || 'tr';
         if (state.settings.isPremium) {
             state.settings.enableQr = document.getElementById('settings-enable-qr').checked;
         } else {
@@ -2264,7 +3185,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         saveSettings();
         settingsModal.classList.add('hidden');
-        renderFormsList();
+        applyLanguage(state.settings.lang);
     });
 
     // Nasıl Kullanılır Modalı
@@ -2283,12 +3204,39 @@ document.addEventListener('DOMContentLoaded', () => {
     const iapSimModal = document.getElementById('modal-iap-simulation');
 
     // Header Premium Butonu
+    const proStatusModal = document.getElementById('modal-pro-status');
+    
+    function openProStatusModal() {
+        const pType = state.settings.premiumType || 'yearly';
+        const pDate = state.settings.premiumStartDate || new Date().toISOString();
+        
+        let typeStr = 'Yıllık Pro Paket';
+        if (pType === 'monthly') typeStr = 'Aylık Pro Paket';
+        else if (pType === 'enterprise') typeStr = 'Kurumsal Pro Paket';
+        
+        if (state.settings.lang === 'en') {
+            typeStr = pType === 'monthly' ? 'Monthly Pro Plan' : (pType === 'enterprise' ? 'Enterprise Pro Plan' : 'Yearly Pro Plan');
+        }
+        
+        const dateFormatted = new Date(pDate).toLocaleDateString(state.settings.lang === 'en' ? 'en-US' : 'tr-TR');
+        
+        document.getElementById('pro-sub-type').textContent = typeStr;
+        document.getElementById('pro-sub-start-date').textContent = dateFormatted;
+        
+        proStatusModal.classList.remove('hidden');
+    }
+
+    // Header Premium Butonu
     const goPremiumBtn = document.getElementById('btn-go-premium');
     if (goPremiumBtn) {
         goPremiumBtn.addEventListener('click', () => {
-            const alertBanner = document.getElementById('premium-limit-alert');
-            if (alertBanner) alertBanner.style.display = 'none';
-            premiumModal.classList.remove('hidden');
+            if (state.settings.isPremium) {
+                openProStatusModal();
+            } else {
+                const alertBanner = document.getElementById('premium-limit-alert');
+                if (alertBanner) alertBanner.style.display = 'none';
+                premiumModal.classList.remove('hidden');
+            }
         });
     }
 
@@ -2296,14 +3244,26 @@ document.addEventListener('DOMContentLoaded', () => {
     const settingsPremiumBtn = document.getElementById('btn-settings-premium');
     if (settingsPremiumBtn) {
         settingsPremiumBtn.addEventListener('click', () => {
-            const alertBanner = document.getElementById('premium-limit-alert');
-            if (alertBanner) alertBanner.style.display = 'none';
-            settingsModal.classList.add('hidden');
-            premiumModal.classList.remove('hidden');
+            if (state.settings.isPremium) {
+                settingsModal.classList.add('hidden');
+                openProStatusModal();
+            } else {
+                const alertBanner = document.getElementById('premium-limit-alert');
+                if (alertBanner) alertBanner.style.display = 'none';
+                settingsModal.classList.add('hidden');
+                premiumModal.classList.remove('hidden');
+            }
         });
     }
 
     // Modalları Kapatma Butonları
+    document.getElementById('btn-close-pro-status').addEventListener('click', () => {
+        proStatusModal.classList.add('hidden');
+    });
+    document.getElementById('btn-close-pro-status-footer').addEventListener('click', () => {
+        proStatusModal.classList.add('hidden');
+    });
+
     document.getElementById('btn-close-premium').addEventListener('click', () => {
         if (window.limitCountdownInterval) {
             clearInterval(window.limitCountdownInterval);
@@ -2359,6 +3319,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================
     function initApp() {
         applyTheme(localStorage.getItem('kolayform_theme') || 'dark');
+        applyLanguage(state.settings.lang || 'tr');
         renderCompanyCards();
         updateFilterSelectors();
         renderFormsList();
@@ -2387,7 +3348,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // 2. Aktif ekran kontrolü
                 const activeView = Object.keys(views).find(key => !views[key].classList.contains('hidden'));
                 
-                if (activeView === 'companyEdit') {
+                if (activeView === 'companyEdit' || activeView === 'serviceEntry' || activeView === 'quoteEntry') {
                     showView('dashboard');
                 } else if (activeView === 'serviceEditor' || activeView === 'quoteEditor') {
                     openExitConfirmation();
@@ -2582,7 +3543,7 @@ document.addEventListener('DOMContentLoaded', () => {
             lean.st = dd.subtotal || '';
             lean.tx = dd.taxTotal || '';
             lean.gt = form.grandTotal || '';
-            lean.it = (dd.items || []).map(i => ({ d: i.desc, q: i.qty, u: i.unit, p: i.price, k: i.kdv }));
+            lean.it = (dd.items || []).map(i => ({ d: i.desc, q: i.qty, u: i.unit, p: i.price, ds: i.discount || 0, k: i.kdv }));
         } else {
             lean.cb = {
                 b: dd.chkBakim ? 1 : 0, o: dd.chkOnarim ? 1 : 0, a: dd.chkAriza ? 1 : 0,
@@ -2703,7 +3664,7 @@ document.addEventListener('DOMContentLoaded', () => {
             form.data = {
                 clientAddress: L.ca || '', conditionsText: L.cond || '',
                 subtotal: L.st || '', taxTotal: L.tx || '',
-                items: (L.it || []).map(i => ({ desc: i.d || '', qty: i.q, unit: i.u || '', price: i.p, kdv: i.k }))
+                items: (L.it || []).map(i => ({ desc: i.d || '', qty: i.q, unit: i.u || '', price: i.p, discount: i.ds || 0, kdv: i.k }))
             };
         } else {
             const cb = L.cb || {};
@@ -3131,5 +4092,469 @@ document.addEventListener('DOMContentLoaded', () => {
     cropOverlayEl.addEventListener('touchstart', cropDown, { passive: false });
     cropOverlayEl.addEventListener('touchmove', cropMove, { passive: false });
     window.addEventListener('touchend', cropUp);
+
+
+    // ==========================================
+    // 13. FORM BİLGİ GİRİŞ EKRANI (TEMİZ LİSTE) AKIŞI
+    //  Form Hazırla -> temiz liste -> "Kaydet ve Ön İzle" -> PDF canvas
+    //  PDF canvas -> "✏️ Düzenle" -> tekrar temiz liste
+    // ==========================================
+    let entryContext = null; // { type, mode: 'new' | 'edit' }
+
+    function genServiceNo() {
+        const year = new Date().toISOString().split('T')[0].split('-')[0];
+        const count = state.forms.filter(f => f.type === 'servis' && f.date && f.date.startsWith(year)).length + 1;
+        return `SRV-${year}-${String(count).padStart(4, '0')}`;
+    }
+    function genQuoteNo() {
+        const year = new Date().toISOString().split('T')[0].split('-')[0];
+        const count = state.forms.filter(f => f.type === 'teklif' && f.date && f.date.startsWith(year)).length + 1;
+        return `TEK-${year}-${String(count).padStart(4, '0')}`;
+    }
+
+    function clearEntryInvalid() {
+        document.querySelectorAll('.entry-invalid').forEach(el => el.classList.remove('entry-invalid'));
+    }
+
+    // Zorunlu alan uyarı pop-up'ı
+    function showRequiredWarn(fieldEl, fieldLabel) {
+        const modal = document.getElementById('modal-required-warn');
+        const txt = document.getElementById('required-warn-text');
+        if (txt && fieldLabel) {
+            txt.innerHTML = `Devam etmeden önce lütfen zorunlu alan olan <strong>${fieldLabel}</strong> kısmını doldurun.`;
+        }
+        if (fieldEl) {
+            fieldEl.classList.add('entry-invalid');
+            fieldEl.addEventListener('input', () => fieldEl.classList.remove('entry-invalid'), { once: true });
+        }
+        modal.classList.remove('hidden');
+    }
+    document.getElementById('btn-close-required-warn').addEventListener('click', () => {
+        document.getElementById('modal-required-warn').classList.add('hidden');
+    });
+    document.getElementById('btn-ok-required-warn').addEventListener('click', () => {
+        document.getElementById('modal-required-warn').classList.add('hidden');
+        const f = document.querySelector('.entry-invalid');
+        if (f) f.focus();
+    });
+
+    // ---------- SERVİS GİRİŞ EKRANI ----------
+    function addServiceDeviceEntryRow(d) {
+        d = d || { model: '', sn: '', contract: 'yok' };
+        const row = document.createElement('div');
+        row.className = 'entry-row entry-device-row';
+        row.innerHTML = `
+            <input class="e-dev-model" type="text" placeholder="Marka / Model">
+            <input class="e-dev-sn" type="text" placeholder="Künye / Seri No">
+            <div class="entry-row-foot">
+                <label class="entry-inline-check"><input type="checkbox" class="e-dev-contract"> Bakım Anlaşması Var</label>
+                <button type="button" class="entry-row-del" title="Cihazı Sil">🗑️</button>
+            </div>
+        `;
+        row.querySelector('.e-dev-model').value = d.model || '';
+        row.querySelector('.e-dev-sn').value = d.sn || '';
+        row.querySelector('.e-dev-contract').checked = (d.contract === 'var');
+        row.querySelector('.entry-row-del').addEventListener('click', () => row.remove());
+        document.getElementById('se-devices').appendChild(row);
+    }
+
+    function addServicePartEntryRow(p) {
+        p = p || { code: '', name: '', qty: 1, changed: false, recommend: false };
+        const row = document.createElement('div');
+        row.className = 'entry-row entry-part-row';
+        row.innerHTML = `
+            <input class="e-part-code" type="text" placeholder="Parça Kodu">
+            <input class="e-part-name" type="text" placeholder="Yedek Parça İsmi">
+            <div class="entry-row-foot">
+                <div class="entry-row-checks">
+                    <label class="entry-inline-check">Adet <input class="e-part-qty" type="number" min="1" style="width:58px"></label>
+                    <label class="entry-inline-check"><input type="checkbox" class="e-part-changed"> Değişti</label>
+                    <label class="entry-inline-check"><input type="checkbox" class="e-part-recommend"> Tavsiye</label>
+                </div>
+                <button type="button" class="entry-row-del" title="Parçayı Sil">🗑️</button>
+            </div>
+        `;
+        row.querySelector('.e-part-code').value = p.code || '';
+        row.querySelector('.e-part-name').value = p.name || '';
+        row.querySelector('.e-part-qty').value = p.qty || 1;
+        row.querySelector('.e-part-changed').checked = !!p.changed;
+        row.querySelector('.e-part-recommend').checked = !!p.recommend;
+        row.querySelector('.entry-row-del').addEventListener('click', () => row.remove());
+        document.getElementById('se-parts').appendChild(row);
+    }
+
+    function fillServiceEntryFromData(d) {
+        const data = d.data || {};
+        document.getElementById('se-no').value = d.id || '';
+        document.getElementById('se-date').value = d.date || new Date().toISOString().split('T')[0];
+        document.getElementById('se-client-name').value = d.clientName || '';
+        document.getElementById('se-client-city').value = d.clientCity || '';
+        document.getElementById('se-chk-bakim').checked = !!data.chkBakim;
+        document.getElementById('se-chk-onarim').checked = !!data.chkOnarim;
+        document.getElementById('se-chk-ariza').checked = !!data.chkAriza;
+        document.getElementById('se-chk-kontrol').checked = !!data.chkKontrol;
+        document.getElementById('se-chk-garanti').checked = !!data.chkGaranti;
+        document.getElementById('se-chk-kurulum').checked = !!data.chkKurulum;
+        document.getElementById('se-process').value = data.processText || '';
+        document.getElementById('se-result').value = data.resultText || '';
+        document.getElementById('se-tech-name').value = data.techName || '';
+        document.getElementById('se-client-person').value = data.clientPerson || '';
+        document.getElementById('se-unit-person').value = data.unitPerson || '';
+        document.getElementById('se-devices').innerHTML = '';
+        const devices = (data.devices && data.devices.length) ? data.devices : [undefined];
+        devices.forEach(dev => addServiceDeviceEntryRow(dev));
+        document.getElementById('se-parts').innerHTML = '';
+        const parts = (data.parts && data.parts.length) ? data.parts : [undefined];
+        parts.forEach(pt => addServicePartEntryRow(pt));
+    }
+
+    function buildServiceDataFromEntry() {
+        const devices = [];
+        document.querySelectorAll('#se-devices .entry-device-row').forEach(row => {
+            const model = row.querySelector('.e-dev-model').value.trim();
+            const sn = row.querySelector('.e-dev-sn').value.trim();
+            const contract = row.querySelector('.e-dev-contract').checked ? 'var' : 'yok';
+            if (model || sn) devices.push({ model, sn, contract });
+        });
+        const parts = [];
+        document.querySelectorAll('#se-parts .entry-part-row').forEach(row => {
+            const code = row.querySelector('.e-part-code').value.trim();
+            const name = row.querySelector('.e-part-name').value.trim();
+            const qty = parseInt(row.querySelector('.e-part-qty').value) || 1;
+            const changed = row.querySelector('.e-part-changed').checked;
+            const recommend = row.querySelector('.e-part-recommend').checked;
+            if (code || name) parts.push({ code, name, qty, changed, recommend });
+        });
+        return {
+            id: document.getElementById('se-no').value.trim(),
+            type: 'servis',
+            companyId: state.activeCompanyId,
+            date: document.getElementById('se-date').value,
+            clientName: document.getElementById('se-client-name').value.trim(),
+            clientCity: document.getElementById('se-client-city').value.trim(),
+            grandTotal: '',
+            data: {
+                chkBakim: document.getElementById('se-chk-bakim').checked,
+                chkOnarim: document.getElementById('se-chk-onarim').checked,
+                chkAriza: document.getElementById('se-chk-ariza').checked,
+                chkKontrol: document.getElementById('se-chk-kontrol').checked,
+                chkGaranti: document.getElementById('se-chk-garanti').checked,
+                chkKurulum: document.getElementById('se-chk-kurulum').checked,
+                processText: document.getElementById('se-process').value.trim(),
+                resultText: document.getElementById('se-result').value.trim(),
+                techName: document.getElementById('se-tech-name').value.trim(),
+                clientPerson: document.getElementById('se-client-person').value.trim(),
+                unitPerson: document.getElementById('se-unit-person').value.trim(),
+                devices: devices,
+                parts: parts
+            },
+            signatures: { tech: null, client: null, unit: null }
+        };
+    }
+
+    // Canvas (A4) -> sade veri (doğrulama/uyarı yok)
+    function readServiceCanvas() {
+        const devices = [];
+        document.querySelectorAll('#srv-table-devices tbody tr').forEach(tr => {
+            const model = tr.querySelector('.val-model').value.trim();
+            const sn = tr.querySelector('.val-sn').value.trim();
+            const contractEl = tr.querySelector('.val-contract:checked');
+            const contract = contractEl ? contractEl.value : 'yok';
+            if (model || sn) devices.push({ model, sn, contract });
+        });
+        const parts = [];
+        document.querySelectorAll('#srv-table-parts tbody tr').forEach(tr => {
+            const code = tr.querySelector('.val-pcode').value.trim();
+            const name = tr.querySelector('.val-pname').value.trim();
+            const qty = parseInt(tr.querySelector('.val-pqty').value) || 1;
+            const changed = tr.querySelector('.val-pchanged').checked;
+            const recommend = tr.querySelector('.val-precommend').checked;
+            if (code || name) parts.push({ code, name, qty, changed, recommend });
+        });
+        return {
+            id: document.getElementById('srv-input-no').value.trim(),
+            date: document.getElementById('srv-input-date').value,
+            clientName: document.getElementById('srv-input-client-name').value.trim(),
+            clientCity: document.getElementById('srv-input-client-city').value.trim(),
+            data: {
+                chkBakim: document.getElementById('srv-chk-bakim').checked,
+                chkOnarim: document.getElementById('srv-chk-onarim').checked,
+                chkAriza: document.getElementById('srv-chk-ariza').checked,
+                chkKontrol: document.getElementById('srv-chk-kontrol').checked,
+                chkGaranti: document.getElementById('srv-chk-garanti').checked,
+                chkKurulum: document.getElementById('srv-chk-kurulum').checked,
+                processText: document.getElementById('srv-txt-process').value,
+                resultText: document.getElementById('srv-txt-result').value,
+                techName: document.getElementById('srv-input-tech-name').value.trim(),
+                clientPerson: document.getElementById('srv-input-client-person').value.trim(),
+                unitPerson: document.getElementById('srv-input-unit-person').value.trim(),
+                devices: devices,
+                parts: parts
+            }
+        };
+    }
+
+    function openServiceEntry(formData = null) {
+        const company = resolveEditorCompany(formData);
+        if (!company) { alert("Lütfen önce bir aktif şirket ekleyin."); return; }
+
+        if (formData) {
+            entryContext = { type: 'servis', mode: 'edit' };
+            fillServiceEntryFromData(formData);
+        } else {
+            entryContext = { type: 'servis', mode: 'new' };
+            document.getElementById('se-date').valueAsDate = new Date();
+            document.getElementById('se-no').value = genServiceNo();
+            document.getElementById('se-client-name').value = '';
+            document.getElementById('se-client-city').value = '';
+            ['bakim', 'onarim', 'ariza', 'kontrol', 'garanti', 'kurulum']
+                .forEach(k => document.getElementById('se-chk-' + k).checked = false);
+            document.getElementById('se-process').value = '';
+            document.getElementById('se-result').value = '';
+            document.getElementById('se-tech-name').value = '';
+            document.getElementById('se-client-person').value = '';
+            document.getElementById('se-unit-person').value = '';
+            document.getElementById('se-devices').innerHTML = '';
+            document.getElementById('se-parts').innerHTML = '';
+            addServiceDeviceEntryRow();
+            addServicePartEntryRow();
+        }
+        clearEntryInvalid();
+        showView('serviceEntry');
+    }
+
+    function editServiceFromCanvas() {
+        const d = readServiceCanvas();
+        entryContext = { type: 'servis', mode: 'edit' };
+        fillServiceEntryFromData(d);
+        clearEntryInvalid();
+        showView('serviceEntry');
+    }
+
+    // "Kaydet ve Ön İzle" -> PDF canvas
+    function previewServiceFromEntry() {
+        const nameEl = document.getElementById('se-client-name');
+        if (!nameEl.value.trim()) {
+            showRequiredWarn(nameEl, 'Kurum / Kişi Adı');
+            return;
+        }
+        const built = buildServiceDataFromEntry();
+        if (!built.id) built.id = genServiceNo();
+
+        let fd;
+        if (entryContext && entryContext.mode === 'edit' && state.currentEditingForm && state.currentEditingForm.type === 'servis') {
+            // Mevcut formun meta verilerini (QR/şirket vb.) koru, alanları girişten güncelle
+            fd = { ...state.currentEditingForm };
+            fd.id = built.id;
+            fd.date = built.date;
+            fd.clientName = built.clientName;
+            fd.clientCity = built.clientCity;
+            fd.grandTotal = '';
+            fd.data = built.data;
+            fd.signatures = { ...serviceSignatures };
+        } else {
+            fd = built;
+            fd.companyId = state.activeCompanyId;
+            const company = state.companies.find(c => c.id === state.activeCompanyId) || state.companies[0];
+            fd.signatures = { tech: (company && company.signature) ? company.signature : null, client: null, unit: null };
+        }
+        openServiceFormEditor(fd);
+    }
+
+    document.getElementById('se-add-device').addEventListener('click', () => addServiceDeviceEntryRow());
+    document.getElementById('se-add-part').addEventListener('click', () => addServicePartEntryRow());
+    document.getElementById('btn-srv-entry-preview').addEventListener('click', previewServiceFromEntry);
+    document.getElementById('btn-srv-entry-cancel').addEventListener('click', () => showView('dashboard'));
+    document.getElementById('btn-srv-entry-back').addEventListener('click', () => showView('dashboard'));
+    document.getElementById('btn-edit-service-form').addEventListener('click', editServiceFromCanvas);
+
+    // ---------- TEKLİF GİRİŞ EKRANI ----------
+    function recalcQuoteEntryTotals() {
+        let subtotal = 0, taxTotal = 0;
+        document.querySelectorAll('#qe-items .entry-item-row').forEach(row => {
+            const qty = parseFloat(row.querySelector('.e-item-qty').value) || 0;
+            const price = parseFloat(row.querySelector('.e-item-price').value) || 0;
+            const discount = parseFloat(row.querySelector('.e-item-discount').value) || 0;
+            const kdv = parseFloat(row.querySelector('.e-item-kdv').value) || 0;
+            const lineTotal = qty * price * (1 - discount / 100);
+            subtotal += lineTotal;
+            taxTotal += lineTotal * (kdv / 100);
+            row.querySelector('.e-item-total').textContent = formatCurrency(lineTotal * (1 + kdv / 100));
+        });
+        document.getElementById('qe-grand-total').textContent = formatCurrency(subtotal + taxTotal);
+    }
+
+    function addQuoteItemEntryRow(item) {
+        item = item || { desc: '', qty: 1, unit: 'AD', price: 0, discount: 0, kdv: null };
+        const kdvVal = (item.kdv === null || item.kdv === undefined) ? state.settings.defaultKdv : item.kdv;
+        const row = document.createElement('div');
+        row.className = 'entry-row entry-item-row';
+        row.innerHTML = `
+            <textarea class="e-item-desc" rows="2" placeholder="Mal / Hizmet Açıklaması"></textarea>
+            <div class="entry-item-grid">
+                <div class="ig-field"><label>Miktar</label><input class="e-item-qty" type="number" min="0" step="any"></div>
+                <div class="ig-field"><label>Birim</label><input class="e-item-unit" type="text"></div>
+                <div class="ig-field"><label>Birim Fiyat</label><input class="e-item-price" type="number" min="0" step="any"></div>
+                <div class="ig-field"><label>İskonto %</label><input class="e-item-discount" type="number" min="0" max="100" step="any"></div>
+                <div class="ig-field"><label>KDV %</label><input class="e-item-kdv" type="number" min="0" max="100" step="any"></div>
+            </div>
+            <div class="entry-row-foot">
+                <span class="e-item-total">₺ 0,00</span>
+                <button type="button" class="entry-row-del" title="Kalemi Sil">🗑️</button>
+            </div>
+        `;
+        row.querySelector('.e-item-desc').value = item.desc || '';
+        row.querySelector('.e-item-qty').value = (item.qty !== undefined ? item.qty : 1);
+        row.querySelector('.e-item-unit').value = item.unit || 'AD';
+        row.querySelector('.e-item-price').value = (item.price !== undefined ? item.price : 0);
+        row.querySelector('.e-item-discount').value = (item.discount !== undefined ? item.discount : 0);
+        row.querySelector('.e-item-kdv').value = kdvVal;
+        row.querySelectorAll('input').forEach(inp => inp.addEventListener('input', recalcQuoteEntryTotals));
+        row.querySelector('.entry-row-del').addEventListener('click', () => { row.remove(); recalcQuoteEntryTotals(); });
+        document.getElementById('qe-items').appendChild(row);
+    }
+
+    function fillQuoteEntryFromData(d) {
+        const data = d.data || {};
+        document.getElementById('qe-no').value = d.id || '';
+        document.getElementById('qe-date').value = d.date || new Date().toISOString().split('T')[0];
+        document.getElementById('qe-client-title').value = d.clientName || '';
+        document.getElementById('qe-client-address').value = data.clientAddress || '';
+        document.getElementById('qe-client-city').value = d.clientCity || '';
+        document.getElementById('qe-conditions').value = data.conditionsText || '';
+        document.getElementById('qe-items').innerHTML = '';
+        const items = (data.items && data.items.length) ? data.items : [undefined];
+        items.forEach(it => addQuoteItemEntryRow(it));
+        recalcQuoteEntryTotals();
+    }
+
+    function buildQuoteDataFromEntry() {
+        const items = [];
+        let subtotal = 0, taxTotal = 0;
+        document.querySelectorAll('#qe-items .entry-item-row').forEach(row => {
+            const desc = row.querySelector('.e-item-desc').value.trim();
+            const qty = parseFloat(row.querySelector('.e-item-qty').value) || 0;
+            const unit = row.querySelector('.e-item-unit').value.trim();
+            const price = parseFloat(row.querySelector('.e-item-price').value) || 0;
+            const discount = parseFloat(row.querySelector('.e-item-discount').value) || 0;
+            const kdv = parseFloat(row.querySelector('.e-item-kdv').value) || 0;
+            if (desc || qty || price) {
+                items.push({ desc, qty, unit, price, discount, kdv });
+                const lineTotal = qty * price * (1 - discount / 100);
+                subtotal += lineTotal;
+                taxTotal += lineTotal * (kdv / 100);
+            }
+        });
+        const grandTotal = subtotal + taxTotal;
+        return {
+            id: document.getElementById('qe-no').value.trim(),
+            type: 'teklif',
+            companyId: state.activeCompanyId,
+            date: document.getElementById('qe-date').value,
+            clientName: document.getElementById('qe-client-title').value.trim(),
+            clientCity: document.getElementById('qe-client-city').value.trim(),
+            grandTotal: grandTotal.toFixed(2),
+            data: {
+                clientAddress: document.getElementById('qe-client-address').value.trim(),
+                conditionsText: document.getElementById('qe-conditions').value.trim(),
+                items: items,
+                subtotal: subtotal.toFixed(2),
+                taxTotal: taxTotal.toFixed(2)
+            },
+            signatures: { stamp: null, signature: null }
+        };
+    }
+
+    function readQuoteCanvas() {
+        const items = [];
+        document.querySelectorAll('#qte-table-items tbody tr').forEach(tr => {
+            const desc = tr.querySelector('.val-desc').value.trim();
+            const qty = parseFloat(tr.querySelector('.val-qty').value) || 0;
+            const unit = tr.querySelector('.val-unit').value.trim();
+            const price = parseFloat(tr.querySelector('.val-price').value) || 0;
+            const discount = parseFloat(tr.querySelector('.val-discount').value) || 0;
+            const kdv = parseFloat(tr.querySelector('.val-kdv').value) || 0;
+            if (desc || qty || price) items.push({ desc, qty, unit, price, discount, kdv });
+        });
+        return {
+            id: document.getElementById('qte-input-no').value.trim(),
+            date: document.getElementById('qte-input-date').value,
+            clientName: document.getElementById('qte-input-client-title').value.trim(),
+            clientCity: document.getElementById('qte-input-client-city').value.trim(),
+            data: {
+                clientAddress: document.getElementById('qte-input-client-address').value.trim(),
+                conditionsText: document.getElementById('qte-txt-conditions').value.trim(),
+                items: items
+            }
+        };
+    }
+
+    function openQuoteEntry(formData = null) {
+        const company = resolveEditorCompany(formData);
+        if (!company) { alert("Lütfen önce bir aktif şirket ekleyin."); return; }
+
+        if (formData) {
+            entryContext = { type: 'teklif', mode: 'edit' };
+            fillQuoteEntryFromData(formData);
+        } else {
+            entryContext = { type: 'teklif', mode: 'new' };
+            document.getElementById('qe-date').valueAsDate = new Date();
+            document.getElementById('qe-no').value = genQuoteNo();
+            document.getElementById('qe-client-title').value = '';
+            document.getElementById('qe-client-address').value = '';
+            document.getElementById('qe-client-city').value = '';
+            document.getElementById('qe-conditions').value = "* Fiyatlarımız KDV hariçtir.\n* Teslim süresi 15 gündür.\n* Ödeme: Teslimatta nakit veya havale.";
+            document.getElementById('qe-items').innerHTML = '';
+            addQuoteItemEntryRow();
+            recalcQuoteEntryTotals();
+        }
+        clearEntryInvalid();
+        showView('quoteEntry');
+    }
+
+    function editQuoteFromCanvas() {
+        const d = readQuoteCanvas();
+        entryContext = { type: 'teklif', mode: 'edit' };
+        fillQuoteEntryFromData(d);
+        clearEntryInvalid();
+        showView('quoteEntry');
+    }
+
+    function previewQuoteFromEntry() {
+        const nameEl = document.getElementById('qe-client-title');
+        if (!nameEl.value.trim()) {
+            showRequiredWarn(nameEl, 'Kişi / Kurum Adı');
+            return;
+        }
+        const built = buildQuoteDataFromEntry();
+        if (!built.id) built.id = genQuoteNo();
+
+        let fd;
+        if (entryContext && entryContext.mode === 'edit' && state.currentEditingForm && state.currentEditingForm.type === 'teklif') {
+            fd = { ...state.currentEditingForm };
+            fd.id = built.id;
+            fd.date = built.date;
+            fd.clientName = built.clientName;
+            fd.clientCity = built.clientCity;
+            fd.grandTotal = built.grandTotal;
+            fd.data = built.data;
+            fd.signatures = { ...quoteSignatures };
+        } else {
+            fd = built;
+            fd.companyId = state.activeCompanyId;
+            const company = state.companies.find(c => c.id === state.activeCompanyId) || state.companies[0];
+            fd.signatures = {
+                stamp: (company && company.stamp) ? company.stamp : null,
+                signature: (company && company.signature) ? company.signature : null
+            };
+        }
+        openQuoteFormEditor(fd);
+    }
+
+    document.getElementById('qe-add-item').addEventListener('click', () => { addQuoteItemEntryRow(); recalcQuoteEntryTotals(); });
+    document.getElementById('btn-qte-entry-preview').addEventListener('click', previewQuoteFromEntry);
+    document.getElementById('btn-qte-entry-cancel').addEventListener('click', () => showView('dashboard'));
+    document.getElementById('btn-qte-entry-back').addEventListener('click', () => showView('dashboard'));
+    document.getElementById('btn-edit-quote-form').addEventListener('click', editQuoteFromCanvas);
 
 });

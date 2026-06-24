@@ -2449,6 +2449,116 @@ body.light-theme .feedback-tabs .tab-btn.active {
     }
 }
 
+/* Launch Discount Banner */
+.premium-discount-banner {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(245, 158, 11, 0.15));
+    border: 1px dashed rgba(245, 158, 11, 0.4);
+    border-radius: 12px;
+    padding: 10px 15px;
+    margin: -5px 0 20px 0;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #fbbf24;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    box-shadow: 0 0 15px rgba(251, 191, 36, 0.05);
+    animation: discountPulse 2s infinite ease-in-out;
+}
+
+@keyframes discountPulse {
+    0%, 100% {
+        transform: scale(1);
+        box-shadow: 0 0 15px rgba(251, 191, 36, 0.05);
+        border-color: rgba(245, 158, 11, 0.4);
+    }
+    50% {
+        transform: scale(1.02);
+        box-shadow: 0 0 25px rgba(251, 191, 36, 0.15);
+        border-color: rgba(251, 191, 36, 0.8);
+    }
+}
+
+.discount-sparkle {
+    font-size: 1.1rem;
+    animation: spinSparkle 3s infinite linear;
+    display: inline-block;
+}
+
+@keyframes spinSparkle {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Strikethrough Old Price styling */
+.plan-old-price {
+    font-size: 1rem;
+    text-decoration: line-through;
+    color: #ef4444;
+    font-weight: 500;
+    margin-bottom: 2px;
+    opacity: 0.85;
+    display: inline-block;
+}
+
+/* Plan Price Container */
+.price-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+/* Small shiny circular badge on the card corner */
+.discount-circle-badge {
+    position: absolute;
+    top: -15px;
+    right: -15px;
+    width: 54px;
+    height: 54px;
+    background: linear-gradient(135deg, #ef4444, #dc2626);
+    border: 2px solid #ffffff;
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    line-height: 1.1;
+    box-shadow: 0 4px 10px rgba(239, 68, 68, 0.4);
+    z-index: 10;
+    animation: badgeGlow 1.5s infinite alternate;
+}
+
+.discount-circle-badge span {
+    display: block;
+}
+
+.discount-circle-badge .percent {
+    font-size: 0.85rem;
+    font-weight: 900;
+}
+
+.discount-circle-badge .text {
+    font-size: 0.52rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+@keyframes badgeGlow {
+    from {
+        box-shadow: 0 4px 8px rgba(239, 68, 68, 0.4);
+        transform: scale(1) rotate(5deg);
+    }
+    to {
+        box-shadow: 0 4px 16px rgba(239, 68, 68, 0.8);
+        transform: scale(1.08) rotate(-5deg);
+    }
+}
+
 .premium-plan-card {
     background: rgba(0, 0, 0, 0.3);
     border: 1px solid var(--border-color);
@@ -2641,5 +2751,815 @@ body.light-theme .premium-modal-card .plan-price span {
     color: #71717a !important;
 }
 
+/* ==========================================================================
+   12. YENİ EKLENEN DÜZENLEMELER & STİLLER (Dil ve Pro Sürüm)
+   ========================================================================== */
 
+.past-header-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    height: 32px;
+    padding: 0 14px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    border: 1px solid transparent;
+    font-family: var(--font-heading);
+}
 
+.past-header-btn.btn-bulk {
+    background: rgba(34, 197, 94, 0.12);
+    border-color: rgba(34, 197, 94, 0.25);
+    color: #4ade80;
+}
+
+.past-header-btn.btn-bulk:hover {
+    background: rgba(34, 197, 94, 0.22);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.15);
+}
+
+.past-header-btn.btn-filter {
+    background: rgba(6, 182, 212, 0.12);
+    border-color: rgba(6, 182, 212, 0.25);
+    color: #22d3ee;
+}
+
+.past-header-btn.btn-filter:hover {
+    background: rgba(6, 182, 212, 0.22);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(6, 182, 212, 0.15);
+}
+
+.past-header-btn.btn-filter.active-filter {
+    background: rgba(239, 68, 68, 0.12);
+    border-color: rgba(239, 68, 68, 0.25);
+    color: #fca5a5;
+}
+
+.past-header-btn.btn-filter.active-filter:hover {
+    background: rgba(239, 68, 68, 0.22);
+}
+
+body.light-theme .past-header-btn.btn-bulk {
+    background: rgba(22, 163, 74, 0.08);
+    border-color: rgba(22, 163, 74, 0.2);
+    color: #16a34a;
+}
+body.light-theme .past-header-btn.btn-bulk:hover {
+    background: rgba(22, 163, 74, 0.15);
+}
+body.light-theme .past-header-btn.btn-filter {
+    background: rgba(8, 145, 178, 0.08);
+    border-color: rgba(8, 145, 178, 0.2);
+    color: #0891b2;
+}
+body.light-theme .past-header-btn.btn-filter:hover {
+    background: rgba(8, 145, 178, 0.15);
+}
+body.light-theme .past-header-btn.btn-filter.active-filter {
+    background: rgba(220, 38, 38, 0.08);
+    border-color: rgba(220, 38, 38, 0.2);
+    color: #dc2626;
+}
+body.light-theme .past-header-btn.btn-filter.active-filter:hover {
+    background: rgba(220, 38, 38, 0.15);
+}
+
+/* Pro Status Modal styling */
+.pro-badge-animation {
+    animation: proPulse 2.5s infinite ease-in-out;
+}
+
+@keyframes proPulse {
+    0%, 100% { transform: scale(1) rotate(0deg); filter: drop-shadow(0 0 10px rgba(251, 191, 36, 0.3)); }
+    50% { transform: scale(1.1) rotate(5deg); filter: drop-shadow(0 0 20px rgba(251, 191, 36, 0.6)); }
+}
+
+body.light-theme #modal-pro-status .modal-card {
+    background: linear-gradient(180deg, #18181b 0%, #111827 100%) !important;
+    border-color: rgba(251, 191, 36, 0.25) !important;
+}
+
+body.light-theme #modal-pro-status h3,
+body.light-theme #modal-pro-status h4,
+body.light-theme #modal-pro-status p,
+body.light-theme #modal-pro-status strong {
+    color: #ffffff !important;
+}
+
+body.light-theme #modal-pro-status span {
+    color: #fbbf24 !important;
+}
+
+/* ==========================================================================
+   YENİ EKLEMELER & UI DÜZENLEMELERİ (GÖREV 1, 2, 3, 6)
+   ========================================================================== */
+
+/* Görev 1: Banner Reklamı İçin Alt Boşluk */
+body.has-banner {
+    padding-bottom: 60px !important;
+}
+body.has-banner .view {
+    padding-bottom: 120px !important;
+}
+
+/* Görev 2: Teknik Servis Formu Tarih & No Dikey Hizalaması
+   Tarih üstte, No altta; her iki satırın etiketleri ve girdileri
+   sabit bir kolon yapısıyla dikey olarak aynı hizada durur. */
+.form-print-date-block {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-end !important;
+    gap: 4px !important;
+    font-weight: 700;
+}
+.form-print-date-block > div {
+    display: grid !important;
+    grid-template-columns: 46px 110px;
+    align-items: center;
+    gap: 6px;
+}
+.form-print-date-block > div > label {
+    text-align: right;
+    white-space: nowrap;
+}
+.form-print-date-block > div > .print-inline-input {
+    width: 110px;
+}
+
+/* Görev 3: Proforma Tablosu textarea Metin Kaydırma */
+textarea.print-inline-input {
+    resize: none;
+    overflow-y: hidden;
+    min-height: 20px;
+    height: auto;
+    font-family: inherit;
+    line-height: 1.4;
+    word-break: break-word;
+    white-space: pre-wrap;
+    box-sizing: border-box;
+    vertical-align: middle;
+}
+
+/* Görev 6: Ayarlar ve Yeni Form Modallarındaki Form Elemanlarının Tasarıma Uygunluğu */
+.modal-body input[type="text"],
+.modal-body input[type="number"],
+.modal-body select,
+.modal-body textarea {
+    background: rgba(0, 0, 0, 0.25) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 10px !important;
+    height: 44px !important;
+    padding: 0 14px !important;
+    color: #ffffff !important;
+    font-family: var(--font-body) !important;
+    font-size: 0.9rem !important;
+    outline: none !important;
+    transition: var(--transition-smooth) !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+}
+
+.modal-body textarea {
+    height: auto !important;
+    padding: 12px 14px !important;
+    resize: vertical !important;
+}
+
+.modal-body input:focus,
+.modal-body select:focus,
+.modal-body textarea:focus {
+    border-color: var(--primary-light) !important;
+    box-shadow: 0 0 10px var(--primary-glow) !important;
+}
+
+/* Açık Tema (Light Theme) için Modal Form Elemanları */
+body.light-theme .modal-body input[type="text"],
+body.light-theme .modal-body input[type="number"],
+body.light-theme .modal-body select,
+body.light-theme .modal-body textarea {
+    background: #ffffff !important;
+    border-color: rgba(0, 0, 0, 0.15) !important;
+    color: #0f172a !important;
+}
+
+/* ==========================================================================
+   ANA MENÜ SADELEŞTİRME + FORM BİLGİ GİRİŞ AKIŞI (UI/UX YENİLEME)
+   ========================================================================== */
+
+/* --- "Şirketiniz" başlığı + satır içi "+ Şirket Ekle" butonu --- */
+.company-section-header {
+    margin-bottom: 12px;
+}
+.company-section-header .section-title {
+    margin-bottom: 0;
+}
+.btn-add-company-inline {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    white-space: nowrap;
+}
+.btn-add-company-inline .plus {
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--secondary-light);
+}
+.btn-add-company-inline:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--secondary);
+    transform: translateY(-1px);
+}
+
+/* --- Kompakt Şirket Kartı (tescil & telefon kaldırıldı) --- */
+.company-card {
+    flex: 0 0 200px;
+    padding: 13px 14px;
+    border-radius: 14px;
+}
+.company-card .company-card-header {
+    margin-bottom: 0;
+    gap: 10px;
+}
+.company-card .company-card-logo {
+    width: 38px;
+    height: 38px;
+    border-radius: 8px;
+    flex: 0 0 38px;
+}
+.company-card .company-card-title {
+    font-size: 0.8rem;
+    line-height: 1.25;
+    font-weight: 700;
+    white-space: normal;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+}
+.company-card-taxno {
+    margin-top: 9px;
+    font-size: 0.72rem;
+    color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.company-card-taxno strong {
+    color: var(--text-main);
+    font-weight: 600;
+    margin-left: 2px;
+}
+body.light-theme .company-card-taxno {
+    color: #475569;
+}
+body.light-theme .company-card-taxno strong {
+    color: #0f172a;
+}
+.company-card-compact-actions {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex: 0 0 auto;
+}
+.cc-icon-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-main);
+    font-size: 0.8rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-smooth);
+    padding: 0;
+    margin: 0;
+    width: 28px !important;
+}
+.cc-icon-btn:hover {
+    background: rgba(255, 255, 255, 0.12);
+}
+.cc-icon-btn.cc-del {
+    border-color: rgba(239, 68, 68, 0.4);
+    background: rgba(239, 68, 68, 0.1);
+    margin-top: 0;
+}
+.cc-icon-btn.cc-del:hover {
+    background: var(--danger);
+}
+
+/* --- Sabit Alt Aksiyon Butonları (FAB) --- */
+.dashboard-fab-bar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 18px;
+    z-index: 95;
+    pointer-events: none;
+}
+.dashboard-fab-bar .fab-btn {
+    pointer-events: auto;
+}
+body.has-banner .dashboard-fab-bar {
+    bottom: calc(72px + env(safe-area-inset-bottom, 0px));
+}
+.fab-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.9rem;
+    padding: 12px 18px;
+    border-radius: 30px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.32);
+    transition: var(--transition-smooth);
+}
+.fab-btn .fab-icon {
+    font-size: 1.05rem;
+    line-height: 1;
+}
+.fab-create {
+    background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+    color: #ffffff;
+}
+.fab-create:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.08);
+    box-shadow: 0 10px 24px rgba(79, 70, 229, 0.4);
+}
+.fab-qr {
+    background: var(--bg-card-hover);
+    color: var(--text-main);
+    border: 1px solid var(--border-color);
+    backdrop-filter: var(--glass-blur);
+}
+.fab-qr:hover {
+    transform: translateY(-2px);
+    border-color: var(--secondary);
+}
+
+/* --- Editör üst barındaki "Düzenle" (kalem) butonu --- */
+.btn-editor-edit {
+    background: #475569;
+    border: none;
+    color: #ffffff;
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.82rem;
+    font-weight: 600;
+}
+.btn-editor-edit:hover {
+    background: #64748b;
+}
+
+/* ==========================================================================
+   FORM BİLGİ GİRİŞ EKRANI (TEMİZ LİSTE)
+   ========================================================================== */
+.entry-view {
+    padding: 0;
+    max-width: 760px;
+}
+.entry-top-bar {
+    position: sticky;
+    top: 64px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    height: 52px;
+    padding: 0 14px;
+    background: rgba(9, 13, 22, 0.92);
+    backdrop-filter: var(--glass-blur);
+    border-bottom: 1px solid var(--border-color);
+    z-index: 80;
+}
+.btn-entry-back {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    color: var(--text-main);
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 auto;
+}
+.entry-top-title {
+    flex: 1;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1rem;
+    color: #ffffff;
+}
+.entry-scroll {
+    padding: 16px 16px 112px 16px;
+}
+.entry-head-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 12px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 14px 16px;
+    margin-bottom: 16px;
+}
+.entry-head-form-title {
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 1.02rem;
+    color: #ffffff;
+    margin-bottom: 6px;
+}
+.entry-head-no {
+    background: transparent;
+    border: none;
+    border-bottom: 1px dashed var(--border-color);
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    font-weight: 600;
+    padding: 2px 0;
+    width: 140px;
+    outline: none;
+    font-family: var(--font-body);
+}
+.entry-head-no:focus {
+    border-bottom-color: var(--secondary);
+    color: var(--text-main);
+}
+.entry-head-right {
+    text-align: right;
+    flex: 0 0 auto;
+}
+.entry-head-right label {
+    display: block;
+    font-size: 0.68rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 5px;
+}
+.entry-head-date {
+    background: rgba(0, 0, 0, 0.22);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-main);
+    font-size: 0.82rem;
+    padding: 7px 9px;
+    outline: none;
+    font-family: var(--font-body);
+}
+.entry-section {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 16px;
+    margin-bottom: 14px;
+}
+.entry-section-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: #ffffff;
+    margin-bottom: 12px;
+}
+.entry-section-title-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+.entry-section-title-row .entry-section-title {
+    margin-bottom: 0;
+}
+.entry-step {
+    width: 22px;
+    height: 22px;
+    flex: 0 0 22px;
+    border-radius: 6px;
+    background: linear-gradient(135deg, var(--secondary), var(--primary));
+    color: #ffffff;
+    font-size: 0.76rem;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+.entry-field {
+    margin-bottom: 12px;
+}
+.entry-field:last-child {
+    margin-bottom: 0;
+}
+.entry-field > label {
+    display: block;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-bottom: 6px;
+    font-weight: 500;
+}
+.entry-field input,
+.entry-section > textarea,
+.entry-row input,
+.entry-row textarea {
+    width: 100%;
+    background: rgba(0, 0, 0, 0.22);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    color: var(--text-main);
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    padding: 11px 13px;
+    outline: none;
+    transition: var(--transition-smooth);
+}
+.entry-field input::placeholder,
+.entry-section > textarea::placeholder,
+.entry-row input::placeholder,
+.entry-row textarea::placeholder {
+    color: rgba(148, 163, 184, 0.6);
+}
+.entry-field input:focus,
+.entry-section > textarea:focus,
+.entry-row input:focus,
+.entry-row textarea:focus {
+    border-color: var(--primary-light);
+    box-shadow: 0 0 8px var(--primary-glow);
+}
+.entry-section > textarea {
+    resize: vertical;
+    line-height: 1.5;
+    min-height: 70px;
+}
+.req {
+    color: var(--danger-light);
+    font-weight: 700;
+}
+.entry-field input.entry-invalid {
+    border-color: var(--danger) !important;
+    box-shadow: 0 0 8px rgba(239, 68, 68, 0.4) !important;
+}
+
+/* Servis nedeni onay kutuları */
+.entry-chip-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+.entry-chip {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 10px 12px;
+    font-size: 0.85rem;
+    color: var(--text-main);
+    cursor: pointer;
+    transition: var(--transition-smooth);
+}
+.entry-chip input {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--secondary);
+}
+.entry-chip:hover {
+    border-color: var(--secondary);
+}
+
+/* Tekrarlı satırlar (cihaz / parça / kalem) */
+.entry-repeat-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.entry-row {
+    background: rgba(0, 0, 0, 0.18);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.entry-add-btn {
+    background: rgba(6, 182, 212, 0.12);
+    border: 1px solid rgba(6, 182, 212, 0.4);
+    color: var(--secondary-light);
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 6px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: var(--transition-smooth);
+    white-space: nowrap;
+    flex: 0 0 auto;
+}
+.entry-add-btn:hover {
+    background: rgba(6, 182, 212, 0.22);
+}
+.entry-row-checks {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+.entry-inline-check {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.82rem;
+    color: var(--text-main);
+    cursor: pointer;
+}
+.entry-inline-check input {
+    width: 16px;
+    height: 16px;
+    accent-color: var(--secondary);
+}
+.entry-row-foot {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+.entry-row-del {
+    background: rgba(239, 68, 68, 0.12);
+    border: 1px solid rgba(239, 68, 68, 0.4);
+    color: var(--danger-light);
+    width: 32px;
+    height: 32px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    flex: 0 0 auto;
+    transition: var(--transition-smooth);
+}
+.entry-row-del:hover {
+    background: var(--danger);
+    color: #ffffff;
+}
+
+/* Teklif kalemi grid + toplam */
+.entry-item-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+}
+.ig-field {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+.ig-field label {
+    font-size: 0.66rem;
+    color: var(--text-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+.e-item-total {
+    font-weight: 700;
+    color: var(--secondary-light);
+    font-size: 0.9rem;
+}
+.entry-quote-total {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 14px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border-color);
+    font-family: var(--font-heading);
+    font-weight: 600;
+    color: var(--text-main);
+}
+.entry-quote-total strong {
+    font-size: 1.15rem;
+    color: var(--secondary-light);
+}
+.entry-note {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    text-align: center;
+    margin-top: 8px;
+    opacity: 0.85;
+}
+
+/* Alt sabit aksiyon barı (İptal / Kaydet ve Ön İzle) */
+.entry-action-bar {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    gap: 12px;
+    padding: 12px 16px calc(12px + env(safe-area-inset-bottom, 0px)) 16px;
+    background: rgba(9, 13, 22, 0.96);
+    backdrop-filter: var(--glass-blur);
+    border-top: 1px solid var(--border-color);
+    z-index: 95;
+}
+.entry-action-bar > button {
+    height: 48px;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    font-family: var(--font-heading);
+    font-weight: 700;
+    font-size: 0.95rem;
+    transition: var(--transition-smooth);
+}
+.entry-btn-cancel {
+    flex: 0 0 34%;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--border-color) !important;
+    color: var(--text-main);
+}
+.entry-btn-cancel:hover {
+    background: rgba(255, 255, 255, 0.12);
+}
+.entry-btn-preview {
+    flex: 1;
+    background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+    color: #ffffff;
+}
+.entry-btn-preview:hover {
+    transform: translateY(-2px);
+    filter: brightness(1.08);
+}
+body.has-banner .entry-action-bar {
+    bottom: 56px;
+}
+
+/* Açık tema uyarlamaları */
+body.light-theme .entry-head-card,
+body.light-theme .entry-section {
+    background: #ffffff;
+    border-color: rgba(0, 0, 0, 0.1);
+}
+body.light-theme .entry-section-title,
+body.light-theme .entry-head-form-title,
+body.light-theme .entry-top-title {
+    color: #0f172a;
+}
+body.light-theme .entry-field input,
+body.light-theme .entry-section > textarea,
+body.light-theme .entry-row input,
+body.light-theme .entry-row textarea,
+body.light-theme .entry-chip,
+body.light-theme .entry-row,
+body.light-theme .entry-head-date {
+    background: #f1f5f9;
+    border-color: rgba(0, 0, 0, 0.1);
+    color: #0f172a;
+}
+body.light-theme .entry-top-bar,
+body.light-theme .entry-action-bar {
+    background: rgba(255, 255, 255, 0.96);
+    border-color: rgba(0, 0, 0, 0.1);
+}
+body.light-theme .fab-qr {
+    background: #ffffff;
+    color: #0f172a;
+}
+body.light-theme .entry-btn-cancel {
+    background: rgba(0, 0, 0, 0.04);
+    color: #0f172a;
+}

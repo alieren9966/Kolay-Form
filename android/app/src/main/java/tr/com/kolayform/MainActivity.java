@@ -1,4 +1,4 @@
-package com.kolayform.app;
+package tr.com.kolayform;
 
 import com.getcapacitor.BridgeActivity;
 

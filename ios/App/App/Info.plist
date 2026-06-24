@@ -47,5 +47,20 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<true/>
+	<key>GADApplicationIdentifier</key>
+	<string>ca-app-pub-3016010033385907~4105710626</string> <!-- BURAYA KENDİ CANLI iOS ADMOB UYGULAMA ID'NİZİ YAZIN (Şu anki değer AdMob iOS test kimliğidir) -->
+	<key>NSCameraUsageDescription</key>
+	<string>Form verilerini QR kod tarayarak içe aktarmak için kameranıza erişim izni vermeniz gerekmektedir.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Şirket logoları ve kaşelerini seçmek için fotoğraf galerinize erişim izni vermeniz gerekmektedir.</string>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>Size daha kişisel ve ilginiz dahilinde reklamlar gösterebilmemiz için izin vermeniz gerekmektedir.</string>
+	<key>SKAdNetworkItems</key>
+	<array>
+		<dict>
+			<key>SKAdNetworkIdentifier</key>
+			<string>cstr6suwn9.skadnetwork</string>
+		</dict>
+	</array>
 </dict>
 </plist>
