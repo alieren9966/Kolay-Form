@@ -1699,8 +1699,8 @@ document.addEventListener('DOMContentLoaded', () => {
         tr.id = rowId;
         
         tr.innerHTML = `
-            <td><input type="text" class="print-inline-input val-model bold-input" value="${device.model}" placeholder="Marka / Model Giriniz..."></td>
-            <td><input type="text" class="print-inline-input val-sn" value="${device.sn}" placeholder="Künye No / Seri No..."></td>
+            <td><textarea class="print-inline-input val-model bold-input" rows="1" placeholder="Marka / Model Giriniz..." style="resize:none; overflow-y:hidden;">${device.model}</textarea></td>
+            <td><textarea class="print-inline-input val-sn" rows="1" placeholder="Künye No / Seri No..." style="resize:none; overflow-y:hidden;">${device.sn}</textarea></td>
             <td>
                 <div class="table-checkbox-group">
                     <label class="table-chk-label">
@@ -1716,6 +1716,7 @@ document.addEventListener('DOMContentLoaded', () => {
             </td>
         `;
         tbody.appendChild(tr);
+        bindTableTextareaAutoGrow(tr);
     }
 
     // Servis Parça Satırı Ekle
@@ -1727,8 +1728,8 @@ document.addEventListener('DOMContentLoaded', () => {
         tr.id = rowId;
         
         tr.innerHTML = `
-            <td><input type="text" class="print-inline-input val-pcode" value="${part.code}" placeholder="Parça Kodu..."></td>
-            <td><input type="text" class="print-inline-input val-pname" value="${part.name}" placeholder="Parça Adı..."></td>
+            <td><textarea class="print-inline-input val-pcode" rows="1" placeholder="Parça Kodu..." style="resize:none; overflow-y:hidden;">${part.code}</textarea></td>
+            <td><textarea class="print-inline-input val-pname" rows="1" placeholder="Parça Adı..." style="resize:none; overflow-y:hidden;">${part.name}</textarea></td>
             <td><input type="number" class="print-inline-input val-pqty" value="${part.qty}" min="1" style="text-align:center"></td>
             <td>
                 <div class="table-checkbox-group">
@@ -1745,6 +1746,7 @@ document.addEventListener('DOMContentLoaded', () => {
             </td>
         `;
         tbody.appendChild(tr);
+        bindTableTextareaAutoGrow(tr);
     }
 
     // Servis Formunu Editörde Aç
@@ -1900,7 +1902,12 @@ document.addEventListener('DOMContentLoaded', () => {
             document.getElementById('srv-print-stamp').style.display = 'flex';
         }
 
+        // Form rengini uygula (kayıtlı/seçili renk veya varsayılan)
+        applyFormColor(document.getElementById('service-print-area'), (formData && formData.themeColor) || null);
+
         showView('serviceEditor');
+        // Görünür olduktan sonra tüm metin alanlarını içeriğe göre boyutlandır
+        requestAnimationFrame(() => resizeFormTextareas('service-print-area'));
     }
 
     // Servis İmza Kutularına Basma Takipleri
@@ -2007,7 +2014,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 devices: devices,
                 parts: parts
             },
-            signatures: { ...serviceSignatures }
+            signatures: { ...serviceSignatures },
+            themeColor: getCanvasColor('service-print-area')
         };
     }
 
@@ -2269,7 +2277,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }, true, true);
         };
 
+        // Form rengini uygula (kayıtlı/seçili renk veya varsayılan)
+        applyFormColor(document.getElementById('quote-print-area'), (formData && formData.themeColor) || null);
+
         showView('quoteEditor');
+        // Görünür olduktan sonra tüm metin alanlarını içeriğe göre boyutlandır
+        requestAnimationFrame(() => resizeFormTextareas('quote-print-area'));
     }
 
     // Kalem ekleme butonu
@@ -2334,7 +2347,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 subtotal: subtotal.toFixed(2),
                 taxTotal: taxTotal.toFixed(2)
             },
-            signatures: { ...quoteSignatures }
+            signatures: { ...quoteSignatures },
+            themeColor: getCanvasColor('quote-print-area')
         };
     }
 
@@ -3570,9 +3584,23 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- PDF anında textarea'ları sol-üst hizalı, içeriğe oturan div'lerle değiştir; geri yükleyiciyi döndür ---
     function swapTextareasForPrint(element) {
         const created = [];
+        // Büyük metin alanları (İşlem / Sonuç / Teklif Koşulları)
         element.querySelectorAll('textarea.print-textarea').forEach(ta => {
             const div = document.createElement('div');
             div.className = 'print-textarea-clone';
+            div.textContent = ta.value;
+            ta.style.display = 'none';
+            ta.parentNode.insertBefore(div, ta.nextSibling);
+            created.push({ ta, div });
+        });
+        // Tablo içi metin alanları (cihaz/parça/teklif kalemi). html2canvas textarea içeriğini
+        // doğru saramaz; içeriğe oturan, satır kaydıran bir div ile değiştir.
+        element.querySelectorAll('textarea.print-inline-input').forEach(ta => {
+            const div = document.createElement('div');
+            div.className = 'print-inline-clone';
+            const cs = window.getComputedStyle(ta);
+            div.style.textAlign = cs.textAlign;
+            if (ta.classList.contains('bold-input')) div.style.fontWeight = '700';
             div.textContent = ta.value;
             ta.style.display = 'none';
             ta.parentNode.insertBefore(div, ta.nextSibling);
@@ -4325,7 +4353,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function editServiceFromCanvas() {
         const d = readServiceCanvas();
-        entryContext = { type: 'servis', mode: 'edit' };
+        entryContext = { type: 'servis', mode: 'edit', themeColor: getCanvasColor('service-print-area') };
         fillServiceEntryFromData(d);
         clearEntryInvalid();
         showView('serviceEntry');
@@ -4358,6 +4386,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const company = state.companies.find(c => c.id === state.activeCompanyId) || state.companies[0];
             fd.signatures = { tech: (company && company.signature) ? company.signature : null, client: null, unit: null };
         }
+        // Canvas'ta seçilmiş form rengini koru
+        fd.themeColor = (entryContext && entryContext.themeColor) || '';
         openServiceFormEditor(fd);
     }
 
@@ -4514,7 +4544,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function editQuoteFromCanvas() {
         const d = readQuoteCanvas();
-        entryContext = { type: 'teklif', mode: 'edit' };
+        entryContext = { type: 'teklif', mode: 'edit', themeColor: getCanvasColor('quote-print-area') };
         fillQuoteEntryFromData(d);
         clearEntryInvalid();
         showView('quoteEntry');
@@ -4548,6 +4578,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 signature: (company && company.signature) ? company.signature : null
             };
         }
+        // Canvas'ta seçilmiş form rengini koru
+        fd.themeColor = (entryContext && entryContext.themeColor) || '';
         openQuoteFormEditor(fd);
     }
 
@@ -4556,5 +4588,107 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('btn-qte-entry-cancel').addEventListener('click', () => showView('dashboard'));
     document.getElementById('btn-qte-entry-back').addEventListener('click', () => showView('dashboard'));
     document.getElementById('btn-edit-quote-form').addEventListener('click', editQuoteFromCanvas);
+
+
+    // ==========================================
+    // 14. METİN ALANI AUTO-GROW + FORM RENK KİŞİSELLEŞTİRME
+    // ==========================================
+
+    // Bir textarea'yı içeriğine göre dikey büyüt (kaydırma çubuğu yerine alttan uzasın)
+    function autoGrowField(el) {
+        if (!el) return;
+        el.style.height = 'auto';
+        el.style.height = (el.scrollHeight) + 'px';
+    }
+
+    // Verilen kapsayıcıdaki tablo textarea'larına auto-grow bağla + ilk boyutu ayarla
+    function bindTableTextareaAutoGrow(container) {
+        if (!container) return;
+        container.querySelectorAll('textarea.print-inline-input').forEach(ta => {
+            ta.addEventListener('input', () => autoGrowField(ta));
+            autoGrowField(ta);
+        });
+    }
+
+    // Bir A4 print alanındaki tüm metin alanlarını içeriğe göre yeniden boyutlandır
+    function resizeFormTextareas(printAreaId) {
+        const pa = document.getElementById(printAreaId);
+        if (!pa) return;
+        pa.querySelectorAll('textarea.print-inline-input, textarea.print-textarea').forEach(autoGrowField);
+    }
+
+    // Büyük metin alanları (Yapılan İşlem / Sonuç / Teklif Koşulları) editörde aşağı uzasın
+    ['srv-txt-process', 'srv-txt-result', 'qte-txt-conditions'].forEach(id => {
+        const ta = document.getElementById(id);
+        if (ta) ta.addEventListener('input', () => autoGrowField(ta));
+    });
+
+    // --- Form Renk Kişiselleştirme ---
+    // Bir rengi koyulaştır (başlık/toplam gibi koyu vurgular için)
+    function darkenColor(hex, amt) {
+        let c = (hex || '').replace('#', '');
+        if (c.length === 3) c = c.split('').map(x => x + x).join('');
+        if (c.length !== 6) return hex || '#000000';
+        const n = parseInt(c, 16);
+        let r = (n >> 16) & 255, g = (n >> 8) & 255, b = n & 255;
+        r = Math.round(r * (1 - amt));
+        g = Math.round(g * (1 - amt));
+        b = Math.round(b * (1 - amt));
+        return '#' + [r, g, b].map(v => v.toString(16).padStart(2, '0')).join('');
+    }
+
+    // A4 print alanına uygulanmış form rengini oku (yoksa boş = varsayılan)
+    function getCanvasColor(printAreaId) {
+        const pa = document.getElementById(printAreaId);
+        return pa ? (pa.style.getPropertyValue('--form-accent').trim() || '') : '';
+    }
+
+    // Renk seçicideki aktif swatch'i güncelle
+    function updateActiveSwatch(picker, color) {
+        if (!picker) return;
+        const norm = (color || '').toLowerCase();
+        let matched = false;
+        picker.querySelectorAll('.fcp-swatch:not(.fcp-custom)').forEach(sw => {
+            const dc = (sw.getAttribute('data-color') || '').toLowerCase();
+            const active = (dc === norm);
+            sw.classList.toggle('active', active);
+            if (active) matched = true;
+        });
+        const custom = picker.querySelector('.fcp-custom');
+        if (custom) custom.classList.toggle('active', !!norm && !matched);
+    }
+
+    // Form rengini uygula: color boş/null ise varsayılana (orijinal mavi/lacivert) döner
+    function applyFormColor(printArea, color) {
+        if (!printArea) return;
+        if (color) {
+            printArea.style.setProperty('--form-accent', color);
+            printArea.style.setProperty('--form-accent-strong', darkenColor(color, 0.3));
+        } else {
+            printArea.style.removeProperty('--form-accent');
+            printArea.style.removeProperty('--form-accent-strong');
+        }
+        const pickerId = (printArea.id === 'service-print-area') ? 'srv-color-picker' : 'qte-color-picker';
+        updateActiveSwatch(document.getElementById(pickerId), color || '');
+    }
+
+    // Renk seçici butonlarını bağla
+    function wireColorPicker(pickerId, printAreaId) {
+        const picker = document.getElementById(pickerId);
+        const printArea = document.getElementById(printAreaId);
+        if (!picker || !printArea) return;
+        picker.querySelectorAll('.fcp-swatch:not(.fcp-custom)').forEach(sw => {
+            sw.addEventListener('click', () => {
+                const color = sw.getAttribute('data-color') || '';
+                applyFormColor(printArea, color || null);
+            });
+        });
+        const customInput = picker.querySelector('.fcp-custom-input');
+        if (customInput) {
+            customInput.addEventListener('input', () => applyFormColor(printArea, customInput.value));
+        }
+    }
+    wireColorPicker('srv-color-picker', 'service-print-area');
+    wireColorPicker('qte-color-picker', 'quote-print-area');
 
 });

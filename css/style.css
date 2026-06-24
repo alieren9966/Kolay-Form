@@ -1232,7 +1232,7 @@ h1, h2, h3, h4, h5, h6 {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    border-bottom: 2px solid #0284c7; /* Sky Blue accent color */
+    border-bottom: 2px solid var(--form-accent, #0284c7); /* Sky Blue accent color */
     padding-bottom: 12px;
     margin-bottom: 12px;
 }
@@ -1265,7 +1265,7 @@ h1, h2, h3, h4, h5, h6 {
 .form-print-title {
     font-size: 14px !important;
     font-weight: 800;
-    color: #0c4a6e !important;
+    color: var(--form-accent-strong, #0c4a6e) !important;
     letter-spacing: -0.3px;
     margin: 0;
 }
@@ -1293,12 +1293,12 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .print-inline-input:hover {
-    border-bottom-color: #0284c7;
+    border-bottom-color: var(--form-accent, #0284c7);
     background: rgba(2, 132, 199, 0.03);
 }
 
 .print-inline-input:focus {
-    border-bottom: 1px solid #0284c7;
+    border-bottom: 1px solid var(--form-accent, #0284c7);
     background: rgba(2, 132, 199, 0.05);
 }
 
@@ -1315,7 +1315,7 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 9px !important;
     font-weight: 700;
     color: #ffffff !important;
-    background: #0284c7;
+    background: var(--form-accent, #0284c7);
     padding: 3px 8px;
     margin-bottom: 8px;
     letter-spacing: 0.5px;
@@ -1326,7 +1326,7 @@ h1, h2, h3, h4, h5, h6 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: #0284c7;
+    background: var(--form-accent, #0284c7);
     padding: 2px 8px;
     margin-bottom: 8px;
 }
@@ -1454,14 +1454,20 @@ h1, h2, h3, h4, h5, h6 {
     resize: none;
     line-height: 1.4;
     transition: all 0.2s ease;
+    /* Auto-grow: JS yüksekliği içeriğe göre büyütür, kaydırma çubuğu çıkmasın */
+    overflow: hidden;
+    box-sizing: border-box;
+    white-space: pre-wrap;
+    word-break: break-word;
+    min-height: 48px;
 }
 
 .print-textarea:hover {
-    border-color: #0284c7;
+    border-color: var(--form-accent, #0284c7);
 }
 
 .print-textarea:focus {
-    border-color: #0284c7;
+    border-color: var(--form-accent, #0284c7);
     background: rgba(2, 132, 199, 0.02);
 }
 
@@ -1505,7 +1511,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .sig-image-container:hover {
-    border-color: #0284c7;
+    border-color: var(--form-accent, #0284c7);
     background: rgba(2, 132, 199, 0.02);
 }
 
@@ -1538,7 +1544,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .sig-name-input:focus {
-    border-bottom-color: #0284c7;
+    border-bottom-color: var(--form-accent, #0284c7);
 }
 
 /* SAYFA ALTI VE SERTIFIKALAR */
@@ -1582,8 +1588,8 @@ h1, h2, h3, h4, h5, h6 {
 
 .quote-title-row .form-print-title {
     font-size: 15px !important;
-    color: #1e3a8a !important; /* Navy blue */
-    border-bottom: 2px solid #1e3a8a;
+    color: var(--form-accent-strong, #1e3a8a) !important; /* Navy blue */
+    border-bottom: 2px solid var(--form-accent-strong, #1e3a8a);
     padding-bottom: 4px;
 }
 
@@ -1604,7 +1610,7 @@ h1, h2, h3, h4, h5, h6 {
     font-size: 8px;
     font-weight: 800;
     color: #ffffff !important;
-    background: #1e3a8a; /* Navy background */
+    background: var(--form-accent-strong, #1e3a8a); /* Navy background */
     padding: 2px 6px;
     margin-bottom: 6px;
     text-transform: uppercase;
@@ -1662,14 +1668,14 @@ h1, h2, h3, h4, h5, h6 {
 
 .grand-total-row {
     font-size: 12px;
-    border-top: 2px solid #1e3a8a;
-    border-bottom: 2px double #1e3a8a;
+    border-top: 2px solid var(--form-accent-strong, #1e3a8a);
+    border-bottom: 2px double var(--form-accent-strong, #1e3a8a);
     padding: 4px 0;
-    color: #1e3a8a !important;
+    color: var(--form-accent-strong, #1e3a8a) !important;
 }
 
 .grand-total-row * {
-    color: #1e3a8a !important;
+    color: var(--form-accent-strong, #1e3a8a) !important;
 }
 
 /* TEKLİF İMZA/KAŞE ALANI */
@@ -3562,4 +3568,143 @@ body.light-theme .fab-qr {
 body.light-theme .entry-btn-cancel {
     background: rgba(0, 0, 0, 0.04);
     color: #0f172a;
+}
+
+/* ==========================================================================
+   TABLO METİN SARMA (PDF) + FORM RENK KİŞİSELLEŞTİRME
+   ========================================================================== */
+
+/* PDF anında tablo içi textarea'ların yerine konan, içeriğe oturan & saran div */
+.print-inline-clone {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    line-height: 1.4;
+    color: #1e293b !important;
+    text-align: left;
+    white-space: pre-wrap;
+    word-break: break-word;
+    overflow-wrap: anywhere;
+    padding: 2px 4px;
+    min-height: 14px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Tablo hücrelerinin içeriğe göre dikey büyümesi için üstten hizala */
+.print-table td {
+    vertical-align: top;
+}
+
+/* --- Editör üstündeki küçük ipucu çubuğu (app-header ile toolbar arası) ---
+   View'in üst padding'i sıfırlanır; çubuk o boşluğu doldurur (yükseklik korunur). */
+#service-form-view,
+#quote-form-view {
+    padding-top: 0;
+}
+.editor-hint-bar {
+    text-align: center;
+    font-size: 0.62rem;
+    color: var(--text-muted);
+    line-height: 1.15;
+    letter-spacing: 0.2px;
+    padding: 7px 14px 6px;
+}
+
+/* --- A4 altındaki Form Renk Seçici (PDF'e dahil değildir) --- */
+.form-color-picker {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    padding: 12px 16px;
+    margin: 16px auto 8px;
+    max-width: 794px;
+    backdrop-filter: var(--glass-blur);
+}
+.fcp-label {
+    font-family: var(--font-heading);
+    font-weight: 600;
+    font-size: 0.85rem;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+}
+.fcp-swatches {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+.fcp-swatch {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.25);
+    background: var(--sw, #0284c7);
+    cursor: pointer;
+    padding: 0;
+    position: relative;
+    transition: var(--transition-smooth);
+}
+.fcp-swatch:hover {
+    transform: scale(1.12);
+}
+.fcp-swatch.active {
+    border-color: #ffffff;
+    box-shadow: 0 0 0 2px var(--secondary), 0 0 10px var(--secondary-glow);
+}
+.fcp-swatch.active::after {
+    content: '✓';
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+.fcp-custom {
+    background: conic-gradient(from 0deg, #ef4444, #f59e0b, #eab308, #22c55e, #06b6d4, #6366f1, #ec4899, #ef4444);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+.fcp-custom.active::after {
+    content: '';
+}
+.fcp-custom-input {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    border: none;
+    padding: 0;
+}
+.fcp-custom-icon {
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 1.05rem;
+    line-height: 1;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6);
+    pointer-events: none;
+}
+body.light-theme .form-color-picker {
+    background: #ffffff;
+    border-color: rgba(0, 0, 0, 0.1);
+}
+body.light-theme .fcp-label {
+    color: #0f172a;
+}
+body.light-theme .fcp-swatch {
+    border-color: rgba(0, 0, 0, 0.18);
 }

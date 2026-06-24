@@ -277,6 +277,7 @@
 
         <!-- 4. TEKNİK SERVİS FORMU EDİTÖR EKRANI -->
         <section id="service-form-view" class="view hidden">
+            <div class="editor-hint-bar">Önizleme alanında ekrana dokunarak da düzenleme yapabilirsiniz</div>
             <div class="editor-top-sticky-bar">
                 <button class="btn-editor-back" id="btn-close-service-editor">⬅️ Çıkış</button>
                 <div class="editor-sticky-actions">
@@ -479,10 +480,26 @@
 
                 </div>
             </div>
+
+            <!-- A4 altı: Form Renk Kişiselleştirme (PDF çıktısına dahil değildir) -->
+            <div class="form-color-picker" id="srv-color-picker">
+                <div class="fcp-swatches">
+                    <button type="button" class="fcp-swatch" data-color="" style="--sw:#0284c7" title="Varsayılan (Mavi)"></button>
+                    <button type="button" class="fcp-swatch" data-color="#0f766e" style="--sw:#0f766e" title="Yeşil"></button>
+                    <button type="button" class="fcp-swatch" data-color="#6d28d9" style="--sw:#6d28d9" title="Mor"></button>
+                    <button type="button" class="fcp-swatch" data-color="#b91c1c" style="--sw:#b91c1c" title="Kırmızı"></button>
+                    <button type="button" class="fcp-swatch" data-color="#334155" style="--sw:#334155" title="Antrasit"></button>
+                    <label class="fcp-swatch fcp-custom" title="Özel Renk Seç">
+                        <input type="color" class="fcp-custom-input" value="#0284c7">
+                        <span class="fcp-custom-icon">+</span>
+                    </label>
+                </div>
+            </div>
         </section>
 
         <!-- 5. TEKLİF FORMU EDİTÖR EKRANI -->
         <section id="quote-form-view" class="view hidden">
+            <div class="editor-hint-bar">Önizleme alanında ekrana dokunarak da düzenleme yapabilirsiniz</div>
             <div class="editor-top-sticky-bar">
                 <button class="btn-editor-back" id="btn-close-quote-editor">⬅️ Çıkış</button>
                 <div class="editor-sticky-actions">
@@ -629,6 +646,21 @@
                         <span id="qte-print-footer-text" style="font-size: 8px; color: #64748b !important;">Oluşturulan bu Proforma teklif mektubu elektronik ortamda onaylanmıştır.</span>
                     </div>
 
+                </div>
+            </div>
+
+            <!-- A4 altı: Form Renk Kişiselleştirme (PDF çıktısına dahil değildir) -->
+            <div class="form-color-picker" id="qte-color-picker">
+                <div class="fcp-swatches">
+                    <button type="button" class="fcp-swatch" data-color="" style="--sw:#1e3a8a" title="Varsayılan (Lacivert)"></button>
+                    <button type="button" class="fcp-swatch" data-color="#0f766e" style="--sw:#0f766e" title="Yeşil"></button>
+                    <button type="button" class="fcp-swatch" data-color="#6d28d9" style="--sw:#6d28d9" title="Mor"></button>
+                    <button type="button" class="fcp-swatch" data-color="#b91c1c" style="--sw:#b91c1c" title="Kırmızı"></button>
+                    <button type="button" class="fcp-swatch" data-color="#334155" style="--sw:#334155" title="Antrasit"></button>
+                    <label class="fcp-swatch fcp-custom" title="Özel Renk Seç">
+                        <input type="color" class="fcp-custom-input" value="#1e3a8a">
+                        <span class="fcp-custom-icon">+</span>
+                    </label>
                 </div>
             </div>
         </section>
