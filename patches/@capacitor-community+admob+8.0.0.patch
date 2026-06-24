@@ -1,0 +1,16 @@
+diff --git a/node_modules/@capacitor-community/admob/android/src/main/java/com/getcapacitor/community/admob/banner/BannerExecutor.java b/node_modules/@capacitor-community/admob/android/src/main/java/com/getcapacitor/community/admob/banner/BannerExecutor.java
+index c629139..746d61f 100644
+--- a/node_modules/@capacitor-community/admob/android/src/main/java/com/getcapacitor/community/admob/banner/BannerExecutor.java
++++ b/node_modules/@capacitor-community/admob/android/src/main/java/com/getcapacitor/community/admob/banner/BannerExecutor.java
+@@ -113,7 +113,10 @@ public class BannerExecutor extends Executor {
+                     if ("TOP_CENTER".equals(adOptions.position)) {
+                         mAdViewLayoutParams.setMargins(0, topInset, 0, 0);
+                     } else {
+-                        mAdViewLayoutParams.setMargins(0, 0, 0, bottomInset);
++                        // Kolay Form patch: banner'ı ekranın en altına (navigasyon çubuğu alanına) sabitle.
++                        // Plugin varsayılanı alttan bottomInset kadar margin uygulayıp banner'ı nav bar'ın
++                        // üstüne itiyor ve aralarında boşluk bırakıyordu; bottom margin'i 0 yaparak kaldırıyoruz.
++                        mAdViewLayoutParams.setMargins(0, 0, 0, 0);
+                     }
+ 
+                     mAdViewLayout.setLayoutParams(mAdViewLayoutParams);
