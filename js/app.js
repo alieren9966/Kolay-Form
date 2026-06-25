@@ -569,30 +569,30 @@ document.addEventListener('DOMContentLoaded', () => {
             "service-print-title": { selector: "#service-print-area .form-print-title" },
             "service-print-label-date": { selector: "#srv-label-date" },
             "service-print-label-no": { selector: "#srv-label-no" },
-            "service-print-section-client": { selector: "#service-print-area .form-print-section:nth-of-type(1) .print-section-title" },
+            "service-print-section-client": { selector: "#service-print-area .form-print-section:nth-of-type(3) .print-section-title" },
             "service-print-label-client-name": { selector: "#service-print-area .print-grid-2 .print-form-field:nth-child(1) label" },
             "service-print-placeholder-client-name": { id: "srv-input-client-name", attr: "placeholder" },
             "service-print-label-city": { selector: "#service-print-area .print-grid-2 .print-form-field:nth-child(2) label" },
             "service-print-placeholder-city": { id: "srv-input-client-city", attr: "placeholder" },
-            "service-print-section-device": { selector: "#service-print-area .form-print-section:nth-of-type(2) .print-section-title" },
+            "service-print-section-device": { selector: "#service-print-area .form-print-section:nth-of-type(4) .print-section-title" },
             "service-print-btn-add-device": { id: "srv-btn-add-device" },
             "service-print-th-model": { selector: "#srv-table-devices th:nth-child(1)" },
             "service-print-th-sn": { selector: "#srv-table-devices th:nth-child(2)" },
             "service-print-th-contract": { selector: "#srv-table-devices th:nth-child(3)" },
             "service-print-th-action": { selector: "#srv-table-devices th:nth-child(4)" },
-            "service-print-section-reason": { selector: "#service-print-area .form-print-section:nth-of-type(3) .print-section-title" },
-            "service-print-section-process": { selector: "#service-print-area .form-print-section:nth-of-type(4) .print-section-title" },
+            "service-print-section-reason": { selector: "#service-print-area .form-print-section:nth-of-type(5) .print-section-title" },
+            "service-print-section-process": { selector: "#service-print-area .form-print-section:nth-of-type(6) .print-section-title" },
             "service-print-placeholder-process": { id: "srv-txt-process", attr: "placeholder" },
-            "service-print-section-parts": { selector: "#service-print-area .form-print-section:nth-of-type(5) .print-section-title" },
+            "service-print-section-parts": { selector: "#service-print-area .form-print-section:nth-of-type(7) .print-section-title" },
             "service-print-btn-add-part": { id: "srv-btn-add-part" },
             "service-print-th-part-code": { selector: "#srv-table-parts th:nth-child(1)" },
             "service-print-th-part-name": { selector: "#srv-table-parts th:nth-child(2)" },
             "service-print-th-part-qty": { selector: "#srv-table-parts th:nth-child(3)" },
             "service-print-th-part-changed": { selector: "#srv-table-parts th:nth-child(4)" },
             "service-print-th-part-recommend": { selector: "#srv-table-parts th:nth-child(5)" },
-            "service-print-section-result": { selector: "#service-print-area .form-print-section:nth-of-type(6) .print-section-title" },
+            "service-print-section-result": { selector: "#service-print-area .form-print-section:nth-of-type(8) .print-section-title" },
             "service-print-placeholder-result": { id: "srv-txt-result", attr: "placeholder" },
-            "service-print-section-signatures": { selector: "#service-print-area .form-print-section:nth-of-type(7) .print-section-title" },
+            "service-print-section-signatures": { selector: "#service-print-area .form-print-section:nth-of-type(9) .print-section-title" },
             "service-print-sig-tech": { selector: "#srv-sig-box-tech .sig-title" },
             "service-print-sig-client": { selector: "#srv-sig-box-client .sig-title" },
             "service-print-sig-unit": { selector: "#srv-sig-box-unit .sig-title" },
@@ -611,7 +611,7 @@ document.addEventListener('DOMContentLoaded', () => {
             "quote-print-label-date": { selector: "#quote-print-area .details-box label:nth-child(1)" },
             "quote-print-label-no": { selector: "#quote-print-area .details-box label:nth-child(2)" },
             "quote-print-placeholder-no": { id: "qte-input-no", attr: "placeholder" },
-            "quote-print-section-items": { selector: "#quote-print-area .form-print-section:nth-of-type(1) .print-section-title" },
+            "quote-print-section-items": { selector: "#quote-print-area .form-print-section:nth-of-type(4) .print-section-title" },
             "quote-print-btn-add-item": { id: "qte-btn-add-item" },
             "quote-print-th-index": { selector: "#qte-table-items th:nth-child(1)" },
             "quote-print-th-desc": { selector: "#qte-table-items th:nth-child(2)" },
@@ -625,7 +625,7 @@ document.addEventListener('DOMContentLoaded', () => {
             "quote-print-label-subtotal": { selector: "#quote-print-area .quote-summary-row:nth-child(1) .summary-label" },
             "quote-print-label-tax": { selector: "#quote-print-area .quote-summary-row:nth-child(2) .summary-label" },
             "quote-print-label-grand": { selector: "#quote-print-area .quote-summary-row:nth-child(3) .summary-label" },
-            "quote-print-section-conditions": { selector: "#quote-print-area .form-print-section:nth-of-type(2) .print-section-title" },
+            "quote-print-section-conditions": { selector: "#quote-print-area .form-print-section:nth-of-type(6) .print-section-title" },
             "quote-print-placeholder-conditions": { id: "qte-txt-conditions", attr: "placeholder" },
             "quote-print-sig-title": { selector: ".quote-stamp-sig-title" },
             "pro-title": { id: "pro-title" },
@@ -670,7 +670,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (input) {
                     label.innerHTML = "";
                     label.appendChild(input);
-                    label.appendChild(document.createTextNode(dict["service-print-" + id.replace("chk-", "chk")] || ""));
+                    label.appendChild(document.createTextNode(dict["service-print-" + id] || ""));
                 }
             });
         }
@@ -3581,31 +3581,73 @@ document.addEventListener('DOMContentLoaded', () => {
         return QR_URL_PREFIX + bytesToB64url(deflated);
     }
 
-    // --- PDF anında textarea'ları sol-üst hizalı, içeriğe oturan div'lerle değiştir; geri yükleyiciyi döndür ---
+    // Metni HTML-güvenli yap
+    function escapeHtml(s) {
+        return (s == null ? '' : String(s))
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;');
+    }
+
+    // Metni verilen piksel genişliğe göre satırlara böl: önce boşlukta; sığmayan tek kelimeyi
+    // (örn. boşluksuz uzun seri no / kod) karakter karakter böl. Mevcut satır sonları korunur.
+    function wrapTextToWidth(text, maxWidth, font) {
+        const ctx = wrapTextToWidth._ctx || (wrapTextToWidth._ctx = document.createElement('canvas').getContext('2d'));
+        ctx.font = font;
+        const out = [];
+        String(text == null ? '' : text).split(/\r\n|\r|\n/).forEach(para => {
+            if (para === '') { out.push(''); return; }
+            let line = '';
+            para.split(' ').forEach(word => {
+                const cand = line ? line + ' ' + word : word;
+                if (ctx.measureText(cand).width <= maxWidth) { line = cand; return; }
+                if (line) { out.push(line); line = ''; }
+                if (ctx.measureText(word).width <= maxWidth) {
+                    line = word;
+                } else {
+                    let chunk = '';
+                    for (const ch of word) {
+                        if (chunk && ctx.measureText(chunk + ch).width > maxWidth) { out.push(chunk); chunk = ch; }
+                        else { chunk += ch; }
+                    }
+                    line = chunk;
+                }
+            });
+            out.push(line);
+        });
+        return out;
+    }
+
+    // --- PDF anında textarea'ları, içeriğe oturan ve SATIRLARA ÖNCEDEN BÖLÜNMÜŞ div'lerle değiştir ---
+    // html2canvas, textarea'yı ve CSS otomatik sarmayı (özellikle boşluksuz uzun metni) doğru
+    // RENDER ETMEZ — metni tek satırda yazar, hücreyi/A4'ü taşırır. Bu yüzden metni editördeki
+    // genişliğe göre JS ile (canvas measureText) satırlara bölüp <br> ile veriyoruz; böylece PDF
+    // tıpkı editördeki gibi otomatik satır atmış görünür ve A4 dışına taşmaz.
     function swapTextareasForPrint(element) {
         const created = [];
-        // Büyük metin alanları (İşlem / Sonuç / Teklif Koşulları)
-        element.querySelectorAll('textarea.print-textarea').forEach(ta => {
+        const swap = (ta, cloneClass) => {
+            const w = ta.offsetWidth; // editördeki gerçek (ölçeklenmemiş) genişlik
             const div = document.createElement('div');
-            div.className = 'print-textarea-clone';
-            div.textContent = ta.value;
-            ta.style.display = 'none';
-            ta.parentNode.insertBefore(div, ta.nextSibling);
-            created.push({ ta, div });
-        });
-        // Tablo içi metin alanları (cihaz/parça/teklif kalemi). html2canvas textarea içeriğini
-        // doğru saramaz; içeriğe oturan, satır kaydıran bir div ile değiştir.
-        element.querySelectorAll('textarea.print-inline-input').forEach(ta => {
-            const div = document.createElement('div');
-            div.className = 'print-inline-clone';
-            const cs = window.getComputedStyle(ta);
-            div.style.textAlign = cs.textAlign;
+            div.className = cloneClass;
+            const tcs = window.getComputedStyle(ta);
+            div.style.textAlign = tcs.textAlign;
+            if (w > 0) div.style.width = w + 'px';
             if (ta.classList.contains('bold-input')) div.style.fontWeight = '700';
-            div.textContent = ta.value;
             ta.style.display = 'none';
             ta.parentNode.insertBefore(div, ta.nextSibling);
+            // Klonun gerçek font ve içerik genişliğiyle metni satırlara böl
+            const cs = window.getComputedStyle(div);
+            const padL = parseFloat(cs.paddingLeft) || 0;
+            const padR = parseFloat(cs.paddingRight) || 0;
+            const contentW = Math.max(10, (div.clientWidth || w) - padL - padR - 1);
+            const font = (cs.fontWeight || '400') + ' ' + (cs.fontSize || '11px') + ' ' + (cs.fontFamily || 'Inter, sans-serif');
+            div.innerHTML = wrapTextToWidth(ta.value, contentW, font).map(escapeHtml).join('<br>') || '&nbsp;';
             created.push({ ta, div });
-        });
+        };
+        // Büyük metin alanları (İşlem / Sonuç / Teklif Koşulları)
+        element.querySelectorAll('textarea.print-textarea').forEach(ta => swap(ta, 'print-textarea-clone'));
+        // Tablo içi metin alanları (cihaz/parça/teklif kalemi)
+        element.querySelectorAll('textarea.print-inline-input').forEach(ta => swap(ta, 'print-inline-clone'));
         return function restore() {
             created.forEach(({ ta, div }) => {
                 ta.style.display = '';

@@ -2130,8 +2130,11 @@ body.light-theme .feedback-tabs .tab-btn.active {
     line-height: 1.35;
     color: #1e293b !important;
     text-align: left;
-    white-space: pre-wrap;
+    white-space: normal;
     word-break: break-word;
+    overflow-wrap: anywhere;
+    max-width: 100%;
+    box-sizing: border-box;
     padding: 4px 6px;
     min-height: 14px;
 }
@@ -3581,7 +3584,7 @@ body.light-theme .entry-btn-cancel {
     line-height: 1.4;
     color: #1e293b !important;
     text-align: left;
-    white-space: pre-wrap;
+    white-space: normal;
     word-break: break-word;
     overflow-wrap: anywhere;
     padding: 2px 4px;
@@ -3593,6 +3596,15 @@ body.light-theme .entry-btn-cancel {
 /* Tablo hücrelerinin içeriğe göre dikey büyümesi için üstten hizala */
 .print-table td {
     vertical-align: top;
+}
+
+/* PDF anında satır kaydırma emniyeti. Asıl sarma, klonlara JS ile verilen açık piksel
+   genişlik + <br> ile sağlanır; bu kurallar html2canvas'ta kelime kırmayı pekiştirir.
+   table-layout: auto (editördeki) korunur ki PDF tabloları editörle birebir aynı görünsün. */
+.generating-pdf .print-table td,
+.generating-pdf .print-table th {
+    word-break: break-word;
+    overflow-wrap: anywhere;
 }
 
 /* --- Editör üstündeki küçük ipucu çubuğu (app-header ile toolbar arası) ---
